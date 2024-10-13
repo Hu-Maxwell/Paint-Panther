@@ -1,0 +1,16 @@
+Organization of files: 
+
+
+src/            # Source code files, where the main project code is located
+
+include/        # Header files, where all functions, classes, etc are defined
+
+assets/         # Images, fonts, other files
+
+docs/           # Documentation
+
+.gitignore                   # tells Git which files to ignore
+.gitattributes               # idk bro
+2D Paint Interface.sln       # Solution file, idk what it does but it's chill 
+README.md                    # This is what's shown at the bottom of our github page
+LICENSE                      

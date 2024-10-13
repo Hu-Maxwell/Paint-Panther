@@ -1,0 +1,18 @@
+int main() {
+    window((800, 600), "2D Paint Interface");
+
+    // game loop!
+    while (window is open) {
+        // saves the position of the mosue
+        float mousePositionX = sf::Mouse::getPosition(window).x;
+        float mousePositionY = sf::Mouse::getPosition(window).y;
+
+        // creates pixel with radius of 1
+        sf::CircleShape pixel(1); 
+        pixel.setPosition(mousePositionX, mousePositionY);
+
+        // draw and display!
+        window.draw(pixel);
+        window.display();
+    }
+}
