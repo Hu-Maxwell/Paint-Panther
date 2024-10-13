@@ -46,8 +46,4 @@
       <Filter>docs</Filter>
     </Text>
   </ItemGroup>
-  <ItemGroup>
-    <None Include=".gitattributes" />
-    <None Include=".gitignore" />
-  </ItemGroup>
 </Project>

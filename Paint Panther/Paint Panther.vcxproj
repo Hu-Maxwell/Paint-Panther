@@ -33,10 +33,6 @@
     <Text Include="docs\file_organization.txt" />
     <Text Include="docs\pseudocode.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include=".gitattributes" />
-    <None Include=".gitignore" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
