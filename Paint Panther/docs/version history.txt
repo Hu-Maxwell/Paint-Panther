@@ -1,0 +1,13 @@
+Version 1: 
+- black background with simple pen and square tool
+
+======================================================
+Version 2: 
+- changed square tool to rectangle tool
+- added UI that allows for selection between pen and rectangle tool 
+- white background 
+
+Demo: https://youtu.be/Ng5axPO1tdk 
+
+======================================================
+Version 3:
