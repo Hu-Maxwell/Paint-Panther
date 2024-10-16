@@ -20,10 +20,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\paint.hpp" />
+    <ClInclude Include="include\shape.hpp" />
+    <ClInclude Include="include\uiux.hpp" />
+    <ClInclude Include="include\user_input.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\paint.cpp" />
+    <ClCompile Include="src\shape.cpp" />
+    <ClCompile Include="src\uiux.cpp" />
+    <ClCompile Include="src\user_input.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\mr_handsome.jpg" />
