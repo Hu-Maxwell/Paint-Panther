@@ -1,6 +1,4 @@
 #include "../include/paint.hpp"
-#include <SFML/Graphics.hpp>
-#include <cmath>
 
 // draws the UI
 void drawUI(sf::RenderWindow& window, sf::FloatRect& penButtonBounds, sf::FloatRect& rectangleButtonBounds) {

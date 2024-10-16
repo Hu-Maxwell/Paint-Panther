@@ -1,6 +1,4 @@
 #include "../include/paint.hpp"
-#include <SFML/Graphics.hpp>
-#include <iostream>
 
 // draws a pixel at the given mouse pos
 void drawPixel(sf::RenderTexture& canvas, const sf::Vector2f& mousePosition) {

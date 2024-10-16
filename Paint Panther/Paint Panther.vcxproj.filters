@@ -30,6 +30,9 @@
     <ClInclude Include="include\user_input.hpp">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\undo_redo.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -45,6 +48,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\user_input.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\undo_redo.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

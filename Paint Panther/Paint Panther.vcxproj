@@ -22,6 +22,7 @@
     <ClInclude Include="include\paint.hpp" />
     <ClInclude Include="include\shape.hpp" />
     <ClInclude Include="include\uiux.hpp" />
+    <ClInclude Include="include\undo_redo.hpp" />
     <ClInclude Include="include\user_input.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -29,6 +30,7 @@
     <ClCompile Include="src\paint.cpp" />
     <ClCompile Include="src\shape.cpp" />
     <ClCompile Include="src\uiux.cpp" />
+    <ClCompile Include="src\undo_redo.cpp" />
     <ClCompile Include="src\user_input.cpp" />
   </ItemGroup>
   <ItemGroup>

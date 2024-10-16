@@ -6,6 +6,7 @@
 
 #include "../include/shape.hpp"
 #include "../include/uiux.hpp"
+#include "../include/undo_redo.hpp"
 #include "../include/user_input.hpp"
 
 void drawPixel(sf::RenderTexture& canvas, const sf::Vector2f& mousePosition);

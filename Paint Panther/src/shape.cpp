@@ -1,6 +1,4 @@
 #include "../include/paint.hpp"
-#include <SFML/Graphics.hpp>
-#include <cmath>
 
 // draws a rectangle
 void drawRectangle(sf::RenderTexture& canvas, const sf::Vector2i& startPos, const sf::Vector2i& endPos) {
@@ -18,5 +16,10 @@ void drawRectangle(sf::RenderTexture& canvas, const sf::Vector2i& startPos, cons
 
 // draws a circle
 void drawCircle() {
+
+}
+
+// draws a trapezoid (this is hard btw!) 
+void drawTrapezoid() {
 
 }
