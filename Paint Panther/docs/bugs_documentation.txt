@@ -1,17 +1,17 @@
 Core: 
-
+Draw tool in unable to keep up with the movement speed of the cursor.
 
 
 
 Shapes and tools: 
-
+Rectangle tool continuosly makes rectangles instead of only one.
 
 
 
 
 UIUX: 
-
-
+Canvas deforms when window is resized.
+When window is resized the drawings inside resizes with it instead of staying as they were drawn.
 
 
 
