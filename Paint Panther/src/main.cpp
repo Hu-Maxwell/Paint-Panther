@@ -3,8 +3,8 @@
 int main() {
     // creates the window
 
-    int width = 1600; 
-    int height = 1200; 
+    int width = 500; 
+    int height = 500; 
 
     sf::RenderWindow window(sf::VideoMode(width, height), "Paint Panther");
     sf::RenderTexture canvas;
