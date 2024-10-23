@@ -21,10 +21,6 @@ void drawUI(sf::RenderWindow& window, sf::FloatRect& penButtonBounds, sf::FloatR
     // undo / redo button
 
 
-    // 
-
-
-
     window.draw(toolbar);
     window.draw(penButton);
     window.draw(rectangleButton);

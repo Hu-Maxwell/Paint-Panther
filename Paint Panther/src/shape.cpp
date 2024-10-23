@@ -5,7 +5,7 @@ void drawRectangle(sf::RenderTexture& canvas, const sf::Vector2i& startPos, cons
     float width = endPos.x - startPos.x;
     float height = endPos.y - startPos.y;
 
-    sf::RectangleShape rectangle(sf::Vector2f(std::abs(width), std::abs(height)));
+    sf::RectangleShape rectangle(sf::Vector2f((width), (height)));
     rectangle.setPosition(
         width < 0 ? endPos.x : startPos.x,
         height < 0 ? endPos.y : startPos.y
