@@ -5,7 +5,7 @@ void drawRectangle(sf::RenderTexture& canvas, const sf::Vector2i& startPos, cons
     float width = endPos.x - startPos.x;
     float height = endPos.y - startPos.y;
 
-    sf::RectangleShape rectangle(sf::Vector2f((width), (height)));
+    sf::RectangleShape rectangle(sf::Vector2f(std::abs(width), std::abs(height)));
     rectangle.setPosition(
         width < 0 ? endPos.x : startPos.x,
         height < 0 ? endPos.y : startPos.y
@@ -22,9 +22,4 @@ void drawCircle(sf::RenderTexture& canvas, const sf::Vector2i& startPos, const s
     circle.setPosition(startPos.x - radius, startPos.y - radius);
     circle.setFillColor(sf::Color::Black);
     canvas.draw(circle);
-}
-
-// draws a trapezoid (this is hard btw!) 
-void drawTrapezoid() {
-
 }

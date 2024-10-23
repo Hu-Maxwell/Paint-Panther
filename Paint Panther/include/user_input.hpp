@@ -1,6 +1,8 @@
 #ifndef USER_INPUT_HPP
 #define USER_INPUT_HPP
 
+#include <SFML/Graphics.hpp>
+
 void handleMouseReleased(bool& isDrawingRectangle, bool& isDrawingPixel, bool& isDrawingCircle);
 
 void handleMousePressed(sf::RenderWindow& window, bool& isDrawingRectangle, bool& isDrawingPixel, bool& isDrawingCircle,
@@ -13,4 +15,4 @@ void handleDrawingEvents(sf::RenderWindow& window, bool& isDrawingRectangle, boo
     const sf::FloatRect& rectangleButtonBounds, const sf::FloatRect& circleButtonBounds,
     const sf::FloatRect& undoButtonBounds, const sf::FloatRect& redoButtonBounds);
 
-#endif
+#endif // USER_INPUT_HPP

@@ -1,18 +1,11 @@
 #include "../include/paint.hpp"
 
-// handles mouse button release events
-// handles mouse button release events
-void handleMouseReleased(bool& isDrawingRectangle, bool& isDrawingPixel, bool& isDrawingCircle) {
-    isDrawingRectangle = false;
-    isDrawingPixel = false;
-    isDrawingCircle = false;
-}
-
-// handles mouse button press events
+// Handles mouse button press events
 void handleMousePressed(sf::RenderWindow& window, bool& isDrawingRectangle, bool& isDrawingPixel, bool& isDrawingCircle,
     sf::Vector2i& startPos, int& currentTool, const sf::FloatRect& penButtonBounds,
     const sf::FloatRect& rectangleButtonBounds, const sf::FloatRect& circleButtonBounds,
     const sf::FloatRect& undoButtonBounds, const sf::FloatRect& redoButtonBounds) {
+
     sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -53,13 +46,21 @@ void handleMousePressed(sf::RenderWindow& window, bool& isDrawingRectangle, bool
     }
 }
 
-// handles window events
+// Handles mouse button release events
+void handleMouseReleased(bool& isDrawingRectangle, bool& isDrawingPixel, bool& isDrawingCircle) {
+    isDrawingRectangle = false;
+    isDrawingPixel = false;
+    isDrawingCircle = false;
+}
+
+// Handles window events
 void handleDrawingEvents(sf::RenderWindow& window, bool& isDrawingRectangle, bool& isDrawingPixel, bool& isDrawingCircle,
     sf::Vector2i& startPos, int& currentTool, const sf::FloatRect& penButtonBounds,
     const sf::FloatRect& rectangleButtonBounds, const sf::FloatRect& circleButtonBounds,
     const sf::FloatRect& undoButtonBounds, const sf::FloatRect& redoButtonBounds) {
+
     sf::Event event;
-    if (window.pollEvent(event)) {
+    while (window.pollEvent(event)) {
         switch (event.type) {
         case sf::Event::Closed:
             window.close();
