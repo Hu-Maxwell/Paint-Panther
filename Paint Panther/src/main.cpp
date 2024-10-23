@@ -1,8 +1,10 @@
 #include "../include/paint.hpp"
 
 int main() {
-    int width = 1600; 
-    int height = 1200; 
+    // creates the window
+
+    int width = 500; 
+    int height = 500; 
 
     sf::RenderWindow window(sf::VideoMode(width, height), "Paint Panther");
     window.setFramerateLimit(144); 
