@@ -13,20 +13,29 @@ void paintLoop(sf::RenderWindow& window, sf::RenderTexture& canvas) {
 
     sf::Vector2i startPos;
 
-    int currentTool = 0; // 0 = nothing, 1 = pen, 2 = rectangle
+    int currentTool = 0; // 0 = nothing, 1 = pen, 2 = rectangle, 3 = circle
 
     sf::FloatRect penButtonBounds;
     sf::FloatRect rectangleButtonBounds;
+    sf::FloatRect circleButtonBounds;
+    sf::FloatRect undoButtonBounds;
+    sf::FloatRect redoButtonBounds;
 
-    bool isDrawingrectangle = false;
+    bool isDrawingRectangle = false;
     bool isDrawingPixel = false;
+    bool isDrawingCircle = false;
 
     while (window.isOpen()) {
-        handleDrawingEvents(window, isDrawingrectangle, isDrawingPixel, startPos, currentTool, penButtonBounds, rectangleButtonBounds);
+        handleDrawingEvents(window, isDrawingRectangle, isDrawingPixel, isDrawingCircle, startPos, currentTool, penButtonBounds, rectangleButtonBounds, circleButtonBounds, undoButtonBounds, redoButtonBounds);
 
         // draw rectangle
-        if (isDrawingrectangle) {
+        if (isDrawingRectangle) {
             drawRectangle(canvas, startPos, sf::Mouse::getPosition(window));
+        }
+
+        // draw circle
+        if (isDrawingCircle) {
+            drawCircle(canvas, startPos, sf::Mouse::getPosition(window));
         }
 
         // draw pixel
@@ -38,10 +47,10 @@ void paintLoop(sf::RenderWindow& window, sf::RenderTexture& canvas) {
         // draw canvas
         sf::Sprite canvasSprite(canvas.getTexture());
         window.draw(canvasSprite);
-        canvas.display();  
+        canvas.display();
 
         // draw UI
-        drawUI(window, penButtonBounds, rectangleButtonBounds);
+        drawUI(window, penButtonBounds, rectangleButtonBounds, circleButtonBounds, undoButtonBounds, redoButtonBounds);
 
         window.display();
     }

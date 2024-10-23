@@ -3,8 +3,8 @@
 int main() {
     // creates the window
 
-    int width = 500; 
-    int height = 500; 
+    int width = 800; 
+    int height = 600; 
 
     sf::RenderWindow window(sf::VideoMode(width, height), "Paint Panther");
     window.setFramerateLimit(144); 
