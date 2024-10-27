@@ -19,28 +19,26 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\paint.hpp" />
-    <ClInclude Include="include\shape.hpp" />
-    <ClInclude Include="include\uiux.hpp" />
-    <ClInclude Include="include\undo_redo.hpp" />
-    <ClInclude Include="include\user_input.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\paint.cpp" />
-    <ClCompile Include="src\shape.cpp" />
-    <ClCompile Include="src\uiux.cpp" />
-    <ClCompile Include="src\undo_redo.cpp" />
-    <ClCompile Include="src\user_input.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="assets\mr_handsome.jpg" />
+    <Image Include="assets\pen.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="docs\bugs_documentation.txt" />
     <Text Include="docs\file_organization.txt" />
     <Text Include="docs\pseudocode.txt" />
     <Text Include="docs\version history.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\PaintApp.cpp" />
+    <ClCompile Include="src\UI.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\PaintApp.h" />
+    <ClInclude Include="include\UI.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="assets\arial.ttf" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
