@@ -6,11 +6,6 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
         exit(EXIT_FAILURE);
     }
 
-    sf::RectangleShape undoRect;
-    sf::Text undoText;
-    button undoButton{ undoRect, undoText };
-    buttons.push_back(undoButton);
-
     toolbarHeight = 40.0f;
     buttonSize = 40.0f;
     backgroundColor = sf::Color(200, 200, 200);
@@ -19,23 +14,24 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     toolbarBackground.setPosition(0, 0);
     toolbarBackground.setFillColor(backgroundColor);
 
-    initUI(); 
+    // Create buttons with labels
+    buttons.emplace_back("U", font); // Undo button
+    buttons.emplace_back("R", font); // Redo button
+    buttons.emplace_back("P", font); // Pen button
+    buttons.emplace_back("D", font); // Dropdown button
+
+    initUI();
 }
 
 
 void Toolbar::initUI() {
     float xPosition = 0.0f;
 
-    for (button& btn : buttons) { 
+    for (button& btn : buttons) {
         btn.rect.setSize(sf::Vector2f(buttonSize, toolbarHeight));
-        btn.rect.setPosition(xPosition, 0); 
-        btn.rect.setFillColor(sf::Color(100, 100, 250));  
+        btn.rect.setPosition(xPosition, 0);
 
-        btn.text.setFont(font);  
-        btn.text.setString("U");  
-        btn.text.setCharacterSize(14);  
-        btn.text.setFillColor(sf::Color::White);  
-
+        // Center the text within the button
         sf::FloatRect textBounds = btn.text.getLocalBounds();
         btn.text.setOrigin(textBounds.left + textBounds.width / 2.0f,
             textBounds.top + textBounds.height / 2.0f);
@@ -43,11 +39,11 @@ void Toolbar::initUI() {
             btn.rect.getPosition().x + btn.rect.getSize().x / 2.0f,
             btn.rect.getPosition().y + btn.rect.getSize().y / 2.0f);
 
-        xPosition += buttonSize + 5.0f;  
+        xPosition += buttonSize + 5.0f; // Space between buttons
     }
 }
 
-void Toolbar::handleUIClick() {
+void Toolbar::handleUIInput() {
 	
 }
 
@@ -63,7 +59,7 @@ void Toolbar::renderUI() {
     window.draw(toolbarBackground);
 
     for (const button& btn : buttons) {
-        window.draw(btn.rect);    
-        window.draw(btn.text);   
+        window.draw(btn.rect);
+        window.draw(btn.text);
     }
 }

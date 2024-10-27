@@ -5,21 +5,25 @@
 #include <iostream>
 
 struct button {
-    sf::RectangleShape rect; 
+    sf::RectangleShape rect;
     sf::Text text;
 
-    button(sf::RectangleShape& _rect, sf::Text _text) {
-        rect = _rect;
-        text = _text; 
+    button(const std::string& label, sf::Font& font) {
+        text.setFont(font);
+        text.setString(label);
+        text.setCharacterSize(14);
+        text.setFillColor(sf::Color::White);
+
+        rect.setSize(sf::Vector2f(40.0f, 40.0f)); // Default size
+        rect.setFillColor(sf::Color(100, 100, 250)); // Default color
     }
-    // sf::Texture; (add this later) 
 };
 
 class Toolbar {
 public:
     Toolbar(sf::RenderWindow& _window);
     void initUI();
-    void handleUIClick();
+    void handleUIInput();
     void openDropdown();
     void highlightButton();
     void renderUI();
