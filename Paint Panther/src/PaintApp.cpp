@@ -62,6 +62,15 @@ void PaintApp::handleEvents() {
                 else if (dropdownButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
                     openDropdown(); 
                 }
+                else if (dropButton1.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y) && dropdownIsOpen) {
+                    std::cout << "dropdown1 open";
+                }
+                else if (dropButton2.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y) && dropdownIsOpen) {
+                    std::cout << "dropdown2 open";
+                }
+                else if (dropButton3.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y) && dropdownIsOpen) {
+                    std::cout << "dropdown3 open";
+                }
                 else {
                     if (currentTool == Tool::Pen) {
                         startDrawing();
@@ -208,7 +217,12 @@ void PaintApp::stopCircle() {
 // ====================================
 
 void PaintApp::openDropdown() {
-    dropdownIsOpen = true; 
+    if (!dropdownIsOpen) {
+        dropdownIsOpen = true;
+    }
+    else {
+        dropdownIsOpen = false; 
+    }
 }
 
 void PaintApp::drawDropdown() {
