@@ -5,23 +5,17 @@
 // ====================================
 
 // constructor - initializes the window, texture, and current color
-PaintApp::PaintApp() : window(sf::VideoMode(800, 600), "Paint2D App"), currentColor(sf::Color::Black) {
+PaintApp::PaintApp()
+    : window(sf::VideoMode(800, 600), "Paint2D App"),
+    toolbar(window), // initialize toolbar with window reference
+    currentColor(sf::Color::Black) {
+    
     texture.create(800, 600);
     texture.clear(sf::Color::White);
     texture.display();
     sprite.setTexture(texture.getTexture());
-
-    // initialize UI
-    initUI(font,
-        undoButton, redoButton,
-        penButton, penSprite,
-        shapeButton, circleButton,
-        toolbarBackground,
-        undoText, redoText, penText, shapeText, circleText,
-        window, penTexture,
-        dropdownButton, dropdownText, 
-        dropButton1, dropButton2, dropButton3);
 }
+
 
 // run - main loop of the application
 void PaintApp::run() {
@@ -42,48 +36,21 @@ void PaintApp::handleEvents() {
         if (event.type == sf::Event::Closed) {
             window.close();
         }
+
         else if (event.type == sf::Event::MouseButtonPressed) {
             if (event.mouseButton.button == sf::Mouse::Left) {
-                if (undoButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-                    undo();
+                if (currentTool == Tool::Pen) {
+                    startDrawing();
                 }
-                else if (redoButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-                    redo();
+                else if (currentTool == Tool::Shape) {
+                    startShape();
                 }
-                else if (penButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-                    currentTool = Tool::Pen;
-                }
-                else if (shapeButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-                    currentTool = Tool::Shape;
-                }
-                else if (circleButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-                    currentTool = Tool::Circle;
-                } 
-                else if (dropdownButton.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
-                    openDropdown(); 
-                }
-                else if (dropButton1.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y) && dropdownIsOpen) {
-                    std::cout << "dropdown1 open";
-                }
-                else if (dropButton2.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y) && dropdownIsOpen) {
-                    std::cout << "dropdown2 open";
-                }
-                else if (dropButton3.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y) && dropdownIsOpen) {
-                    std::cout << "dropdown3 open";
-                }
-                else {
-                    if (currentTool == Tool::Pen) {
-                        startDrawing();
-                    }
-                    else if (currentTool == Tool::Shape) {
-                        startShape();
-                    }
-                    else if (currentTool == Tool::Circle) {
-                        startCircle();
-                    }
+                else if (currentTool == Tool::Circle) {
+                    startCircle();
                 }
             }
         }
+
         else if (event.type == sf::Event::MouseButtonReleased) {
             if (event.mouseButton.button == sf::Mouse::Left) {
                 if (currentTool == Tool::Pen) {
@@ -97,6 +64,7 @@ void PaintApp::handleEvents() {
                 }
             }
         }
+
         else if (event.type == sf::Event::MouseMoved) {
             if (currentTool == Tool::Pen && isDrawing) {
                 draw();
@@ -106,14 +74,6 @@ void PaintApp::handleEvents() {
             }
             else if (currentTool == Tool::Circle && isDrawingCircle) {
                 updateCircle();
-            }
-        }
-        else if (event.type == sf::Event::KeyPressed) {
-            if (event.key.code == sf::Keyboard::Z && event.key.control) {
-                undo();
-            }
-            else if (event.key.code == sf::Keyboard::Y && event.key.control) {
-                redo();
             }
         }
     }
@@ -216,21 +176,8 @@ void PaintApp::stopCircle() {
 // dropdown 
 // ====================================
 
-void PaintApp::openDropdown() {
-    if (!dropdownIsOpen) {
-        dropdownIsOpen = true;
-    }
-    else {
-        dropdownIsOpen = false; 
-    }
-}
 
-void PaintApp::drawDropdown() {
-    // three more buttons appear 
-    window.draw(dropButton1);
-    window.draw(dropButton2);
-    window.draw(dropButton3); 
-}
+
 
 // ====================================
 // undo/redo
@@ -272,25 +219,6 @@ void PaintApp::saveState() {
     }
 }
 
-// highlights current selected button
-void PaintApp::highlightButton() {
-    if (currentTool == Tool::Pen) {
-        penButton.setFillColor(sf::Color::Yellow);
-        shapeButton.setFillColor(sf::Color(200, 200, 200));
-        circleButton.setFillColor(sf::Color(200, 200, 200));
-    }
-    else if (currentTool == Tool::Shape) {
-        penButton.setFillColor(sf::Color(200, 200, 200));
-        shapeButton.setFillColor(sf::Color::Yellow);
-        circleButton.setFillColor(sf::Color(200, 200, 200));
-    }
-    else if (currentTool == Tool::Circle) {
-        penButton.setFillColor(sf::Color(200, 200, 200));
-        shapeButton.setFillColor(sf::Color(200, 200, 200));
-        circleButton.setFillColor(sf::Color::Yellow);
-    }
-}
-
 // render - draws all elements to the window
 void PaintApp::render() {
     window.clear();
@@ -304,25 +232,7 @@ void PaintApp::render() {
         window.draw(currentCircle);
     }
 
-    if (dropdownIsOpen) {
-        drawDropdown(); 
-    }
-
-    highlightButton();
-
-    window.draw(toolbarBackground);
-    window.draw(undoButton);
-    window.draw(undoText);
-    window.draw(redoButton);
-    window.draw(redoText);
-    window.draw(penButton);
-    window.draw(penSprite); 
-    window.draw(shapeButton);
-    window.draw(shapeText);
-    window.draw(circleButton);
-    window.draw(circleText);
-	window.draw(dropdownButton);
-    window.draw(dropdownText); 
-  
+    // render UI 
+    toolbar.renderUI();
     window.display();
 }

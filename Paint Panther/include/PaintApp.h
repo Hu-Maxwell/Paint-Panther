@@ -18,19 +18,14 @@ private:
     sf::Sprite sprite;
     sf::Color currentColor;
     std::vector<sf::Vertex> currentLine;
+
+    Toolbar toolbar; 
+
     std::stack<sf::Image> undoStack, redoStack;
+    sf::Texture tempTexture; 
+
     bool isDrawing = false;
-    bool dropdownIsOpen = false; 
-    sf::Texture penTexture;
-    sf::Sprite penSprite; 
-
-    // UI elements
-    sf::Font font;
-    sf::RectangleShape undoButton, redoButton, penButton, shapeButton, circleButton, toolbarBackground;
-    sf::RectangleShape dropdownButton, dropButton1, dropButton2, dropButton3;
-    sf::Text undoText, redoText, penText, shapeText, circleText, dropdownText;
-
-    sf::Texture tempTexture; // member variable to keep texture within scope
+    bool dropdownIsOpen = false;
 
 	// tool enum
     enum class Tool {
@@ -41,7 +36,6 @@ private:
 
     Tool currentTool = Tool::Pen;
 
-    // rect drawing var 
     // TODO: rename this to rect later
     bool isDrawingShape = false;
     sf::Vector2f shapeStartPos;
@@ -52,21 +46,23 @@ private:
     sf::CircleShape currentCircle;
 
     void handleEvents();
+
     void startDrawing();
     void stopDrawing();
     void draw();
+
     void startShape();
     void updateShape();
     void stopShape();
+
     void startCircle();
-    void openDropdown(); 
-    void drawDropdown(); 
     void updateCircle();
     void stopCircle();
+
     void undo();
     void redo();
     void saveState();
-    void highlightButton(); 
+
     void render();
 };
 
