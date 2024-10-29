@@ -7,7 +7,7 @@
 // constructor - initializes the window, texture, and current color
 PaintApp::PaintApp()
     : window(sf::VideoMode(800, 600), "Paint2D App"),
-    toolbar(window), // initialize toolbar with window reference
+    toolbar(window), 
     currentColor(sf::Color::Black) {
     
     texture.create(800, 600);
@@ -39,12 +39,23 @@ void PaintApp::handleEvents() {
 
         else if (event.type == sf::Event::MouseButtonPressed) {
             if (event.mouseButton.button == sf::Mouse::Left) {
-
+                // TODO: still bugged if you click in the toolbar
                 if (toolbar.handleUIInput(event) != Tool::Nothing) {
-                    currentTool = toolbar.handleUIInput(event);
+                    Tool clickedTool = toolbar.handleUIInput(event);
+                    if (clickedTool == Tool::Undo) {
+                        undo();
+                    }
+                    else if (clickedTool == Tool::Redo) {
+                        redo();
+                    }
+                    else if (clickedTool == Tool::Pen) {
+                        currentTool = clickedTool;
+                    }
+                    else if (clickedTool == Tool::Rect) {
+                        currentTool = clickedTool;
+                    }
+                    break;
                 }
-
-
                 if (currentTool == Tool::Pen) {
                     startDrawing();
                 }

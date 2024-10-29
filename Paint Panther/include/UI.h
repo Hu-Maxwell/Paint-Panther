@@ -8,28 +8,35 @@ enum class Tool {
     Pen,
     Rect,
     Circle,
+    Undo, 
+    Redo, 
     Nothing
-};
-
-struct button {
-    sf::RectangleShape rect;
-    sf::Text text;
-
-    button(const std::string& label, sf::Font& font) {
-        text.setFont(font);
-        text.setString(label);
-        text.setCharacterSize(14);
-        text.setFillColor(sf::Color::White);
-
-        rect.setSize(sf::Vector2f(40.0f, 40.0f)); // Default size
-        rect.setFillColor(sf::Color(100, 100, 250)); // Default color
-    }
 };
 
 class Toolbar {
 public:
+    struct Button {
+        sf::RectangleShape rect;
+        sf::Text text;
+        std::string id;
+        static sf::Font font; 
+        static sf::Color color; 
+        
+        Button(const std::string& label, std::string _id) {
+            text.setFont(font);
+            text.setString(label);
+            text.setCharacterSize(14);
+            text.setFillColor(sf::Color::White);
+
+            id = _id;
+
+            rect.setSize(sf::Vector2f(40.0f, 40.0f)); // TODO: change this to buttonSize
+            rect.setFillColor(sf::Color(100, 100, 250)); // TODO: change this to buttonColor
+        }
+    };
+
     Toolbar(sf::RenderWindow& _window);
-    void initUI();
+    void initButtons(std::vector<Button>& buttonVector, float startingPosX, float startingPosY);
     Tool handleUIInput(sf::Event event);
     void openDropdown();
     void highlightButton();
@@ -39,11 +46,17 @@ public:
     sf::Font font;
     
     sf::RectangleShape toolbarBackground;
-    std::vector<button> buttons;
+    std::vector<Button> buttons;
 
-    float toolbarHeight; // 40.0f
-    float buttonSize; // 40.0f
-    sf::Color backgroundColor; // sf::Color(200, 200, 200);  gray
+    float toolbarHeight; 
+    sf::Vector2f buttonSize; 
+    float buttonGap; 
+    sf::Color backgroundColor; 
+
+    sf::RectangleShape dropdownRect; 
+    float dropdownWidth;
+    float dropdownHeight; // change to vector2 later
+    bool dropdownIsOpen; 
 };
 
 #endif 

@@ -5,7 +5,8 @@
 #include <stack>
 #include <vector>
 #include <iostream>
-#include "UI.h"
+
+#include "../include/UI.h"
 
 class PaintApp {
 public:

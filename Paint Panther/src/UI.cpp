@@ -1,53 +1,63 @@
 #include "../include/UI.h"
 
-
-
+sf::Font Toolbar::Button::font; 
 Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
-    if (!font.loadFromFile("assets/arial.ttf")) {
+    if (!Button::font.loadFromFile("assets/arial.ttf")) {
         std::cerr << "Error loading font 'arial.ttf'." << std::endl;
         exit(EXIT_FAILURE);
     }
 
+    // Button::color = sf::Color()
+
     toolbarHeight = 40.0f;
-    buttonSize = 40.0f;
     backgroundColor = sf::Color(200, 200, 200);
 
     toolbarBackground.setSize(sf::Vector2f(window.getSize().x, toolbarHeight));
     toolbarBackground.setPosition(0, 0);
     toolbarBackground.setFillColor(backgroundColor);
 
-    // Create buttons with labels
-    buttons.emplace_back("U", font); // Undo button
-    buttons.emplace_back("R", font); // Redo button
-    buttons.emplace_back("P", font); // Pen button
-    buttons.emplace_back("D", font); // Dropdown button
+    buttonSize.x = 40.0f;
+    buttonSize.y = toolbarHeight; 
 
-    initUI();
+    sf::Vector2f buttonPos; 
+    buttonGap = 5.0f;
+
+    buttons.emplace_back("U", "undo"); 
+    buttons.emplace_back("R", "redo");
+    buttons.emplace_back("P", "pen");
+    buttons.emplace_back("D", "dropdown");
+    initButtons(buttons, 0, 0);
+
+    dropdownIsOpen = false; 
 }
 
+void Toolbar::initButtons(std::vector<Button>& buttonVector, float startingPosX, float startingPosY) {
+    float buttonPosX = startingPosX;
+    float buttonPosY = startingPosY; 
 
-void Toolbar::initUI() {
-    float xPosition = 0.0f;
+    for (Button& button : buttonVector) {
+        sf::RectangleShape& buttonRect = button.rect; 
 
-    for (button& btn : buttons) {
-        btn.rect.setSize(sf::Vector2f(buttonSize, toolbarHeight));
-        btn.rect.setPosition(xPosition, 0);
+        buttonRect.setSize(sf::Vector2f(buttonSize.x, toolbarHeight)); 
+        buttonRect.setPosition(buttonPosX, buttonPosY); 
 
-        // Center the text within the button
-        sf::FloatRect textBounds = btn.text.getLocalBounds();
-        btn.text.setOrigin(textBounds.left + textBounds.width / 2.0f,
-            textBounds.top + textBounds.height / 2.0f);
-        btn.text.setPosition(
-            btn.rect.getPosition().x + btn.rect.getSize().x / 2.0f,
-            btn.rect.getPosition().y + btn.rect.getSize().y / 2.0f);
-
-        xPosition += buttonSize + 5.0f; // Space between buttons
+        // center the button's text
+        sf::FloatRect textBounds = button.text.getLocalBounds();
+        button.text.setOrigin(textBounds.left + textBounds.width / 2.0f, textBounds.top + textBounds.height / 2.0f); 
+        button.text.setPosition(buttonRect.getPosition().x + buttonRect.getSize().x / 2, buttonRect.getPosition().y + buttonRect.getSize().y / 2);
+    
+        buttonPosX += buttonSize.x + buttonGap; 
     }
 }
 
 
 Tool Toolbar::handleUIInput(sf::Event event) {
-    int temp = 0; 
+    if (!toolbarBackground.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)))) {
+        std::cout << "nothing"; 
+        return Tool::Nothing;
+    }
+
+    int temp = -1; 
     if (event.type == sf::Event::MouseButtonPressed) {
         sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
         for (int i = 0; i < 4; i++) {
@@ -56,24 +66,35 @@ Tool Toolbar::handleUIInput(sf::Event event) {
             }
         }
     }
-    
-    if (temp == 2) {
-        std::cout << "pen tool";
-        return Tool::Pen; 
+
+    if (temp == 0) {
+        return Tool::Undo;
     }
-    if (temp == 3) {
-        std::cout << "rect tool";
-        return Tool::Rect;
+    else if (temp == 1) {
+        return Tool::Redo;
+    }
+    else if (temp == 2) {
+        return Tool::Pen;
+    }
+    else if (temp == 3) {
+        openDropdown();
+        return Tool::Nothing; 
     }
     else {
-        std::cout << "biag";
         return Tool::Nothing;
     }
 }
 
-
 void Toolbar::openDropdown() {
-	
+    dropdownIsOpen = true;
+
+    dropdownWidth = (3 * buttonSize.x) + (2 * buttonGap); 
+    dropdownHeight = buttonSize.x; 
+    dropdownRect.setSize(sf::Vector2f(dropdownWidth, dropdownHeight)); 
+    dropdownRect.setPosition((3 * buttonSize.x) + (3 * buttonGap), buttonSize.y);
+    dropdownRect.setFillColor(backgroundColor);
+
+
 }
 
 void Toolbar::highlightButton() {
@@ -83,8 +104,13 @@ void Toolbar::highlightButton() {
 void Toolbar::renderUI() {
     window.draw(toolbarBackground);
 
-    for (const button& btn : buttons) {
+    for (const Button& btn : buttons) {
         window.draw(btn.rect);
         window.draw(btn.text);
     }
+
+    if (dropdownIsOpen) {
+        window.draw(dropdownRect);
+    }
+    
 }
