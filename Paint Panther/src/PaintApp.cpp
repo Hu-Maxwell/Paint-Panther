@@ -39,11 +39,17 @@ void PaintApp::handleEvents() {
 
         else if (event.type == sf::Event::MouseButtonPressed) {
             if (event.mouseButton.button == sf::Mouse::Left) {
+
+                if (toolbar.handleUIInput(event) != Tool::Nothing) {
+                    currentTool = toolbar.handleUIInput(event);
+                }
+
+
                 if (currentTool == Tool::Pen) {
                     startDrawing();
                 }
-                else if (currentTool == Tool::Shape) {
-                    startShape();
+                else if (currentTool == Tool::Rect) {
+                    startRect();
                 }
                 else if (currentTool == Tool::Circle) {
                     startCircle();
@@ -56,8 +62,8 @@ void PaintApp::handleEvents() {
                 if (currentTool == Tool::Pen) {
                     stopDrawing();
                 }
-                else if (currentTool == Tool::Shape) {
-                    stopShape();
+                else if (currentTool == Tool::Rect) {
+                    stopRect();
                 }
                 else if (currentTool == Tool::Circle) {
                     stopCircle();
@@ -69,8 +75,8 @@ void PaintApp::handleEvents() {
             if (currentTool == Tool::Pen && isDrawing) {
                 draw();
             }
-            else if (currentTool == Tool::Shape && isDrawingShape) {
-                updateShape();
+            else if (currentTool == Tool::Rect && isDrawingRect) {
+                updateRect();
             }
             else if (currentTool == Tool::Circle && isDrawingCircle) {
                 updateCircle();
@@ -108,17 +114,17 @@ void PaintApp::draw() {
 // ====================================
 // rectangle 
 // ====================================
-void PaintApp::startShape() {
+void PaintApp::startRect() {
     saveState();
     shapeStartPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
     currentRectangle.setPosition(shapeStartPos);
     currentRectangle.setFillColor(sf::Color::Transparent);
     currentRectangle.setOutlineColor(currentColor);
     currentRectangle.setOutlineThickness(1);
-    isDrawingShape = true;
+    isDrawingRect = true;
 }
 
-void PaintApp::updateShape() {
+void PaintApp::updateRect() {
     sf::Vector2f currentPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
     sf::Vector2f size = currentPos - shapeStartPos;
 
@@ -138,8 +144,8 @@ void PaintApp::updateShape() {
     currentRectangle.setSize(size);
 }
 
-void PaintApp::stopShape() {
-    isDrawingShape = false;
+void PaintApp::stopRect() {
+    isDrawingRect = false;
     texture.draw(currentRectangle);
     texture.display();
     currentRectangle.setSize(sf::Vector2f(0, 0));
@@ -224,7 +230,7 @@ void PaintApp::render() {
     window.clear();
     window.draw(sprite);
 
-    if (isDrawingShape) {
+    if (isDrawingRect) {
         window.draw(currentRectangle);
     }
 

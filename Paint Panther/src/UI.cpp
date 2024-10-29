@@ -1,5 +1,7 @@
 #include "../include/UI.h"
 
+
+
 Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     if (!font.loadFromFile("assets/arial.ttf")) {
         std::cerr << "Error loading font 'arial.ttf'." << std::endl;
@@ -43,9 +45,32 @@ void Toolbar::initUI() {
     }
 }
 
-void Toolbar::handleUIInput() {
-	
+
+Tool Toolbar::handleUIInput(sf::Event event) {
+    int temp = 0; 
+    if (event.type == sf::Event::MouseButtonPressed) {
+        sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+        for (int i = 0; i < 4; i++) {
+            if (buttons[i].rect.getGlobalBounds().contains(mousePos)) {
+                temp = i; 
+            }
+        }
+    }
+    
+    if (temp == 2) {
+        std::cout << "pen tool";
+        return Tool::Pen; 
+    }
+    if (temp == 3) {
+        std::cout << "rect tool";
+        return Tool::Rect;
+    }
+    else {
+        std::cout << "biag";
+        return Tool::Nothing;
+    }
 }
+
 
 void Toolbar::openDropdown() {
 	

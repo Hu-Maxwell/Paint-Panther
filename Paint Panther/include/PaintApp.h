@@ -27,17 +27,10 @@ private:
     bool isDrawing = false;
     bool dropdownIsOpen = false;
 
-	// tool enum
-    enum class Tool {
-        Pen,
-        Shape, // rename this to rect later
-        Circle
-    };
-
     Tool currentTool = Tool::Pen;
 
     // TODO: rename this to rect later
-    bool isDrawingShape = false;
+    bool isDrawingRect = false;
     sf::Vector2f shapeStartPos;
     sf::RectangleShape currentRectangle;
 
@@ -51,9 +44,9 @@ private:
     void stopDrawing();
     void draw();
 
-    void startShape();
-    void updateShape();
-    void stopShape();
+    void startRect();
+    void updateRect();
+    void stopRect();
 
     void startCircle();
     void updateCircle();

@@ -4,6 +4,13 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+enum class Tool {
+    Pen,
+    Rect,
+    Circle,
+    Nothing
+};
+
 struct button {
     sf::RectangleShape rect;
     sf::Text text;
@@ -23,7 +30,7 @@ class Toolbar {
 public:
     Toolbar(sf::RenderWindow& _window);
     void initUI();
-    void handleUIInput();
+    Tool handleUIInput(sf::Event event);
     void openDropdown();
     void highlightButton();
     void renderUI();
