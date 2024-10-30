@@ -104,6 +104,7 @@ void PaintApp::handleEvents() {
 void PaintApp::startDrawing() {
     saveState();
     currentLine.clear();
+    lastMousePos.x = -1; 
     isDrawing = true;
 }
 
@@ -114,14 +115,22 @@ void PaintApp::stopDrawing() {
 
 
 void PaintApp::draw() {
-    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-    sf::Vertex vertex(sf::Vector2f(mousePos), currentColor);
-    currentLine.push_back(vertex);
+    sf::Vector2i curMousePos = sf::Mouse::getPosition(window);
+    
+    if (lastMousePos != curMousePos && lastMousePos.x != -1) {
+        sf::VertexArray line(sf::Lines, 2);
+        line[0].position = sf::Vector2f(static_cast<float>(lastMousePos.x), static_cast<float>(lastMousePos.y));
+        line[1].position = sf::Vector2f(static_cast<float>(curMousePos.x), static_cast<float>(curMousePos.y));
 
-    sf::CircleShape circle(2);
-    circle.setPosition(vertex.position - sf::Vector2f(1, 1)); // Center the circle
-    circle.setFillColor(currentColor);
-    texture.draw(circle);
+        // Set color (optional)
+        line[0].color = sf::Color::Black;
+        line[1].color = sf::Color::Black;
+
+        // Draw the line on the window
+        texture.draw(line);
+    }
+    lastMousePos = curMousePos;
+
     texture.display();
 }
 

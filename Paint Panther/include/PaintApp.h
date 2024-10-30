@@ -30,14 +30,22 @@ private:
 
     Tool currentTool = Tool::Pen;
 
-    // TODO: rename this to rect later
-    bool isDrawingRect = false;
+    // ==== drawing tools ==== 
+
+    // pen 
+    sf::Vector2i lastMousePos; // for drawing a line between mouse pos last frame and cur frame
+
+    // ==== shapes =====
     sf::Vector2f shapeStartPos;
+
+    // rect
+    bool isDrawingRect = false;
     sf::RectangleShape currentRectangle;
 
-	// circle drawing var
+	// circle 
     bool isDrawingCircle = false;
     sf::CircleShape currentCircle;
+
 
     void handleEvents();
 
