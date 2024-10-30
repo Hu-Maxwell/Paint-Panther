@@ -18,44 +18,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\paint.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\shape.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\uiux.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\user_input.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\undo_redo.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\main.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\paint.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shape.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\uiux.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\user_input.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\undo_redo.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="assets\mr_handsome.jpg">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="assets\pen.png">
       <Filter>assets</Filter>
     </Image>
   </ItemGroup>
@@ -72,5 +38,29 @@
     <Text Include="docs\version history.txt">
       <Filter>docs</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PaintApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\PaintApp.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\UI.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="assets\arial.ttf">
+      <Filter>assets</Filter>
+    </Font>
   </ItemGroup>
 </Project>
