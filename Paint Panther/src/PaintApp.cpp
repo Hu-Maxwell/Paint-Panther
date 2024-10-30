@@ -108,7 +108,6 @@ void PaintApp::handleEvents() {
 // save to file 
 // ====================================
 
-
 void PaintApp::saveToFile(const std::string& filename) {
 	texture.getTexture().copyToImage().saveToFile(filename);
     std::cout << "Saved file!" << std::endl;
@@ -149,7 +148,6 @@ void PaintApp::draw() {
 
     texture.display();
 }
-
 
 // ====================================
 // fill tool 
@@ -209,6 +207,14 @@ void PaintApp::floodFill(sf::Image& image, int x, int y, const sf::Color& target
         pixels.push(sf::Vector2i(px, py + 1));
         pixels.push(sf::Vector2i(px, py - 1));
     }
+}
+
+// ====================================
+// color wheel
+// ====================================
+
+void PaintApp::openColorWheel() {
+    // 
 }
 
 

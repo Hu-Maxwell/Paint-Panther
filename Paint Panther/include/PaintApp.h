@@ -64,6 +64,8 @@ private:
     void fill(); 
     void floodFill(sf::Image& image, int x, int y, const sf::Color& targetColor, const sf::Color& replacementColor);
 
+    void openColorWheel();
+
     void startRect();
     void updateRect();
     void stopRect();

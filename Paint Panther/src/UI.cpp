@@ -28,6 +28,7 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     buttons.emplace_back("S", Tool::SaveFile); 
     buttons.emplace_back("P", Tool::Pen);
     buttons.emplace_back("F", Tool::Fill); 
+    buttons.emplace_back("C", Tool::Color); 
     buttons.emplace_back("D", Tool::Dropdown);
     initButtons(buttons, 0, 0);
 

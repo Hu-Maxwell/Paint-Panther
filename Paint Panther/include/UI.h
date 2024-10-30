@@ -10,6 +10,7 @@ enum class Tool {
     SaveFile,
     Pen,
     Fill, 
+    Color, 
     Dropdown,
     Rect, 
     Circle, 
