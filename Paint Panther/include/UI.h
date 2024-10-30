@@ -5,11 +5,12 @@
 #include <iostream>
 
 enum class Tool {
+    Undo,
+    Redo,
     Pen,
-    Rect,
-    Circle,
-    Undo, 
-    Redo, 
+    Dropdown,
+    Rect, 
+    Circle, 
     Nothing
 };
 
@@ -18,17 +19,17 @@ public:
     struct Button {
         sf::RectangleShape rect;
         sf::Text text;
-        std::string id;
+        Tool tool;
         static sf::Font font; 
         static sf::Color color; 
         
-        Button(const std::string& label, std::string _id) {
+        Button(const std::string& label, Tool _tool) {
             text.setFont(font);
             text.setString(label);
             text.setCharacterSize(14);
             text.setFillColor(sf::Color::White);
 
-            id = _id;
+            tool = _tool;
 
             rect.setSize(sf::Vector2f(40.0f, 40.0f)); // TODO: change this to buttonSize
             rect.setFillColor(sf::Color(100, 100, 250)); // TODO: change this to buttonColor

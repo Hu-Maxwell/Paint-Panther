@@ -7,7 +7,6 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
         exit(EXIT_FAILURE);
     }
 
-
     dropdownIsOpen = false;
 
     toolbarHeight = 40.0f;
@@ -24,10 +23,10 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     sf::Vector2f buttonPos; 
     buttonGap = 5.0f;
 
-    buttons.emplace_back("U", "undo"); 
-    buttons.emplace_back("R", "redo");
-    buttons.emplace_back("P", "pen");
-    buttons.emplace_back("D", "dropdown");
+    buttons.emplace_back("U", Tool::Undo); 
+    buttons.emplace_back("R", Tool::Redo);
+    buttons.emplace_back("P", Tool::Pen);
+    buttons.emplace_back("D", Tool::Dropdown);
     initButtons(buttons, 0, 0);
 
     // dropdown
@@ -41,8 +40,8 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     float dropdownPosX = (3 * buttonSize.x) + (3 * buttonGap);
     float dropdownPosY = toolbarHeight;
 
-    dropdownButtons.emplace_back("R", "rect");
-    dropdownButtons.emplace_back("C", "circle");
+    dropdownButtons.emplace_back("R", Tool::Rect);
+    dropdownButtons.emplace_back("C", Tool::Circle);
 
     initButtons(dropdownButtons, dropdownPosX, dropdownPosY);
 
@@ -69,37 +68,23 @@ void Toolbar::initButtons(std::vector<Button>& buttonVector, float startingPosX,
 
 
 Tool Toolbar::handleUIInput(sf::Event event) {
-    if (!toolbarBackground.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)))) {
-        std::cout << "nothing"; 
-        return Tool::Nothing;
-    }
-
-    int temp = -1; 
     if (event.type == sf::Event::MouseButtonPressed) {
         sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < buttons.size(); i++) {
             if (buttons[i].rect.getGlobalBounds().contains(mousePos)) {
-                temp = i; 
+                return buttons[i].tool; 
+            }
+        }
+        
+        for (int i = 0; i < dropdownButtons.size(); i++) {
+            if (dropdownButtons[i].rect.getGlobalBounds().contains(mousePos)) {
+                return dropdownButtons[i].tool;
             }
         }
     }
-
-    if (temp == 0) {
-        return Tool::Undo;
-    }
-    else if (temp == 1) {
-        return Tool::Redo;
-    }
-    else if (temp == 2) {
-        return Tool::Pen;
-    }
-    else if (temp == 3) {
-        openDropdown();
-        return Tool::Nothing; 
-    }
-    else {
-        return Tool::Nothing;
-    }
+    
+    // if user doesn't click on any buttons 
+    return Tool::Nothing; 
 }
 
 void Toolbar::openDropdown() {

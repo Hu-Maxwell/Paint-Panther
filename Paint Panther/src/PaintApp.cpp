@@ -32,14 +32,15 @@ void PaintApp::run() {
 // handleEvents - handles all events in the application
 void PaintApp::handleEvents() {
     sf::Event event;
-    while (window.pollEvent(event)) {
+    bool exitLoop = false; 
+
+    while (window.pollEvent(event) && !exitLoop) {
         if (event.type == sf::Event::Closed) {
             window.close();
         }
 
         else if (event.type == sf::Event::MouseButtonPressed) {
             if (event.mouseButton.button == sf::Mouse::Left) {
-                // TODO: still bugged if you click in the toolbar
                 if (toolbar.handleUIInput(event) != Tool::Nothing) {
                     Tool clickedTool = toolbar.handleUIInput(event);
                     if (clickedTool == Tool::Undo) {
@@ -48,14 +49,16 @@ void PaintApp::handleEvents() {
                     else if (clickedTool == Tool::Redo) {
                         redo();
                     }
-                    else if (clickedTool == Tool::Pen) {
+                    else if (clickedTool == Tool::Dropdown) {
+                        toolbar.openDropdown(); 
+                    }
+                    else if (clickedTool == Tool::Pen || clickedTool == Tool::Rect || clickedTool == Tool::Circle) {
                         currentTool = clickedTool;
                     }
-                    else if (clickedTool == Tool::Rect) {
-                        currentTool = clickedTool;
-                    }
-                    break;
+                    exitLoop = true;
+                    break; 
                 }
+
                 if (currentTool == Tool::Pen) {
                     startDrawing();
                 }
@@ -67,7 +70,6 @@ void PaintApp::handleEvents() {
                 }
             }
         }
-
         else if (event.type == sf::Event::MouseButtonReleased) {
             if (event.mouseButton.button == sf::Mouse::Left) {
                 if (currentTool == Tool::Pen) {
@@ -109,6 +111,7 @@ void PaintApp::stopDrawing() {
     isDrawing = false;
     currentLine.clear();
 }
+
 
 void PaintApp::draw() {
     sf::Vector2i mousePos = sf::Mouse::getPosition(window);
@@ -188,13 +191,6 @@ void PaintApp::stopCircle() {
     texture.display();
     currentCircle.setRadius(0);
 }
-
-// ====================================
-// dropdown 
-// ====================================
-
-
-
 
 // ====================================
 // undo/redo
