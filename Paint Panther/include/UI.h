@@ -54,6 +54,7 @@ public:
     sf::Color backgroundColor; 
 
     sf::RectangleShape dropdownRect; 
+    std::vector<Button> dropdownButtons; 
     float dropdownWidth;
     float dropdownHeight; // change to vector2 later
     bool dropdownIsOpen; 

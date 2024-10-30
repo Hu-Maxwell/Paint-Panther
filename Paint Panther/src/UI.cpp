@@ -7,7 +7,8 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
         exit(EXIT_FAILURE);
     }
 
-    // Button::color = sf::Color()
+
+    dropdownIsOpen = false;
 
     toolbarHeight = 40.0f;
     backgroundColor = sf::Color(200, 200, 200);
@@ -16,6 +17,7 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     toolbarBackground.setPosition(0, 0);
     toolbarBackground.setFillColor(backgroundColor);
 
+    // ui buttons
     buttonSize.x = 40.0f;
     buttonSize.y = toolbarHeight; 
 
@@ -28,7 +30,22 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     buttons.emplace_back("D", "dropdown");
     initButtons(buttons, 0, 0);
 
-    dropdownIsOpen = false; 
+    // dropdown
+    dropdownWidth = (3 * buttonSize.x) + (2 * buttonGap);
+    dropdownHeight = buttonSize.x;
+
+    dropdownRect.setSize(sf::Vector2f(dropdownWidth, dropdownHeight));
+    dropdownRect.setFillColor(backgroundColor);
+    dropdownRect.setPosition(3 * buttonSize.x + 3 * buttonGap, toolbarHeight);
+
+    float dropdownPosX = (3 * buttonSize.x) + (3 * buttonGap);
+    float dropdownPosY = toolbarHeight;
+
+    dropdownButtons.emplace_back("R", "rect");
+    dropdownButtons.emplace_back("C", "circle");
+
+    initButtons(dropdownButtons, dropdownPosX, dropdownPosY);
+
 }
 
 void Toolbar::initButtons(std::vector<Button>& buttonVector, float startingPosX, float startingPosY) {
@@ -87,18 +104,10 @@ Tool Toolbar::handleUIInput(sf::Event event) {
 
 void Toolbar::openDropdown() {
     dropdownIsOpen = true;
-
-    dropdownWidth = (3 * buttonSize.x) + (2 * buttonGap); 
-    dropdownHeight = buttonSize.x; 
-    dropdownRect.setSize(sf::Vector2f(dropdownWidth, dropdownHeight)); 
-    dropdownRect.setPosition((3 * buttonSize.x) + (3 * buttonGap), buttonSize.y);
-    dropdownRect.setFillColor(backgroundColor);
-
-
 }
 
 void Toolbar::highlightButton() {
-
+    // stuff
 }
 
 void Toolbar::renderUI() {
@@ -111,6 +120,9 @@ void Toolbar::renderUI() {
 
     if (dropdownIsOpen) {
         window.draw(dropdownRect);
+        for (const Button& btn : dropdownButtons) {
+            window.draw(btn.rect);
+            window.draw(btn.text);
+        }
     }
-    
 }
