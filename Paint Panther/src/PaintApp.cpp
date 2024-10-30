@@ -52,7 +52,7 @@ void PaintApp::handleEvents() {
                     else if (clickedTool == Tool::Dropdown) {
                         toolbar.openDropdown(); 
                     }
-                    else if (clickedTool == Tool::Pen || clickedTool == Tool::Rect || clickedTool == Tool::Circle) {
+                    else if (clickedTool == Tool::Pen || clickedTool == Tool::Fill || clickedTool == Tool::Rect || clickedTool == Tool::Circle) {
                         currentTool = clickedTool;
                     }
                     exitLoop = true;
@@ -61,6 +61,9 @@ void PaintApp::handleEvents() {
 
                 if (currentTool == Tool::Pen) {
                     startDrawing();
+                } 
+                if (currentTool == Tool::Fill) {
+                    fill(); 
                 }
                 else if (currentTool == Tool::Rect) {
                     startRect();
@@ -133,6 +136,68 @@ void PaintApp::draw() {
 
     texture.display();
 }
+
+
+// ====================================
+// fill tool 
+// ====================================\
+
+void PaintApp::fill() {
+    saveState();
+
+    sf::Image image = texture.getTexture().copyToImage();
+
+    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+
+    sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+
+    int x = static_cast<int>(worldPos.x);
+    int y = static_cast<int>(worldPos.y);
+
+    if (x < 0 || x >= static_cast<int>(image.getSize().x) || y < 0 || y >= static_cast<int>(image.getSize().y))
+        return;
+
+    sf::Color targetColor = image.getPixel(x, y);
+
+    if (targetColor == currentColor)
+        return;
+
+    floodFill(image, x, y, targetColor, currentColor);
+
+    tempTexture.loadFromImage(image);
+    sf::Sprite tempSprite(tempTexture);
+
+    texture.clear(sf::Color::Transparent);
+    texture.draw(tempSprite);
+    texture.display();
+}
+
+void PaintApp::floodFill(sf::Image& image, int x, int y, const sf::Color& targetColor, const sf::Color& replacementColor) {
+    std::stack<sf::Vector2i> pixels;
+    pixels.push(sf::Vector2i(x, y));
+
+    while (!pixels.empty()) {
+        sf::Vector2i p = pixels.top();
+        pixels.pop();
+
+        int px = p.x;
+        int py = p.y;
+
+        if (px < 0 || px >= static_cast<int>(image.getSize().x) || py < 0 || py >= static_cast<int>(image.getSize().y))
+            continue;
+
+        if (image.getPixel(px, py) != targetColor)
+            continue;
+
+        image.setPixel(px, py, replacementColor);
+
+        pixels.push(sf::Vector2i(px + 1, py));
+        pixels.push(sf::Vector2i(px - 1, py));
+        pixels.push(sf::Vector2i(px, py + 1));
+        pixels.push(sf::Vector2i(px, py - 1));
+    }
+}
+
 
 // ====================================
 // rectangle 

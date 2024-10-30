@@ -8,6 +8,7 @@ enum class Tool {
     Undo,
     Redo,
     Pen,
+    Fill, 
     Dropdown,
     Rect, 
     Circle, 

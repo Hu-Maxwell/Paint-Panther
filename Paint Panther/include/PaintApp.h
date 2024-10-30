@@ -35,6 +35,12 @@ private:
     // pen 
     sf::Vector2i lastMousePos; // for drawing a line between mouse pos last frame and cur frame
 
+    // eraser
+
+    
+    // fill 
+
+
     // ==== shapes =====
     sf::Vector2f shapeStartPos;
 
@@ -52,6 +58,9 @@ private:
     void startDrawing();
     void stopDrawing();
     void draw();
+
+    void fill(); 
+    void floodFill(sf::Image& image, int x, int y, const sf::Color& targetColor, const sf::Color& replacementColor);
 
     void startRect();
     void updateRect();
