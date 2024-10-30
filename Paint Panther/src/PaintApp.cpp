@@ -8,14 +8,13 @@
 PaintApp::PaintApp()
     : window(sf::VideoMode(800, 600), "Paint2D App"),
     toolbar(window), 
-    currentColor(sf::Color::Black) {
+    currentColor(sf::Color::Red) {
     
     texture.create(800, 600);
     texture.clear(sf::Color::White);
     texture.display();
     sprite.setTexture(texture.getTexture());
 }
-
 
 // run - main loop of the application
 void PaintApp::run() {
@@ -76,6 +75,7 @@ void PaintApp::handleEvents() {
                 }
             }
         }
+
         else if (event.type == sf::Event::MouseButtonReleased) {
             if (event.mouseButton.button == sf::Mouse::Left) {
                 if (currentTool == Tool::Pen) {
@@ -138,11 +138,9 @@ void PaintApp::draw() {
         line[0].position = sf::Vector2f(static_cast<float>(lastMousePos.x), static_cast<float>(lastMousePos.y));
         line[1].position = sf::Vector2f(static_cast<float>(curMousePos.x), static_cast<float>(curMousePos.y));
 
-        // Set color (optional)
-        line[0].color = sf::Color::Black;
-        line[1].color = sf::Color::Black;
+        line[0].color = currentColor;
+        line[1].color = currentColor;
 
-        // Draw the line on the window
         texture.draw(line);
     }
     lastMousePos = curMousePos;
