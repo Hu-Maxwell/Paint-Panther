@@ -48,7 +48,10 @@ void PaintApp::handleEvents() {
                     }
                     else if (clickedTool == Tool::Redo) {
                         redo();
-                    }
+					}
+					else if (clickedTool == Tool::SaveFile) {
+						saveToFile("output.png");
+					}
                     else if (clickedTool == Tool::Dropdown) {
                         toolbar.openDropdown(); 
                     }
@@ -102,6 +105,16 @@ void PaintApp::handleEvents() {
 }
 
 // ====================================
+// save to file 
+// ====================================
+
+
+void PaintApp::saveToFile(const std::string& filename) {
+	texture.getTexture().copyToImage().saveToFile(filename);
+    std::cout << "Saved file!" << std::endl;
+}
+
+// ====================================
 // drawing 
 // ====================================
 void PaintApp::startDrawing() {
@@ -140,7 +153,7 @@ void PaintApp::draw() {
 
 // ====================================
 // fill tool 
-// ====================================\
+// ====================================
 
 void PaintApp::fill() {
     saveState();

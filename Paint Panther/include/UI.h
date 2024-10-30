@@ -7,6 +7,7 @@
 enum class Tool {
     Undo,
     Redo,
+    SaveFile,
     Pen,
     Fill, 
     Dropdown,

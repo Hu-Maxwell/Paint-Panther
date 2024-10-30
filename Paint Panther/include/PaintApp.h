@@ -55,6 +55,8 @@ private:
 
     void handleEvents();
 
+    void saveToFile(const std::string& filename);
+
     void startDrawing();
     void stopDrawing();
     void draw();
