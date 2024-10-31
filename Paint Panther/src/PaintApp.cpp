@@ -6,11 +6,11 @@
 
 // constructor - initializes the window, texture, and current color
 PaintApp::PaintApp()
-    : window(sf::VideoMode(800, 600), "Paint2D App"),
+    : window(sf::VideoMode(1600, 1200), "Paint2D App"),
     toolbar(window), 
     currentColor(sf::Color::Red) {
     
-    texture.create(800, 600);
+    texture.create(1600, 1200);
     texture.clear(sf::Color::White);
     texture.display();
     sprite.setTexture(texture.getTexture());
