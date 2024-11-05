@@ -1,0 +1,20 @@
+[
+{
+  "directory": "C:/repos/Paint-Panther/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1441~1.341\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP  -IC:\\repos\\PAINT-~1\\PAINTP~1\\src -external:IC:\\VCPKG\\vcpkg\\installed\\x64-windows\\include -external:W0 /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\paintapp.dir\\Paint_Panther\\src\\main.cpp.obj /FdCMakeFiles\\paintapp.dir/ /FS -c \"C:\\repos\\Paint-Panther\\Paint Panther\\src\\main.cpp\"",
+  "file": "C:/repos/Paint-Panther/Paint Panther/src/main.cpp",
+  "output": "CMakeFiles/paintapp.dir/Paint_Panther/src/main.cpp.obj"
+},
+{
+  "directory": "C:/repos/Paint-Panther/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1441~1.341\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP  -IC:\\repos\\PAINT-~1\\PAINTP~1\\src -external:IC:\\VCPKG\\vcpkg\\installed\\x64-windows\\include -external:W0 /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\paintapp.dir\\Paint_Panther\\src\\PaintApp.cpp.obj /FdCMakeFiles\\paintapp.dir/ /FS -c \"C:\\repos\\Paint-Panther\\Paint Panther\\src\\PaintApp.cpp\"",
+  "file": "C:/repos/Paint-Panther/Paint Panther/src/PaintApp.cpp",
+  "output": "CMakeFiles/paintapp.dir/Paint_Panther/src/PaintApp.cpp.obj"
+},
+{
+  "directory": "C:/repos/Paint-Panther/build",
+  "command": "C:\\PROGRA~1\\MICROS~2\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1441~1.341\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP  -IC:\\repos\\PAINT-~1\\PAINTP~1\\src -external:IC:\\VCPKG\\vcpkg\\installed\\x64-windows\\include -external:W0 /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\paintapp.dir\\Paint_Panther\\src\\UI.cpp.obj /FdCMakeFiles\\paintapp.dir/ /FS -c \"C:\\repos\\Paint-Panther\\Paint Panther\\src\\UI.cpp\"",
+  "file": "C:/repos/Paint-Panther/Paint Panther/src/UI.cpp",
+  "output": "CMakeFiles/paintapp.dir/Paint_Panther/src/UI.cpp.obj"
+}
+]
