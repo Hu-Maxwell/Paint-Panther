@@ -1,3 +1,0 @@
-C:/repos/Paint-Panther/build/CMakeFiles/paintapp.dir
-C:/repos/Paint-Panther/build/CMakeFiles/edit_cache.dir
-C:/repos/Paint-Panther/build/CMakeFiles/rebuild_cache.dir
