@@ -58,5 +58,6 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "cmake.configureSettings": {
         "CMAKE_TOOLCHAIN_FILE":"C:/VCPKG/vcpkg/scripts/buildsystems/vcpkg.cmake"
-   }
+},
+"cmake.sourceDirectory": "C:/repos/Paint-Panther/Paint Panther/src"
 }
