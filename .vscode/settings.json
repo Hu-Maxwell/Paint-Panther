@@ -57,7 +57,7 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "cmake.configureSettings": {
-        "CMAKE_TOOLCHAIN_FILE":"C:/VCPKG/vcpkg/scripts/buildsystems/vcpkg.cmake"
+        "CMAKE_TOOLCHAIN_FILE":"C:/SFML-2.6.1"
 },
 "cmake.sourceDirectory": "C:/repos/Paint-Panther/Paint Panther/src"
 }
