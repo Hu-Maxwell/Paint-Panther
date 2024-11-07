@@ -10,3 +10,5 @@ Canvas deforms when window is resized.
 When window is resized the drawings inside resizes with it instead of staying as they were drawn.
 
 User Input: 
+
+Maxwell is a random annoyance.
