@@ -2,10 +2,12 @@
 
 sf::Font Toolbar::Button::font; 
 Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
-    if (!Button::font.loadFromFile("assets/arial.ttf")) {
+    /* IDK HOW TO GET FILEPATHS WORKING I HATE THIS STUFF 
+    if (!Button::font.loadFromFile("../assets/arial.ttf")) {
         std::cerr << "Error loading font 'arial.ttf'." << std::endl;
         exit(EXIT_FAILURE);
     }
+    */ 
 
     dropdownIsOpen = false;
 
