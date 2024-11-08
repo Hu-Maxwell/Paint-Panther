@@ -6,7 +6,7 @@
 
 // constructor - initializes the window, texture, and current color
 PaintApp::PaintApp()
-    : window(sf::VideoMode(1600, 1200), "Paint2D App"),
+    : window(sf::VideoMode(800, 600), "Paint2D App"),
     toolbar(window), 
     currentColor(sf::Color::Red) {
     
@@ -54,7 +54,7 @@ void PaintApp::handleEvents() {
                     else if (clickedTool == Tool::Dropdown) {
                         toolbar.openDropdown(); 
                     }
-                    else if (clickedTool == Tool::Pen || clickedTool == Tool::Fill || clickedTool == Tool::Rect || clickedTool == Tool::Circle) {
+                    else if (clickedTool == Tool::Pen || clickedTool == Tool::Eraser || clickedTool == Tool::Fill || clickedTool == Tool::Rect || clickedTool == Tool::Circle) {
                         currentTool = clickedTool;
                     }
                     exitLoop = true;
@@ -93,6 +93,9 @@ void PaintApp::handleEvents() {
         else if (event.type == sf::Event::MouseMoved) {
             if (currentTool == Tool::Pen && isDrawing) {
                 draw();
+            }
+            if (currentTool == Tool::Eraser) {
+                erase(); 
             }
             else if (currentTool == Tool::Rect && isDrawingRect) {
                 updateRect();
@@ -145,6 +148,16 @@ void PaintApp::draw() {
     lastMousePos = curMousePos;
 
     texture.display();
+}
+
+// ====================================
+// erase tool 
+// ====================================
+
+// draw white lines
+// make the line thicker
+void PaintApp::erase() {
+    
 }
 
 // ====================================
@@ -282,6 +295,16 @@ void PaintApp::stopCircle() {
     texture.display();
     currentCircle.setRadius(0);
 }
+
+// ====================================
+// polygon  
+// ====================================
+
+
+// ====================================
+// triangle  
+// ====================================
+
 
 // ====================================
 // undo/redo

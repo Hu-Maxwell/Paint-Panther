@@ -6,8 +6,6 @@ set(CMAKE_CXX_STANDARD 17)
 # Tell CMake where to find SFML
 set(SFML_DIR "C:/SFML-2.6.1/lib/cmake/SFML")  # Adjust path if needed
 
-
-
 # Find the SFML package with specific components
 find_package(SFML COMPONENTS system window graphics REQUIRED)
 

@@ -61,6 +61,8 @@ private:
     void stopDrawing();
     void draw();
 
+    void erase();
+
     void fill(); 
     void floodFill(sf::Image& image, int x, int y, const sf::Color& targetColor, const sf::Color& replacementColor);
 

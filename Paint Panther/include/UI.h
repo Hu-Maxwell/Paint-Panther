@@ -9,6 +9,7 @@ enum class Tool {
     Redo,
     SaveFile,
     Pen,
+    Eraser, 
     Fill, 
     Color, 
     Dropdown,

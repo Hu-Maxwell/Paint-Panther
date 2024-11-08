@@ -11,3 +11,9 @@ Demo: https://youtu.be/Ng5axPO1tdk
 
 ======================================================
 Version 3:
+- added undo / redo, image saving
+- refactored everything lol 
+- changed UI 
+- WIP: eraser tool, color picker, dropdown, fill tool efficiency, color wheel
+
+Demo: https://youtu.be/zqsbYRVXBec
