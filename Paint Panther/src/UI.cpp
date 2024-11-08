@@ -1,13 +1,18 @@
 #include "../include/UI.h"
+#include <iostream>
+#include <filesystem>
+
+
 
 sf::Font Toolbar::Button::font; 
 Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
-    /* IDK HOW TO GET FILEPATHS WORKING I HATE THIS STUFF 
+    
+    // IDK HOW TO GET FILEPATHS WORKING I HATE THIS STUFF 
     if (!Button::font.loadFromFile("../assets/arial.ttf")) {
         std::cerr << "Error loading font 'arial.ttf'." << std::endl;
+        std::cout << "Current working directory: " << std::filesystem::current_path() << std::endl;
         exit(EXIT_FAILURE);
     }
-    */ 
 
     dropdownIsOpen = false;
 

@@ -8,7 +8,7 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": ".",
+      "cwd": "${workspaceFolder}/Paint Panther/src", 
       "program": "C:/repos/Paint-Panther/build/paintapp.exe",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
