@@ -131,6 +131,11 @@ void PaintApp::stopDrawing() {
     currentLine.clear();
 }
 
+// curMousePos.x - lastMousePos.x
+// curMousePos.y - lastMousePos.y
+// sf::RectangleShape rect;
+// rect.setPosition(lastMousePos.x, lastMousePos.y);
+// it's ok to make a line thickness variable
 
 void PaintApp::draw() {
     sf::Vector2i curMousePos = sf::Mouse::getPosition(window);
