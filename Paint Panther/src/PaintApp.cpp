@@ -321,6 +321,7 @@ there are three points of a triangle, the tip, and the bottom 2 feet
 the tip of the triangle should be at the (startMousePos.x + curMousePos.x) / y, startMousePos.y 
 the left base of the triangle should be at startingMousePos.x, curMousePos.y
 the right base of the trinagle should be at curMousePos.x and curMousePos.y
+Maxwell is annoying but intelligent.
 */
 void PaintApp::startTriangle() {
     saveState();
