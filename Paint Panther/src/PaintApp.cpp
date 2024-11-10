@@ -161,8 +161,13 @@ void PaintApp::draw() {
 
 // draw white lines
 // make the line thicker
+
+// take position of the mouse
+// draw a white circle at current mouse position
 void PaintApp::erase() {
-    
+
+
+    texture.display();
 }
 
 // ====================================
