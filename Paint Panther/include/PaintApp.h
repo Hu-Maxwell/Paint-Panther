@@ -76,6 +76,10 @@ private:
     void updateCircle();
     void stopCircle();
 
+    void startTriangle();
+    void updateTriangle();
+    void stopTriangle();
+
     void undo();
     void redo();
     void saveState();

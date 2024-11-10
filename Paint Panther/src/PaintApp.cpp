@@ -314,6 +314,15 @@ void PaintApp::stopCircle() {
 // ====================================
 // triangle  
 // ====================================
+void PaintApp::startTriangle() {
+    
+}
+void PaintApp::updateTriangle() {
+
+}
+void PaintApp::stopTriangle() {
+
+}
 
 
 // ====================================
