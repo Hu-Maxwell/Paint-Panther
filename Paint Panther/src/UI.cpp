@@ -51,7 +51,7 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
 
     initButtons(dropdownButtons, dropdownPosX, dropdownPosY);
 
-}
+}// End toolbar
 
 void Toolbar::initButtons(std::vector<Button>& buttonVector, float startingPosX, float startingPosY) {
     float buttonPosX = startingPosX;
@@ -96,8 +96,34 @@ void Toolbar::openDropdown() {
     dropdownIsOpen = true;
 }
 
-void Toolbar::highlightButton() {
-    // stuff
+void Toolbar::highlightButton(Tool currentButton) { // hue shift down (darker) ** add an undo shift 
+    // check the current tool to know what to highlight
+    // ** Find a way to un highlight the last button **
+
+    // Finds button by comparing against button[i].tool
+
+    for (int i = 0; i < buttons.size(); i++) {
+        if (buttons[i].tool == currentButton) {
+            // Run highlighting here
+            buttons[i].rect.setFillColor(sf::Color(255, 215, 0));
+        }
+    } 
+        
+        /* Undo,
+        Redo,
+        SaveFile,
+        Pen,
+        Eraser,
+        Fill,
+        Color,
+        Dropdown,
+        Rect,
+        Circle,*/
+
+    std::cerr << "Color changed (I Think)" << std::endl;
+
+
+
 }
 
 void Toolbar::renderUI() {
