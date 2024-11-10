@@ -52,6 +52,9 @@ private:
     bool isDrawingCircle = false;
     sf::CircleShape currentCircle;
 
+    // triangle
+    bool isDrawingTriangle = false; 
+
 
     void handleEvents();
 
