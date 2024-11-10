@@ -8,6 +8,7 @@ Shapes and tools:
 UIUX: 
 Canvas deforms when window is resized.
 When window is resized the drawings inside resizes with it instead of staying as they were drawn.
+When user clicks D for dropdown the dropdown options is not directly under the dropdown button.
 
 User Input: 
 
