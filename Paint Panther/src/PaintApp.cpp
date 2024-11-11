@@ -246,7 +246,7 @@ void PaintApp::startRect() {
     saveState();
     shapeStartPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
     currentRectangle.setPosition(shapeStartPos);
-    currentRectangle.setFillColor(sf::Color::Transparent);
+    currentRectangle.setFillColor(sf::Color::Red);
     currentRectangle.setOutlineColor(currentColor);
     currentRectangle.setOutlineThickness(1);
     isDrawingRect = true;
