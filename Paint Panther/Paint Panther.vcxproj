@@ -19,6 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\..\Downloads\Circle Icon Tool.jpg" />
+    <Image Include="..\..\..\..\..\Downloads\Paint Bucket Icon Tool.png" />
+    <Image Include="..\..\..\..\..\Downloads\pen Icon tool.png" />
+    <Image Include="..\..\..\..\..\Downloads\Rectangle Icon Tool.png" />
+    <Image Include="..\..\..\..\..\Downloads\Triangle Icon Tool.jpg" />
+    <Image Include="..\..\..\..\..\Downloads\undo icon.jpg" />
     <Image Include="assets\mr_handsome.jpg" />
     <Image Include="assets\pen.png" />
   </ItemGroup>
