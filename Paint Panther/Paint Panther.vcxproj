@@ -31,7 +31,6 @@
   <ItemGroup>
     <Text Include="docs\bugs_documentation.txt" />
     <Text Include="docs\file_organization.txt" />
-    <Text Include="docs\pseudocode.txt" />
     <Text Include="docs\version history.txt" />
   </ItemGroup>
   <ItemGroup>
