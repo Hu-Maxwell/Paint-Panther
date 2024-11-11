@@ -36,7 +36,7 @@ private:
     sf::Vector2i lastMousePos; // for drawing a line between mouse pos last frame and cur frame
 
     // eraser
-
+    bool isErasing; 
     
     // fill 
 

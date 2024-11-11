@@ -64,6 +64,9 @@ void PaintApp::handleEvents() {
                 if (currentTool == Tool::Pen) {
                     startDrawing();
                 }
+                if (currentTool == Tool::Eraser) {
+                    startErase(); 
+                }
                 if (currentTool == Tool::Fill) {
                     fill();
                 }
@@ -81,6 +84,9 @@ void PaintApp::handleEvents() {
                 if (currentTool == Tool::Pen) {
                     stopDrawing();
                 }
+                if (currentTool == Tool::Eraser) {
+                    stopErase(); 
+                }
                 else if (currentTool == Tool::Rect) {
                     stopRect();
                 }
@@ -94,7 +100,7 @@ void PaintApp::handleEvents() {
             if (currentTool == Tool::Pen && isDrawing) {
                 draw();
             }
-            if (currentTool == Tool::Eraser) {
+            if (currentTool == Tool::Eraser && isErasing) {
                 erase();
             }
             else if (currentTool == Tool::Rect && isDrawingRect) {
@@ -159,30 +165,28 @@ void PaintApp::draw() {
 // erase tool 
 // ====================================
 
-void PaintApp::startErase() {
+// TODO: add a circle around cursor that indicates erase radius
 
+void PaintApp::startErase() {
+    saveState(); 
+    isErasing = true; 
 }
 
 void PaintApp::erase() {
-    
     sf::Vector2i curMousePos = sf::Mouse::getPosition(window);
 
     float eraserRadius = 20.f; 
-
     sf::CircleShape eraser(eraserRadius);
-
     eraser.setFillColor(sf::Color::White);
-   
     eraser.setPosition(static_cast<float>(curMousePos.x - eraserRadius),
         static_cast<float>(curMousePos.y - eraserRadius));
 
     texture.draw(eraser);
-
     texture.display();
-  }
+}
 
 void PaintApp::stopErase() {
-
+    isErasing = false; 
 }
        
 
