@@ -24,6 +24,9 @@
     <Image Include="assets\pen.png">
       <Filter>assets</Filter>
     </Image>
+    <Image Include="..\..\..\..\Downloads\PIA00271~medium.jpg">
+      <Filter>assets</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="docs\bugs_documentation.txt">
