@@ -159,11 +159,10 @@ void PaintApp::draw() {
 // erase tool 
 // ====================================
 
-// draw white lines
-// make the line thicker
+void PaintApp::startErase() {
 
-// take position of the mouse
-// draw a white circle at current mouse position
+}
+
 void PaintApp::erase() {
     
     sf::Vector2i curMousePos = sf::Mouse::getPosition(window);
@@ -181,6 +180,10 @@ void PaintApp::erase() {
 
     texture.display();
   }
+
+void PaintApp::stopErase() {
+
+}
        
 
 // ====================================
