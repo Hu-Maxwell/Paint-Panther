@@ -246,7 +246,7 @@ void PaintApp::startRect() {
     saveState();
     shapeStartPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
     currentRectangle.setPosition(shapeStartPos);
-    currentRectangle.setFillColor(sf::Color::Red);
+    currentRectangle.setFillColor(sf::Color::Red); // was "sf::Color::Transparent" now changed to "sf::Color::Red"
     currentRectangle.setOutlineColor(currentColor);
     currentRectangle.setOutlineThickness(1);
     isDrawingRect = true;
@@ -286,7 +286,7 @@ void PaintApp::startCircle() {
     saveState();
     shapeStartPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
     currentCircle.setPosition(shapeStartPos);
-    currentCircle.setFillColor(sf::Color::Transparent);
+    currentCircle.setFillColor(sf::Color::Red); // was "sf::Color::Transparent" now changed to "sf::Color::Red"
     currentCircle.setOutlineColor(currentColor);
     currentCircle.setOutlineThickness(1);
     isDrawingCircle = true;
