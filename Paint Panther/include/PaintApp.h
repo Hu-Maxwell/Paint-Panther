@@ -52,6 +52,9 @@ private:
     bool isDrawingCircle = false;
     sf::CircleShape currentCircle;
 
+    // triangle
+    bool isDrawingTriangle = false; 
+
 
     void handleEvents();
 
@@ -75,6 +78,10 @@ private:
     void startCircle();
     void updateCircle();
     void stopCircle();
+
+    void startTriangle();
+    void updateTriangle();
+    void stopTriangle();
 
     void undo();
     void redo();

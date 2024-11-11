@@ -246,7 +246,7 @@ void PaintApp::startRect() {
     saveState();
     shapeStartPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
     currentRectangle.setPosition(shapeStartPos);
-    currentRectangle.setFillColor(sf::Color::Transparent);
+    currentRectangle.setFillColor(sf::Color::Red); // was "sf::Color::Transparent" now changed to "sf::Color::Red"
     currentRectangle.setOutlineColor(currentColor);
     currentRectangle.setOutlineThickness(1);
     isDrawingRect = true;
@@ -286,7 +286,7 @@ void PaintApp::startCircle() {
     saveState();
     shapeStartPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
     currentCircle.setPosition(shapeStartPos);
-    currentCircle.setFillColor(sf::Color::Transparent);
+    currentCircle.setFillColor(sf::Color::Red); // was "sf::Color::Transparent" now changed to "sf::Color::Red"
     currentCircle.setOutlineColor(currentColor);
     currentCircle.setOutlineThickness(1);
     isDrawingCircle = true;
@@ -315,6 +315,27 @@ void PaintApp::stopCircle() {
 // triangle  
 // ====================================
 
+/* 
+take the starting mouse position of the click, and the current mouse position
+there are three points of a triangle, the tip, and the bottom 2 feet
+the tip of the triangle should be at the (startMousePos.x + curMousePos.x) / y, startMousePos.y 
+the left base of the triangle should be at startingMousePos.x, curMousePos.y
+the right base of the trinagle should be at curMousePos.x and curMousePos.y
+*/
+void PaintApp::startTriangle() {
+    saveState();
+    shapeStartPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+    isDrawingTriangle = true; 
+}
+
+void PaintApp::updateTriangle() {
+    sf::Vector2f currentPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+}
+
+void PaintApp::stopTriangle() {
+    isDrawingTriangle = false; 
+    texture.display();
+} 
 
 // ====================================
 // undo/redo
