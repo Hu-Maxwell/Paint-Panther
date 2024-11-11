@@ -24,7 +24,22 @@
     <Image Include="assets\pen.png">
       <Filter>assets</Filter>
     </Image>
-    <Image Include="..\..\..\..\Downloads\PIA00271~medium.jpg">
+    <Image Include="..\..\..\..\..\Downloads\undo icon.jpg">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\Downloads\Circle Icon Tool.jpg">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\Downloads\Triangle Icon Tool.jpg">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\Downloads\Rectangle Icon Tool.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\Downloads\Paint Bucket Icon Tool.png">
+      <Filter>assets</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\Downloads\pen Icon tool.png">
       <Filter>assets</Filter>
     </Image>
   </ItemGroup>

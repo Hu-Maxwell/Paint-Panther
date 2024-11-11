@@ -31,7 +31,7 @@ void PaintApp::run() {
 // handleEvents - handles all events in the application
 void PaintApp::handleEvents() {
     sf::Event event;
-    bool exitLoop = false; 
+    bool exitLoop = false;
 
     while (window.pollEvent(event) && !exitLoop) {
         if (event.type == sf::Event::Closed) {
@@ -47,25 +47,25 @@ void PaintApp::handleEvents() {
                     }
                     else if (clickedTool == Tool::Redo) {
                         redo();
-					}
-					else if (clickedTool == Tool::SaveFile) {
-						saveToFile("output.png");
-					}
+                    }
+                    else if (clickedTool == Tool::SaveFile) {
+                        saveToFile("output.png");
+                    }
                     else if (clickedTool == Tool::Dropdown) {
-                        toolbar.openDropdown(); 
+                        toolbar.openDropdown();
                     }
                     else if (clickedTool == Tool::Pen || clickedTool == Tool::Eraser || clickedTool == Tool::Fill || clickedTool == Tool::Rect || clickedTool == Tool::Circle) {
                         currentTool = clickedTool;
                     }
                     exitLoop = true;
-                    break; 
+                    break;
                 }
 
                 if (currentTool == Tool::Pen) {
                     startDrawing();
-                } 
+                }
                 if (currentTool == Tool::Fill) {
-                    fill(); 
+                    fill();
                 }
                 else if (currentTool == Tool::Rect) {
                     startRect();
@@ -95,7 +95,7 @@ void PaintApp::handleEvents() {
                 draw();
             }
             if (currentTool == Tool::Eraser) {
-                erase(); 
+                erase();
             }
             else if (currentTool == Tool::Rect && isDrawingRect) {
                 updateRect();
@@ -165,10 +165,23 @@ void PaintApp::draw() {
 // take position of the mouse
 // draw a white circle at current mouse position
 void PaintApp::erase() {
+    
+    sf::Vector2i curMousePos = sf::Mouse::getPosition(window);
 
+    float eraserRadius = 20.f; 
+
+    sf::CircleShape eraser(eraserRadius);
+
+    eraser.setFillColor(sf::Color::White);
+   
+    eraser.setPosition(static_cast<float>(curMousePos.x - eraserRadius),
+        static_cast<float>(curMousePos.y - eraserRadius));
+
+    texture.draw(eraser);
 
     texture.display();
-}
+  }
+       
 
 // ====================================
 // fill tool 
