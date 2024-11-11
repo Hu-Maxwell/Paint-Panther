@@ -40,6 +40,11 @@ void PaintApp::handleEvents() {
 
         else if (event.type == sf::Event::MouseButtonPressed) {
             if (event.mouseButton.button == sf::Mouse::Left) {
+                sf::Color tempColor = toolbar.getRgbOnClick(event); 
+                if (tempColor != sf::Color::Black) {
+                    currentColor = tempColor; 
+                }
+
                 if (toolbar.handleUIInput(event) != Tool::Nothing) {
                     Tool clickedTool = toolbar.handleUIInput(event);
                     if (clickedTool == Tool::Undo) {
@@ -51,8 +56,11 @@ void PaintApp::handleEvents() {
                     else if (clickedTool == Tool::SaveFile) {
                         saveToFile("output.png");
                     }
-                    else if (clickedTool == Tool::Dropdown) {
+                    else if (clickedTool == Tool::Dropdown) { // thi s is really bad to have toolbar call paintapp then call toolbar
                         toolbar.openDropdown();
+                    }
+                    else if (clickedTool == Tool::Color) {
+                        toolbar.openColorWheel(); 
                     }
                     else if (clickedTool == Tool::Pen || clickedTool == Tool::Eraser || clickedTool == Tool::Fill || clickedTool == Tool::Rect || clickedTool == Tool::Circle) {
                         currentTool = clickedTool;
@@ -77,6 +85,7 @@ void PaintApp::handleEvents() {
                     startCircle();
                 }
             }
+            
         }
 
         else if (event.type == sf::Event::MouseButtonReleased) {

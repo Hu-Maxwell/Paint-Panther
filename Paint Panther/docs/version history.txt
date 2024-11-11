@@ -17,3 +17,7 @@ Version 3:
 - WIP: eraser tool, color picker, dropdown, fill tool efficiency, color wheel
 
 Demo: https://youtu.be/zqsbYRVXBec
+
+======================================================
+Version 4: 
+- 

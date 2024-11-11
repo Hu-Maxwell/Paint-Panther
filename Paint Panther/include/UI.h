@@ -47,6 +47,10 @@ public:
     void highlightButton();
     void renderUI();
 
+    sf::Color HSVtoRGB(float h, float s, float v);
+    void openColorWheel(); 
+    sf::Color getRgbOnClick(sf::Event event);
+
     sf::RenderWindow& window;
     sf::Font font;
     
@@ -63,6 +67,12 @@ public:
     float dropdownWidth;
     float dropdownHeight; // change to vector2 later
     bool dropdownIsOpen; 
+
+	// cwImage -> cwTexture -> cwSprite cuz sfml is weird
+    sf::Image cwImage;
+    sf::Texture cwTexture;
+	sf::Sprite cwSprite;
+    bool colorWheelOpen; 
 };
 
 #endif 

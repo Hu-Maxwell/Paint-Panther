@@ -2,14 +2,12 @@ Core:
 - FIXED: Draw tool in unable to keep up with the movement speed of the cursor.
 
 Shapes and tools:
-- FIXED: Rectangle tool continuosly makes rectangles instead of only one.
-
+- FIXED: Rectangle tool continuously makes rectangles instead of only one.
 
 UIUX: 
-Canvas deforms when window is resized.
-When window is resized the drawings inside resizes with it instead of staying as they were drawn.
-When user clicks D for dropdown the dropdown options is not directly under the dropdown button.
+- TODO: Canvas deforms when window is resized.
+- TODO: When window is resized the drawings inside resizes with it instead of staying as they were drawn.
+- TODO: When user clicks D for dropdown the dropdown options is not directly under the dropdown button.
 
 User Input: 
-
-Maxwell is a random annoyance.
+- TODO: Currently, when fill tool is selected and the UI is clicked, it leads to unexpected behavior. 
