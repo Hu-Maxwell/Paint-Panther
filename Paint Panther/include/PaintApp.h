@@ -61,8 +61,8 @@ private:
     void saveToFile(const std::string& filename);
 
     void startDrawing();
-    void stopDrawing();
     void draw();
+    void stopDrawing();
 
     void startErase(); 
     void erase();

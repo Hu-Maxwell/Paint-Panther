@@ -132,11 +132,6 @@ void PaintApp::startDrawing() {
     isDrawing = true;
 }
 
-void PaintApp::stopDrawing() {
-    isDrawing = false;
-    currentLine.clear();
-}
-
 // curMousePos.x - lastMousePos.x
 // curMousePos.y - lastMousePos.y
 // sf::RectangleShape rect;
@@ -159,6 +154,11 @@ void PaintApp::draw() {
     lastMousePos = curMousePos;
 
     texture.display();
+}
+
+void PaintApp::stopDrawing() {
+    isDrawing = false;
+    currentLine.clear();
 }
 
 // ====================================
