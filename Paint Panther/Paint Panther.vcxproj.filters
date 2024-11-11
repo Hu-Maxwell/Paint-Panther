@@ -50,9 +50,6 @@
     <Text Include="docs\file_organization.txt">
       <Filter>docs</Filter>
     </Text>
-    <Text Include="docs\pseudocode.txt">
-      <Filter>docs</Filter>
-    </Text>
     <Text Include="docs\version history.txt">
       <Filter>docs</Filter>
     </Text>
