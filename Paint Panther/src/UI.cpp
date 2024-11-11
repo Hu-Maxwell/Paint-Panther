@@ -3,11 +3,11 @@
 
 sf::Font Toolbar::Button::font; 
 Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
-    // IDK HOW TO GET FILEPATHS WORKING I HATE THIS STUFF 
-    // if (!Button::font.loadFromFile("assets/arial.ttf")) {
-    //     std::cerr << "Error loading font 'arial.ttf'." << std::endl;
-    //     exit(EXIT_FAILURE);
-    // }
+    // filepath very buggy atm, feel free to comment out this part 
+    if (!Button::font.loadFromFile("assets/arial.ttf")) {
+        std::cerr << "Error loading font 'arial.ttf'." << std::endl;
+        exit(EXIT_FAILURE);
+    }
 
     dropdownIsOpen = false;
 
@@ -25,14 +25,14 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     sf::Vector2f buttonPos; 
     buttonGap = 5.0f;
 
-    buttons.emplace_back("U", Tool::Undo); 
-    buttons.emplace_back("R", Tool::Redo);
-    buttons.emplace_back("S", Tool::SaveFile); 
-    buttons.emplace_back("P", Tool::Pen);
-    buttons.emplace_back("Eraser", Tool::Eraser); 
-    buttons.emplace_back("F", Tool::Fill); 
-    buttons.emplace_back("C", Tool::Color); 
-    buttons.emplace_back("D", Tool::Dropdown);
+    buttons.emplace_back("Undo", Tool::Undo); 
+    buttons.emplace_back("Redo", Tool::Redo);
+    buttons.emplace_back("Save", Tool::SaveFile); 
+    buttons.emplace_back("Pen", Tool::Pen);
+    buttons.emplace_back("Ersr", Tool::Eraser); 
+    buttons.emplace_back("Fill", Tool::Fill); 
+    buttons.emplace_back("Color", Tool::Color); 
+    buttons.emplace_back("Drop", Tool::Dropdown);
     initButtons(buttons, 0, 0);
 
     // dropdown
@@ -46,8 +46,8 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     float dropdownPosX = (3 * buttonSize.x) + (3 * buttonGap);
     float dropdownPosY = toolbarHeight;
 
-    dropdownButtons.emplace_back("R", Tool::Rect);
-    dropdownButtons.emplace_back("C", Tool::Circle);
+    dropdownButtons.emplace_back("Rect", Tool::Rect);
+    dropdownButtons.emplace_back("Circle", Tool::Circle);
 
     initButtons(dropdownButtons, dropdownPosX, dropdownPosY);
 
