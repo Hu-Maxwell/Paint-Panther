@@ -251,15 +251,6 @@ void PaintApp::floodFill(sf::Image& image, int x, int y, const sf::Color& target
 }
 
 // ====================================
-// color wheel
-// ====================================
-
-void PaintApp::openColorWheel() {
-    // 
-}
-
-
-// ====================================
 // rectangle 
 // ====================================
 void PaintApp::startRect() {
