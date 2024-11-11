@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\PIA00271~medium.jpg" />
     <Image Include="assets\mr_handsome.jpg" />
     <Image Include="assets\pen.png" />
   </ItemGroup>
