@@ -47,6 +47,9 @@ void PaintApp::handleEvents() {
 
                 if (toolbar.handleUIInput(event) != Tool::Nothing) {
                     Tool clickedTool = toolbar.handleUIInput(event);
+
+                    toolbar.highlightButton(clickedTool); // Testing this (clicked tool returns the "tool" in the enumerated toolbar class - Use to find the button[i].tool
+                    
                     if (clickedTool == Tool::Undo) {
                         undo();
                     }
@@ -80,7 +83,7 @@ void PaintApp::handleEvents() {
                 if (currentTool == Tool::Fill) {
                     fill();
                 }
-                else if (currentTool == Tool::Rect) {
+                else if (currentTool == Tool::Rect) {    
                     startRect();
                 }
                 else if (currentTool == Tool::Circle) {
@@ -94,7 +97,7 @@ void PaintApp::handleEvents() {
         }
 
         else if (event.type == sf::Event::MouseButtonReleased) {
-            if (event.mouseButton.button == sf::Mouse::Left) {
+            if (event.mouseButton.button == sf::Mouse::Left) { // Add the unhighlight case Here - UI/UX
                 if (currentTool == Tool::Pen) {
                     stopDrawing();
                 }

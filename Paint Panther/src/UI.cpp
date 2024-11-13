@@ -56,7 +56,7 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
 
     initButtons(dropdownButtons, dropdownPosX, dropdownPosY);
 
-}
+}// End toolbar
 
 void Toolbar::initButtons(std::vector<Button>& buttonVector, float startingPosX, float startingPosY) {
     float buttonPosX = startingPosX;
@@ -98,11 +98,33 @@ Tool Toolbar::handleUIInput(sf::Event event) {
 }
 
 void Toolbar::openDropdown() {
+    if (dropdownIsOpen) {dropdownIsOpen = false;}
     dropdownIsOpen = true;
 }
 
-void Toolbar::highlightButton() {
-    // stuff
+// hue shift down (darker) to mark selected buttons (excluding undo and save)
+void Toolbar::highlightButton(Tool currentButton) { 
+
+    // Undo Highlighting
+    for (int i = 0; i < buttons.size(); i++) {
+        buttons[i].rect.setFillColor(sf::Color(100, 100, 250));
+    }
+    for (int i = 0; i < dropdownButtons.size(); i++) {
+        dropdownButtons[i].rect.setFillColor(sf::Color(100, 100, 250));
+    }
+
+    // Finds button by comparing against button[i].tool
+    for (int i = 0; i < buttons.size(); i++) {
+        if (buttons[i].tool == currentButton && currentButton !=  Tool::SaveFile && currentButton != Tool::Undo) {
+            buttons[i].rect.setFillColor(sf::Color(50, 50, 210));
+        }
+    }
+    for (int i = 0; i < dropdownButtons.size(); i++) {
+        if (dropdownButtons[i].tool == currentButton) {
+            dropdownButtons[i].rect.setFillColor(sf::Color(80, 80, 230));
+        }
+    }
+
 }
 
 // h is hue, s is saturation, v is value

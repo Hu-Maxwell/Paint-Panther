@@ -45,7 +45,7 @@ public:
     void initButtons(std::vector<Button>& buttonVector, float startingPosX, float startingPosY);
     Tool handleUIInput(sf::Event event);
     void openDropdown();
-    void highlightButton();
+    void highlightButton(Tool);
     void renderUI();
 
     sf::Color HSVtoRGB(float h, float s, float v);
