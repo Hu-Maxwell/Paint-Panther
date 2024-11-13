@@ -53,6 +53,7 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     dropdownButtons.emplace_back("Rect", Tool::Rect);
     dropdownButtons.emplace_back("Circle", Tool::Circle);
     dropdownButtons.emplace_back("Tri", Tool::Triangle); 
+    dropdownButtons.emplace_back("Po", Tool::Polygon);
 
     initButtons(dropdownButtons, dropdownPosX, dropdownPosY);
 

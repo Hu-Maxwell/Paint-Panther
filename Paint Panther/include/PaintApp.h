@@ -56,6 +56,10 @@ private:
     bool isDrawingTriangle = false;
     sf::ConvexShape currentTriangle;
 
+    // polygon
+    bool isDrawingPolygon = false;
+    sf::ConvexShape currentPolygon;
+
     void handleEvents();
 
     void saveToFile(const std::string& filename);
@@ -82,6 +86,11 @@ private:
     void startTriangle();
     void updateTriangle();
     void stopTriangle();
+
+    std::vector<sf::Vector2f> polygonPoints;
+    void startPolygon();
+    void updatePolygon();
+    void stopPolygon();
 
     void undo();
     void redo();

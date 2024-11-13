@@ -6,7 +6,7 @@
 
 // constructor - initializes the window, texture, and current color
 PaintApp::PaintApp()
-    : window(sf::VideoMode(800, 600), "Paint2D App"),
+    : window(sf::VideoMode(1600, 1000), "Paint2D App"),
     toolbar(window), 
     currentColor(sf::Color::Red) {
     
@@ -94,6 +94,25 @@ void PaintApp::handleEvents() {
                 }
             }
             
+        }
+
+                else if (currentTool == Tool::Polygon) {
+                    if (!isDrawingPolygon) {
+                        startPolygon();
+                    }
+                    else {
+                        updatePolygon();
+                    }             
+                }
+                //else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) { //CANNOT GET THIS TO WORK
+                //    stopPolygon();
+                //}
+            }
+            if (event.mouseButton.button == sf::Mouse::Right) {
+                if (currentTool == Tool::Polygon) {
+                    stopPolygon();
+                }
+            }
         }
 
         else if (event.type == sf::Event::MouseButtonReleased) {
@@ -348,6 +367,49 @@ void PaintApp::stopCircle() {
 // ====================================
 // polygon  
 // ====================================
+void PaintApp::startPolygon() {
+    saveState();
+    polygonPoints.clear();
+    polygonPoints.push_back(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+    isDrawingPolygon = true;
+    std::cout << "Polygon drawing started." << std::endl;
+}
+
+void PaintApp::updatePolygon() {
+    if (!isDrawingPolygon) return;
+    sf::Vector2f currentPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+    polygonPoints.push_back(currentPos);
+    std::cout << polygonPoints.size() << std::endl;
+    // Draw lines between each point
+    if (polygonPoints.size() > 1) {
+        sf::VertexArray lines(sf::LinesStrip, polygonPoints.size());
+        for (int i = 0; i < polygonPoints.size(); ++i) {
+            lines[i].position = polygonPoints[i];
+            lines[i].color = currentColor;
+        }
+        window.draw(lines);
+    }
+}
+
+void PaintApp::stopPolygon() {
+    isDrawingPolygon = false;
+
+    if (polygonPoints.size() >= 3) { // Ensure it's a valid polygon
+        sf::ConvexShape polygon;
+        polygon.setPointCount(polygonPoints.size());
+        for (int i = 0; i < polygonPoints.size(); ++i) {
+            polygon.setPoint(i, polygonPoints[i]);
+        }
+        polygon.setFillColor(sf::Color::Red); // Set fill color
+        polygon.setOutlineColor(currentColor);
+        polygon.setOutlineThickness(1);
+
+        texture.draw(polygon);
+        texture.display();
+        std::cout << "Polygon drawing completed." << std::endl;
+    }
+    polygonPoints.clear();
+}
 
 
 // ====================================
@@ -457,6 +519,15 @@ void PaintApp::render() {
 
     if (isDrawingCircle) {
         window.draw(currentCircle);
+    }
+
+    if (isDrawingPolygon && polygonPoints.size() > 1) {
+        sf::VertexArray lines(sf::LinesStrip, polygonPoints.size());
+        for (size_t i = 0; i < polygonPoints.size(); ++i) {
+            lines[i].position = polygonPoints[i];
+            lines[i].color = currentColor;
+        }
+        window.draw(lines);
     }
 
     if (isDrawingTriangle) {
