@@ -10,7 +10,7 @@ PaintApp::PaintApp()
     toolbar(window), 
     currentColor(sf::Color::Red) {
     
-    texture.create(1600, 1200);
+    texture.create(1600, 1200); // TODO: change so it fits inside window
     texture.clear(sf::Color::White);
     texture.display();
     sprite.setTexture(texture.getTexture());
@@ -28,7 +28,7 @@ void PaintApp::run() {
 // private functions
 // ====================================
 
-// handleEvents - handles all events in the application
+// handles all user input
 void PaintApp::handleEvents() {
     sf::Event event;
     bool exitLoop = false;
@@ -140,6 +140,7 @@ void PaintApp::handleEvents() {
 // save to file 
 // ====================================
 
+// TODO: make it so that the file saved changes depending on what the user inputs
 void PaintApp::saveToFile(const std::string& filename) {
 	texture.getTexture().copyToImage().saveToFile(filename);
     std::cout << "Saved file!" << std::endl;
@@ -155,8 +156,8 @@ void PaintApp::startDrawing() {
     isDrawing = true;
 }
 
+// is glitchy here - skips a bit because of rectangle angle changing 
 void PaintApp::draw() {
-    //I start working on line thickness below here.  I'm keeping the previous code as a note above^^^ incase I accidently messed something up
     float lineThickness = 10.0f;
     sf::Vector2i curMousePos = sf::Mouse::getPosition(window);
 
@@ -193,7 +194,6 @@ void PaintApp::stopDrawing() {
 // ====================================
 
 // TODO: add a circle around cursor that indicates erase radius
-
 void PaintApp::startErase() {
     saveState(); 
     isErasing = true; 
@@ -221,6 +221,7 @@ void PaintApp::stopErase() {
 // fill tool 
 // ====================================
 
+// TODO: optimize it and fix it glitching when toolbar is clicked
 void PaintApp::fill() {
     saveState();
 
@@ -282,7 +283,7 @@ void PaintApp::floodFill(sf::Image& image, int x, int y, const sf::Color& target
 // ====================================
 void PaintApp::startRect() {
     saveState();
-    shapeStartPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+    shapeStartPos = window.mapPixelToCoords(sf::Mouse::getPosition(window)); // cannot use Vector2i, so it converts w/ window
     currentRectangle.setPosition(shapeStartPos);
     currentRectangle.setFillColor(sf::Color::Red); // was "sf::Color::Transparent" now changed to "sf::Color::Red"
     currentRectangle.setOutlineColor(currentColor);
@@ -296,7 +297,7 @@ void PaintApp::updateRect() {
 
     sf::Vector2f position = shapeStartPos;
 
-    // Adjust for negative width/height
+    // adjusts for negative width/height
     if (size.x < 0) {
         position.x += size.x;
         size.x = -size.x;
@@ -445,7 +446,7 @@ void PaintApp::saveState() {
     }
 }
 
-// render - draws all elements to the window
+// draws all elements to the window
 void PaintApp::render() {
     window.clear();
     window.draw(sprite);
