@@ -155,28 +155,8 @@ void PaintApp::startDrawing() {
     isDrawing = true;
 }
 
-// curMousePos.x - lastMousePos.x
-// curMousePos.y - lastMousePos.y
-// sf::RectangleShape rect;
-// rect.setPosition(lastMousePos.x, lastMousePos.y);
-// it's ok to make a line thickness variable
-
 void PaintApp::draw() {
-    /*
-    sf::Vector2i curMousePos = sf::Mouse::getPosition(window);
-    
-    if (lastMousePos != curMousePos && lastMousePos.x != -1) {
-        sf::VertexArray line(sf::Lines, 2);
-        line[0].position = sf::Vector2f(static_cast<float>(lastMousePos.x), static_cast<float>(lastMousePos.y));
-        line[1].position = sf::Vector2f(static_cast<float>(curMousePos.x), static_cast<float>(curMousePos.y));
-
-        line[0].color = currentColor;
-        line[1].color = currentColor;
-
-        texture.draw(line);
-        */
-
-        //I start working on line thickness below here.  I'm keeping the previous code as a note above^^^ incase I accidently messed something up
+    //I start working on line thickness below here.  I'm keeping the previous code as a note above^^^ incase I accidently messed something up
     float lineThickness = 10.0f;
     sf::Vector2i curMousePos = sf::Mouse::getPosition(window);
 
@@ -373,14 +353,6 @@ void PaintApp::stopCircle() {
 // triangle  
 // ====================================
 
-/* 
-take the starting mouse position of the click, and the current mouse position
-there are three points of a triangle, the tip, and the bottom 2 feet
-the tip of the triangle should be at the (startMousePos.x + curMousePos.x) / y, startMousePos.y 
-the left base of the triangle should be at startingMousePos.x, curMousePos.y
-the right base of the trinagle should be at curMousePos.x and curMousePos.y
-Maxwell is annoying but intelligent.
-*/
 void PaintApp::startTriangle() {
     saveState();
     shapeStartPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
