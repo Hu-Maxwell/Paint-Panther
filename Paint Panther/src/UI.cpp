@@ -53,7 +53,7 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     dropdownButtons.emplace_back("Rect", Tool::Rect);
     dropdownButtons.emplace_back("Circle", Tool::Circle);
     dropdownButtons.emplace_back("Tri", Tool::Triangle); 
-    dropdownButtons.emplace_back("Po", Tool::Polygon);
+    dropdownButtons.emplace_back("Po", Tool::Polygon); // TODO: change the UI dropdown so it fits
 
     initButtons(dropdownButtons, dropdownPosX, dropdownPosY);
 
@@ -237,21 +237,14 @@ sf::Color Toolbar::getRgbOnClick(sf::Event event) {
     localPos.x -= cwSprite.getPosition().x;
     localPos.y -= cwSprite.getPosition().y;
 
-    // if not in circle, return 
-    // PLACEHOLDER BLACK COLOR FOR NOW
+    // if not in circle, return debug color (here, it's black)
+    // TODO: change it from black to some random color the user will never select
     if (localPos.x < 0 || localPos.x >= cwImage.getSize().x ||
         localPos.y < 0 || localPos.y >= cwImage.getSize().y) {
-        std::cout << "returned out of bound"; 
         return sf::Color::Black; 
     }
 
     sf::Color color = cwImage.getPixel(localPos.x, localPos.y);
-
-    std::cout << "RGB: ("
-        << static_cast<int>(color.r) << ", "
-        << static_cast<int>(color.g) << ", "
-        << static_cast<int>(color.b) << ")"
-        << std::endl;
 
     return color; 
 }

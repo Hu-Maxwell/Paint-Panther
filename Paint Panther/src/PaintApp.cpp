@@ -66,8 +66,9 @@ void PaintApp::handleEvents() {
                         toolbar.openColorWheel(); 
                     }
                     else if (
-                        clickedTool == Tool::Pen || clickedTool == Tool::Eraser || clickedTool == Tool::Fill 
-                        || clickedTool == Tool::Rect || clickedTool == Tool::Circle || clickedTool == Tool::Triangle) {
+                        clickedTool == Tool::Pen || clickedTool == Tool::Eraser || clickedTool == Tool::Fill || 
+                        clickedTool == Tool::Rect || clickedTool == Tool::Circle || 
+                        clickedTool == Tool::Triangle || clickedTool == Tool::Polygon) {
                         currentTool = clickedTool;
                     }
                     exitLoop = true;
@@ -92,26 +93,18 @@ void PaintApp::handleEvents() {
                 else if (currentTool == Tool::Triangle) {
                     startTriangle(); 
                 }
-            }
-            
-        }
-
                 else if (currentTool == Tool::Polygon) {
                     if (!isDrawingPolygon) {
                         startPolygon();
                     }
                     else {
                         updatePolygon();
-                    }             
+                    }
                 }
-                //else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) { //CANNOT GET THIS TO WORK
-                //    stopPolygon();
-                //}
             }
-            if (event.mouseButton.button == sf::Mouse::Right) {
-                if (currentTool == Tool::Polygon) {
-                    stopPolygon();
-                }
+
+            else if (event.mouseButton.button == sf::Mouse::Right) {
+                stopPolygon();
             }
         }
 
@@ -377,16 +370,19 @@ void PaintApp::startPolygon() {
 
 void PaintApp::updatePolygon() {
     if (!isDrawingPolygon) return;
+
     sf::Vector2f currentPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
     polygonPoints.push_back(currentPos);
-    std::cout << polygonPoints.size() << std::endl;
+
     // Draw lines between each point
     if (polygonPoints.size() > 1) {
         sf::VertexArray lines(sf::LinesStrip, polygonPoints.size());
+
         for (int i = 0; i < polygonPoints.size(); ++i) {
             lines[i].position = polygonPoints[i];
             lines[i].color = currentColor;
         }
+
         window.draw(lines);
     }
 }
@@ -397,17 +393,19 @@ void PaintApp::stopPolygon() {
     if (polygonPoints.size() >= 3) { // Ensure it's a valid polygon
         sf::ConvexShape polygon;
         polygon.setPointCount(polygonPoints.size());
+
         for (int i = 0; i < polygonPoints.size(); ++i) {
             polygon.setPoint(i, polygonPoints[i]);
         }
-        polygon.setFillColor(sf::Color::Red); // Set fill color
+
+        polygon.setFillColor(currentColor);
         polygon.setOutlineColor(currentColor);
         polygon.setOutlineThickness(1);
 
         texture.draw(polygon);
         texture.display();
-        std::cout << "Polygon drawing completed." << std::endl;
     }
+
     polygonPoints.clear();
 }
 
