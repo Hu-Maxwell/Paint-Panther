@@ -61,6 +61,10 @@ private:
     sf::ConvexShape currentPolygon;
 
     void handleEvents();
+    void handleLeftClick(sf::Event event, bool& exitLoop);
+    void handleRightClick(sf::Event event);
+    void handleClickRelease(sf::Event event);
+    void handleMouseMove(sf::Event event);
 
     void saveToFile(const std::string& filename);
 

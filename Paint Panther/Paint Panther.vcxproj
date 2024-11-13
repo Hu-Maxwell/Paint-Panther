@@ -34,6 +34,7 @@
     <Text Include="docs\version history.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\user.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\PaintApp.cpp" />
     <ClCompile Include="src\UI.cpp" />
@@ -41,6 +42,7 @@
   <ItemGroup>
     <ClInclude Include="include\PaintApp.h" />
     <ClInclude Include="include\UI.h" />
+    <ClInclude Include="include\user.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\arial.ttf" />
