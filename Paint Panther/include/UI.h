@@ -15,6 +15,7 @@ enum class Tool {
     Dropdown,
     Rect, 
     Circle, 
+    Triangle,
     Nothing
 };
 

@@ -6,7 +6,7 @@
 
 // constructor - initializes the window, texture, and current color
 PaintApp::PaintApp()
-    : window(sf::VideoMode(1600, 1200), "Paint2D App"),
+    : window(sf::VideoMode(800, 600), "Paint2D App"),
     toolbar(window), 
     currentColor(sf::Color::Red) {
     
@@ -62,7 +62,9 @@ void PaintApp::handleEvents() {
                     else if (clickedTool == Tool::Color) {
                         toolbar.openColorWheel(); 
                     }
-                    else if (clickedTool == Tool::Pen || clickedTool == Tool::Eraser || clickedTool == Tool::Fill || clickedTool == Tool::Rect || clickedTool == Tool::Circle) {
+                    else if (
+                        clickedTool == Tool::Pen || clickedTool == Tool::Eraser || clickedTool == Tool::Fill 
+                        || clickedTool == Tool::Rect || clickedTool == Tool::Circle || clickedTool == Tool::Triangle) {
                         currentTool = clickedTool;
                     }
                     exitLoop = true;
@@ -84,6 +86,9 @@ void PaintApp::handleEvents() {
                 else if (currentTool == Tool::Circle) {
                     startCircle();
                 }
+                else if (currentTool == Tool::Triangle) {
+                    startTriangle(); 
+                }
             }
             
         }
@@ -102,6 +107,9 @@ void PaintApp::handleEvents() {
                 else if (currentTool == Tool::Circle) {
                     stopCircle();
                 }
+                else if (currentTool == Tool::Triangle) {
+                    stopTriangle();
+                }
             }
         }
 
@@ -117,6 +125,9 @@ void PaintApp::handleEvents() {
             }
             else if (currentTool == Tool::Circle && isDrawingCircle) {
                 updateCircle();
+            }
+            else if (currentTool == Tool::Triangle && isDrawingTriangle) { // isDrawingTriangle
+                updateTriangle();
             }
         }
     }
@@ -380,8 +391,6 @@ void PaintApp::startTriangle() {
     currentTriangle.setPoint(0, shapeStartPos);
     currentTriangle.setPoint(1, shapeStartPos);
     currentTriangle.setPoint(2, shapeStartPos); 
-
-    
 }
 
 void PaintApp::updateTriangle() {
