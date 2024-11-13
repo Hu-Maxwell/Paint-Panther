@@ -53,7 +53,8 @@ private:
     sf::CircleShape currentCircle;
 
     // triangle
-    bool isDrawingTriangle = false; 
+    bool isDrawingTriangle = false;
+    sf::ConvexShape currentTriangle;
 
 
     void handleEvents();
