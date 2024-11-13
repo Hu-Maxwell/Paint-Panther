@@ -84,7 +84,12 @@ void PaintApp::handleEvents() {
                         updatePolygon();
                     }             
                 }
-                else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) { //CANNOT GET THIS TO WORK
+                //else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) { //CANNOT GET THIS TO WORK
+                //    stopPolygon();
+                //}
+            }
+            if (event.mouseButton.button == sf::Mouse::Right) {
+                if (currentTool == Tool::Polygon) {
                     stopPolygon();
                 }
             }
@@ -344,10 +349,10 @@ void PaintApp::updatePolygon() {
     sf::Vector2f currentPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
     polygonPoints.push_back(currentPos);
     std::cout << polygonPoints.size() << std::endl;
-    // Draw lines between each consecutive point for visual feedback
+    // Draw lines between each point
     if (polygonPoints.size() > 1) {
         sf::VertexArray lines(sf::LinesStrip, polygonPoints.size());
-        for (size_t i = 0; i < polygonPoints.size(); ++i) {
+        for (int i = 0; i < polygonPoints.size(); ++i) {
             lines[i].position = polygonPoints[i];
             lines[i].color = currentColor;
         }
@@ -361,7 +366,7 @@ void PaintApp::stopPolygon() {
     if (polygonPoints.size() >= 3) { // Ensure it's a valid polygon
         sf::ConvexShape polygon;
         polygon.setPointCount(polygonPoints.size());
-        for (size_t i = 0; i < polygonPoints.size(); ++i) {
+        for (int i = 0; i < polygonPoints.size(); ++i) {
             polygon.setPoint(i, polygonPoints[i]);
         }
         polygon.setFillColor(sf::Color::Red); // Set fill color

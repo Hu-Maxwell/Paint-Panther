@@ -33,7 +33,6 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     buttons.emplace_back("F", Tool::Fill); 
     buttons.emplace_back("C", Tool::Color); 
     buttons.emplace_back("D", Tool::Dropdown);
-    buttons.emplace_back("Po", Tool::Polygon);
     initButtons(buttons, 0, 0);
 
     // dropdown
@@ -49,6 +48,7 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
 
     dropdownButtons.emplace_back("R", Tool::Rect);
     dropdownButtons.emplace_back("C", Tool::Circle);
+    dropdownButtons.emplace_back("Po", Tool::Polygon);
 
     initButtons(dropdownButtons, dropdownPosX, dropdownPosY);
 
