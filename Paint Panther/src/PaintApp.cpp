@@ -424,9 +424,9 @@ void PaintApp::stopTriangle() {
     texture.draw(currentTriangle);
     texture.display();
 
-    currentTriangle.setPoint(0, sf::Vector2f(0, 0));
-    currentTriangle.setPoint(1, sf::Vector2f(0, 0));
-    currentTriangle.setPoint(2, sf::Vector2f(0, 0));
+    // currentTriangle.setPoint(0, sf::Vector2f(0, 0));
+    // currentTriangle.setPoint(1, sf::Vector2f(0, 0));
+    // currentTriangle.setPoint(2, sf::Vector2f(0, 0));
 
     window.clear(sf::Color::White);
 
