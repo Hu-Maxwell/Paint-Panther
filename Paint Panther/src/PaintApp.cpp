@@ -365,20 +365,64 @@ there are three points of a triangle, the tip, and the bottom 2 feet
 the tip of the triangle should be at the (startMousePos.x + curMousePos.x) / y, startMousePos.y 
 the left base of the triangle should be at startingMousePos.x, curMousePos.y
 the right base of the trinagle should be at curMousePos.x and curMousePos.y
+Maxwell is annoying but intelligent.
 */
 void PaintApp::startTriangle() {
     saveState();
     shapeStartPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
     isDrawingTriangle = true; 
+
+    currentTriangle.setPointCount(3);
+    currentTriangle.setFillColor(sf::Color::Transparent);
+    currentTriangle.setOutlineColor(currentColor);
+    currentTriangle.setOutlineThickness(2.0f);
+
+    currentTriangle.setPoint(0, shapeStartPos);
+    currentTriangle.setPoint(1, shapeStartPos);
+    currentTriangle.setPoint(2, shapeStartPos); 
+
+    
 }
 
 void PaintApp::updateTriangle() {
     sf::Vector2f currentPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+
+    sf::Vector2f tipPoint((shapeStartPos.x + currentPos.x) / 2.0f, shapeStartPos.y);
+    sf::Vector2f leftBasePoint(shapeStartPos.x, currentPos.y);
+    sf::Vector2f rightBasePoint(currentPos.x, currentPos.y);
+
+    currentTriangle.setPoint(0, tipPoint);
+    currentTriangle.setPoint(1, leftBasePoint);
+    currentTriangle.setPoint(2, rightBasePoint);
+
+    window.clear(sf::Color::White);
+
+    sf::Sprite sprite(texture.getTexture());
+    window.draw(sprite);
+
+    window.draw(currentTriangle);
+
+    toolbar.renderUI();
+
+    window.display();
 }
 
 void PaintApp::stopTriangle() {
-    isDrawingTriangle = false; 
+    isDrawingTriangle = false;
+    texture.draw(currentTriangle);
     texture.display();
+
+    currentTriangle.setPoint(0, sf::Vector2f(0, 0));
+    currentTriangle.setPoint(1, sf::Vector2f(0, 0));
+    currentTriangle.setPoint(2, sf::Vector2f(0, 0));
+
+    window.clear(sf::Color::White);
+
+    sf::Sprite finalizedSprite(texture.getTexture());
+    window.draw(finalizedSprite);
+
+    toolbar.renderUI();
+    window.display();
 } 
 
 // ====================================
@@ -432,6 +476,10 @@ void PaintApp::render() {
 
     if (isDrawingCircle) {
         window.draw(currentCircle);
+    }
+
+    if (isDrawingTriangle) {
+        window.draw(currentTriangle);
     }
 
     // render UI 
