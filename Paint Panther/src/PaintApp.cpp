@@ -165,22 +165,37 @@ void PaintApp::draw() {
 // take position of the mouse
 // draw a white circle at current mouse position
 void PaintApp::erase() {
-    
+
     sf::Vector2i curMousePos = sf::Mouse::getPosition(window);
 
-    float eraserRadius = 20.f; 
+    float eraserRadius = 20.f;
 
     sf::CircleShape eraser(eraserRadius);
-
     eraser.setFillColor(sf::Color::White);
-   
     eraser.setPosition(static_cast<float>(curMousePos.x - eraserRadius),
         static_cast<float>(curMousePos.y - eraserRadius));
 
-    texture.draw(eraser);
+    
+    sf::CircleShape outline(eraserRadius);
+    outline.setFillColor(sf::Color::White);  
+    outline.setOutlineColor(sf::Color::Black);    
+    outline.setOutlineThickness(3.f);      
+    outline.setPosition(static_cast<float>(curMousePos.x - eraserRadius),
+        static_cast<float>(curMousePos.y - eraserRadius));
+    
+    window.clear(sf::Color::White);  
+
+    window.draw(outline);
+
+    window.draw(eraser);
+
+    texture.draw(eraser); 
 
     texture.display();
-  }
+
+    window.display();
+}
+
        
 
 // ====================================
