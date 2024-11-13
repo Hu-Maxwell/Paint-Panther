@@ -151,6 +151,7 @@ void PaintApp::startDrawing() {
 // it's ok to make a line thickness variable
 
 void PaintApp::draw() {
+    /*
     sf::Vector2i curMousePos = sf::Mouse::getPosition(window);
     
     if (lastMousePos != curMousePos && lastMousePos.x != -1) {
@@ -162,6 +163,29 @@ void PaintApp::draw() {
         line[1].color = currentColor;
 
         texture.draw(line);
+        */
+
+        //I start working on line thickness below here.  I'm keeping the previous code as a note above^^^ incase I accidently messed something up
+    float lineThickness = 10.0f;
+    sf::Vector2i curMousePos = sf::Mouse::getPosition(window);
+
+    if (lastMousePos != curMousePos && lastMousePos.x != -1) {
+        // Calculate line length and angle
+        float dx = static_cast<float>(curMousePos.x - lastMousePos.x);
+        float dy = static_cast<float>(curMousePos.y - lastMousePos.y);
+        float length = sqrt(dx * dx + dy * dy);
+        float angle = atan2(dy, dx) * 180.0f / 3.14159f;
+
+        // Create a rectangle shape
+        sf::RectangleShape rectangle(sf::Vector2f(length, lineThickness)); // 5.0f is the desired thickness
+        rectangle.setFillColor(currentColor);
+
+        // Set position and rotation
+        rectangle.setPosition(sf::Vector2f(lastMousePos.x + dx / 2.0f, lastMousePos.y + dy / 2.0f));
+        rectangle.setRotation(angle);
+
+        // Draw the rectangle
+        texture.draw(rectangle);
     }
     lastMousePos = curMousePos;
 
