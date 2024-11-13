@@ -2,16 +2,15 @@
 
 void PaintApp::handleEvents() {
     sf::Event event;
-    bool exitLoop = false;
-
-    while (window.pollEvent(event) && !exitLoop) {
+    
+    while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
             window.close();
         }
 
         else if (event.type == sf::Event::MouseButtonPressed) {
             if (event.mouseButton.button == sf::Mouse::Left) {
-                handleLeftClick(event, exitLoop);
+                handleLeftClick(event);
             }
         }
 
@@ -32,7 +31,7 @@ void PaintApp::handleEvents() {
     }
 }
 
-void PaintApp::handleLeftClick(sf::Event event, bool& exitLoop) {
+void PaintApp::handleLeftClick(sf::Event event) {
     // manages color
     sf::Color tempColor = toolbar.getRgbOnClick(event);
     if (tempColor != sf::Color::Black) {
@@ -43,7 +42,7 @@ void PaintApp::handleLeftClick(sf::Event event, bool& exitLoop) {
     if (toolbar.handleUIInput(event) != Tool::Nothing) {
         Tool clickedTool = toolbar.handleUIInput(event);
 
-        toolbar.highlightButton(clickedTool); // Testing this (clicked tool returns the "tool" in the enumerated toolbar class - Use to find the button[i].tool
+        toolbar.highlightButton(clickedTool); 
 
         if (clickedTool == Tool::Undo) {
             undo();
@@ -54,7 +53,7 @@ void PaintApp::handleLeftClick(sf::Event event, bool& exitLoop) {
         else if (clickedTool == Tool::SaveFile) {
             saveToFile("output.png");
         }
-        else if (clickedTool == Tool::Dropdown) { // thi s is really bad to have toolbar call paintapp then call toolbar
+        else if (clickedTool == Tool::Dropdown) { // TODO: this is really bad to have toolbar call paintapp then call toolbar
             toolbar.openDropdown();
         }
         else if (clickedTool == Tool::Color) {
@@ -66,7 +65,6 @@ void PaintApp::handleLeftClick(sf::Event event, bool& exitLoop) {
             clickedTool == Tool::Triangle || clickedTool == Tool::Polygon) {
             currentTool = clickedTool;
         }
-        exitLoop = true;
         return; 
     }
 
@@ -138,7 +136,7 @@ void PaintApp::handleMouseMove(sf::Event event) {
     else if (currentTool == Tool::Circle && isDrawingCircle) {
         updateCircle();
     }
-    else if (currentTool == Tool::Triangle && isDrawingTriangle) { // isDrawingTriangle
+    else if (currentTool == Tool::Triangle && isDrawingTriangle) { 
         updateTriangle();
     }
 }

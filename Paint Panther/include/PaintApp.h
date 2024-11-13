@@ -61,7 +61,7 @@ private:
     sf::ConvexShape currentPolygon;
 
     void handleEvents();
-    void handleLeftClick(sf::Event event, bool& exitLoop);
+    void handleLeftClick(sf::Event event);
     void handleRightClick(sf::Event event);
     void handleClickRelease(sf::Event event);
     void handleMouseMove(sf::Event event);
