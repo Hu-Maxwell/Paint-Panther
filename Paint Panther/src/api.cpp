@@ -46,7 +46,7 @@ size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
 // ==========================
 
 std::string getResponse() {
-    const std::string api_key = "DO NOT PUSH API KEY HERE";
+    const std::string api_key = "";
     const std::string image_path = "C:/Users/deweb/source/repos/Paint Panther/Paint Panther/output.png"; // incorrect filepath for all 
 
     try {

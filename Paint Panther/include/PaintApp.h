@@ -6,7 +6,7 @@
 #include <vector>
 #include <iostream>
 
-#include "../include/UI.h"
+#include "UI.h"
 #include "apiHandler.h"
 
 class PaintApp {
@@ -15,32 +15,33 @@ public:
     void run();
 
 private:
+	// variables for canvas (draws to texture -> applied to sprite -> displayed on window) 
     sf::RenderWindow window;
     sf::RenderTexture texture;
     sf::Sprite sprite;
+
+    // ui
+    Toolbar toolbar;
+
+    // current color and tool selected
     sf::Color currentColor;
-    std::vector<sf::Vertex> currentLine;
-
-    Toolbar toolbar; 
-
-    std::stack<sf::Image> undoStack, redoStack;
-    sf::Texture tempTexture; 
-
-    bool isDrawing = false;
-    bool dropdownIsOpen = false;
-
     Tool currentTool = Tool::Pen;
 
-    // ==== drawing tools ==== 
+    // ==== tools ==== 
+
+    // undo / redo
+    std::stack<sf::Image> undoStack, redoStack;
+    sf::Texture tempTexture;
 
     // pen 
     sf::Vector2i lastMousePos; // for drawing a line between mouse pos last frame and cur frame
+    bool isDrawing = false;
 
     // eraser
-    bool isErasing; 
+    bool isErasing = false; 
     
     // fill 
-
+    
 
     // ==== shapes =====
     sf::Vector2f shapeStartPos;
@@ -61,6 +62,7 @@ private:
     bool isDrawingPolygon = false;
     sf::ConvexShape currentPolygon;
 
+    // functions 
     void handleEvents();
     void handleLeftClick(sf::Event event);
     void handleRightClick(sf::Event event);

@@ -36,6 +36,7 @@
   <ItemGroup>
     <ClCompile Include="src\api.cpp" />
     <ClCompile Include="src\shapes.cpp" />
+    <ClCompile Include="src\tools.cpp" />
     <ClCompile Include="src\user.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\PaintApp.cpp" />
