@@ -59,6 +59,9 @@ void PaintApp::handleLeftClick(sf::Event event) {
         else if (clickedTool == Tool::Color) {
             toolbar.openColorWheel();
         }
+        else if (clickedTool == Tool::AI) {
+            std::cout << getResponse() << std::endl;
+        }
         else if (
             clickedTool == Tool::Pen || clickedTool == Tool::Eraser || clickedTool == Tool::Fill ||
             clickedTool == Tool::Rect || clickedTool == Tool::Circle ||

@@ -17,6 +17,7 @@ enum class Tool {
     Circle, 
     Polygon, 
     Triangle,
+    AI, 
     Nothing
 };
 

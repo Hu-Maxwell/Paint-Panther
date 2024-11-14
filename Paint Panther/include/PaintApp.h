@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "../include/UI.h"
+#include "apiHandler.h"
 
 class PaintApp {
 public:
