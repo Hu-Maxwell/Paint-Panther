@@ -3,20 +3,44 @@ project(paintapp VERSION 0.1.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# Tell CMake where to find SFML
-set(SFML_DIR "C:/SFML-2.6.1/lib/cmake/SFML")  # Adjust path if needed
+if (APPLE AND EXISTS "/opt/homebrew")
+    set(HOMEBREW_PREFIX "/opt/homebrew")
+else()
+    set(HOMEBREW_PREFIX "/usr/local")
+endif()
 
-# Find the SFML package with specific components
-find_package(SFML COMPONENTS system window graphics REQUIRED)
+set(SFML_DIR "${HOMEBREW_PREFIX}/lib/cmake/SFML")
+set(CURL_DIR "${HOMEBREW_PREFIX}")
+set(NLOHMANN_JSON_DIR "${HOMEBREW_PREFIX}/share/nlohmann_json")
 
-# Add the executable and include all source files with their relative path
-add_executable(paintapp 
+find_package(SFML COMPONENTS system window graphics REQUIRED PATHS ${SFML_DIR})
+find_package(CURL REQUIRED PATHS ${CURL_DIR})
+find_package(nlohmann_json REQUIRED PATHS ${NLOHMANN_JSON_DIR})
+
+set(SOURCE_FILES
     "Paint Panther/src/main.cpp" 
     "Paint Panther/src/paintapp.cpp" 
     "Paint Panther/src/ui.cpp"
+    "Paint Panther/src/api.cpp"
+    "Paint Panther/src/shapes.cpp"
+    "Paint Panther/src/tools.cpp"
+    "Paint Panther/src/user.cpp"
+)
+set(HEADER_FILES
     "Paint Panther/include/paintapp.h" 
     "Paint Panther/include/ui.h"
+    "Paint Panther/include/apiHandler.h"
 )
 
-# Link SFML libraries to the project
-target_link_libraries(paintapp PRIVATE sfml-system sfml-window sfml-graphics)
+add_executable(paintapp ${SOURCE_FILES} ${HEADER_FILES})
+
+add_compile_definitions(PROJECT_SOURCE_DIR="${CMAKE_SOURCE_DIR}")
+
+add_custom_command(
+    TARGET paintapp POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/"Paint Panther"/assets
+        $<TARGET_FILE_DIR:paintapp>/assets
+)
+
+target_link_libraries(paintapp PRIVATE sfml-system sfml-window sfml-graphics CURL::libcurl nlohmann_json::nlohmann_json)
