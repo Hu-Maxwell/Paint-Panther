@@ -1,5 +1,4 @@
 #include "../include/UI.h"
-#include <iostream>
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -37,6 +36,7 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     buttons.emplace_back("Fill", Tool::Fill); 
     buttons.emplace_back("Color", Tool::Color); 
     buttons.emplace_back("Drop", Tool::Dropdown);
+    buttons.emplace_back("AI", Tool::AI);
     initButtons(buttons, 0, 0);
 
     // dropdown
