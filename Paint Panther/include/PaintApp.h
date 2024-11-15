@@ -20,6 +20,9 @@ private:
     sf::RenderTexture texture;
     sf::Sprite sprite;
 
+    // starting screen
+    bool startingScreen = true; 
+
     // ui
     Toolbar toolbar;
 

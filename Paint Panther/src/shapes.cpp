@@ -7,9 +7,9 @@ void PaintApp::startRect() {
     saveState();
     shapeStartPos = window.mapPixelToCoords(sf::Mouse::getPosition(window)); // cannot use Vector2i, so it converts w/ window
     currentRectangle.setPosition(shapeStartPos);
-    currentRectangle.setFillColor(sf::Color::Red); // was "sf::Color::Transparent" now changed to "sf::Color::Red"
+    currentRectangle.setFillColor(sf::Color::Transparent); 
     currentRectangle.setOutlineColor(currentColor);
-    currentRectangle.setOutlineThickness(1);
+    currentRectangle.setOutlineThickness(5.0f);
     isDrawingRect = true;
 }
 
@@ -47,9 +47,9 @@ void PaintApp::startCircle() {
     saveState();
     shapeStartPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
     currentCircle.setPosition(shapeStartPos);
-    currentCircle.setFillColor(sf::Color::Red); // was "sf::Color::Transparent" now changed to "sf::Color::Red"
+    currentCircle.setFillColor(sf::Color::Transparent); 
     currentCircle.setOutlineColor(currentColor);
-    currentCircle.setOutlineThickness(1);
+    currentCircle.setOutlineThickness(5.0f);
     isDrawingCircle = true;
 }
 
@@ -79,7 +79,7 @@ void PaintApp::startTriangle() {
     currentTriangle.setPointCount(3);
     currentTriangle.setFillColor(sf::Color::Transparent);
     currentTriangle.setOutlineColor(currentColor);
-    currentTriangle.setOutlineThickness(2.0f);
+    currentTriangle.setOutlineThickness(5.0f);
 
     currentTriangle.setPoint(0, shapeStartPos);
     currentTriangle.setPoint(1, shapeStartPos);
@@ -96,31 +96,13 @@ void PaintApp::updateTriangle() {
     currentTriangle.setPoint(0, tipPoint);
     currentTriangle.setPoint(1, leftBasePoint);
     currentTriangle.setPoint(2, rightBasePoint);
-
-    window.clear(sf::Color::White);
-
-    sf::Sprite sprite(texture.getTexture());
-    window.draw(sprite);
-
-    window.draw(currentTriangle);
-
-    toolbar.renderUI();
-
-    window.display();
 }
 
 void PaintApp::stopTriangle() {
     isDrawingTriangle = false;
+
     texture.draw(currentTriangle);
     texture.display();
-
-    window.clear(sf::Color::White);
-
-    sf::Sprite finalizedSprite(texture.getTexture());
-    window.draw(finalizedSprite);
-
-    toolbar.renderUI();
-    window.display();
 }
 
 // ====================================

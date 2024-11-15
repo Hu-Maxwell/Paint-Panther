@@ -19,12 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\..\Downloads\Circle Icon Tool.jpg" />
-    <Image Include="..\..\..\..\..\Downloads\Paint Bucket Icon Tool.png" />
-    <Image Include="..\..\..\..\..\Downloads\pen Icon tool.png" />
-    <Image Include="..\..\..\..\..\Downloads\Rectangle Icon Tool.png" />
-    <Image Include="..\..\..\..\..\Downloads\Triangle Icon Tool.jpg" />
-    <Image Include="..\..\..\..\..\Downloads\undo icon.jpg" />
     <Image Include="assets\mr_handsome.jpg" />
     <Image Include="assets\pen.png" />
   </ItemGroup>
@@ -36,6 +30,7 @@
   <ItemGroup>
     <ClCompile Include="src\api.cpp" />
     <ClCompile Include="src\shapes.cpp" />
+    <ClCompile Include="src\startingScreen.cpp" />
     <ClCompile Include="src\tools.cpp" />
     <ClCompile Include="src\user.cpp" />
     <ClCompile Include="src\main.cpp" />

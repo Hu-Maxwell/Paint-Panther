@@ -1,4 +1,5 @@
 #include "../include/PaintApp.h"
+#include "startingScreen.cpp"
 
 // ====================================
 // public functions
@@ -6,7 +7,7 @@
 
 // constructor - initializes the window, texture, and current color
 PaintApp::PaintApp()
-    : window(sf::VideoMode(1600, 1000), "Paint2D App"),
+    : window(sf::VideoMode(1600, 1000), "Paint2D App"), 
     toolbar(window), 
     currentColor(sf::Color::Red) {
 
@@ -24,6 +25,8 @@ PaintApp::PaintApp()
 
 // run - main loop of the application
 void PaintApp::run() {
+
+
     while (window.isOpen()) {
         handleEvents();
         render();

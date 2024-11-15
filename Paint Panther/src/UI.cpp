@@ -5,6 +5,7 @@
 #endif
 
 sf::Font Toolbar::Button::font; 
+
 Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     // filepath very buggy atm, feel free to comment out this part 
     if (!Button::font.loadFromFile("assets/arial.ttf")) {
