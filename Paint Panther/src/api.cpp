@@ -45,10 +45,9 @@ size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
 }
 
 // ==========================
-
 std::string getResponse() {
     const std::string api_key = "";
-    const std::string image_path = "C:/Users/deweb/source/repos/Paint Panther/Paint Panther/output.png"; // incorrect filepath for all 
+    const std::string image_path = "output.png";
 
     try {
         std::string base64_image = read_image_base64(image_path);
