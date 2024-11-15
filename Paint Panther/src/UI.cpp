@@ -28,32 +28,51 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     sf::Vector2f buttonPos; 
     buttonGap = 5.0f;
 
-   /* Button undoButton("Undo", Tool::Undo);*/
-  /*  undoButton.texture.loadFromFile("assets/icons/undo.png");
-    undoButton.rect.setTexture(&undoButton.texture);*/
-
 
     sf::Texture undoTexture;
-    if (!undoTexture.loadFromFile("assets/icons/undo.png")) {
-        std::cerr << "Failed to load undo texture from 'assets/icons/undo.png'." << std::endl;
+    if (!undoTexture.loadFromFile("assets/undo.png")) {
+        std::cerr << "Failed to load undo texture from 'assets/undo.png'." << std::endl;
         exit(EXIT_FAILURE);
     }
-    undoTexture.loadFromFile("assets/icons/undo.png");
+    std::cout << "Undo texture loaded with size: "
+        << undoTexture.getSize().x << "x"
+        << undoTexture.getSize().y << std::endl;
+
+    // Create the undo button and set the texture
+    Button undoButton(undoTexture, Tool::Undo);
+
+    undoButton.rect.setPosition(10, 10); // Position of the button YOU CAN SEE THE WHITE RECTANGLE HERE
+
+    undoButton.textureImage.setTexture(undoTexture);
+    undoButton.textureImage.setPosition(undoButton.rect.getPosition()); // Align sprite to the button's position
+
+    // Scale the sprite to fit the button size (optional)
+    sf::Vector2f buttonSize = undoButton.rect.getSize();
+    sf::Vector2u textureSize = undoTexture.getSize();
+    float scaleX = buttonSize.x / textureSize.x;
+    float scaleY = buttonSize.y / textureSize.y;
+    undoButton.textureImage.setScale(scaleX, scaleY); // Scaling sprite to button size
+
+
+
+    // Add the button to the buttons vector
+    buttons.emplace_back(undoButton);
+
 
 
 
     //undoButton.textureImage.setTexture(undoButton.texture);
 
     //buttons.emplace_back("Undo", Tool::Undo); 
-    buttons.emplace_back(undoTexture, Tool::Undo); 
-    buttons.emplace_back("Redo", Tool::Redo);
-    buttons.emplace_back("Save", Tool::SaveFile); 
-    buttons.emplace_back("Pen", Tool::Pen);
-    buttons.emplace_back("Ersr", Tool::Eraser); 
-    buttons.emplace_back("Fill", Tool::Fill); 
-    buttons.emplace_back("Color", Tool::Color); 
-    buttons.emplace_back("Drop", Tool::Dropdown);
-    buttons.emplace_back("AI", Tool::AI);
+    //buttons.emplace_back(undoTexture, Tool::Undo); 
+    //buttons.emplace_back("Redo", Tool::Redo);
+    //buttons.emplace_back("Save", Tool::SaveFile); 
+    //buttons.emplace_back("Pen", Tool::Pen);
+    //buttons.emplace_back("Ersr", Tool::Eraser); 
+    //buttons.emplace_back("Fill", Tool::Fill); 
+    //buttons.emplace_back("Color", Tool::Color); 
+    //buttons.emplace_back("Drop", Tool::Dropdown);
+    //buttons.emplace_back("AI", Tool::AI);
 
  /*   buttons.push_back(std::move(undoButton));*/
 
@@ -70,10 +89,10 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     float dropdownPosX = (3 * buttonSize.x) + (3 * buttonGap);
     float dropdownPosY = toolbarHeight;
 
-    dropdownButtons.emplace_back("Rect", Tool::Rect);
+/*    dropdownButtons.emplace_back("Rect", Tool::Rect);
     dropdownButtons.emplace_back("Circle", Tool::Circle);
     dropdownButtons.emplace_back("Tri", Tool::Triangle); 
-    dropdownButtons.emplace_back("Po", Tool::Polygon); // TODO: change the UI dropdown so it fits
+    dropdownButtons.emplace_back("Po", Tool::Polygon);*/ // TODO: change the UI dropdown so it fits
 
     initButtons(dropdownButtons, dropdownPosX, dropdownPosY);
 
@@ -274,6 +293,7 @@ void Toolbar::renderUI() {
 
     for (const Button& btn : buttons) {
         window.draw(btn.rect);
+        window.draw(btn.textureImage);
         window.draw(btn.text);
     }
 

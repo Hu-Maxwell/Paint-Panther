@@ -61,8 +61,13 @@ public:
 
             rect.setSize(sf::Vector2f(40.0f, 40.0f)); // TODO: change this to buttonSize
             rect.setFillColor(sf::Color(100, 100, 250)); // TODO: change this to buttonColor
+            textureImage.setTexture(texture); // Set the sprite texture
+            textureImage.setScale(rect.getSize().x / texture.getSize().x, rect.getSize().y / texture.getSize().y);
+            textureImage.setPosition(rect.getPosition());
         }
     };
+
+
 
     Toolbar(sf::RenderWindow& _window);
     void initButtons(std::vector<Button>& buttonVector, float startingPosX, float startingPosY);
