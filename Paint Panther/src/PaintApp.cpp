@@ -23,16 +23,25 @@ void PaintApp::run() {
         render();
     }
 }
+
+/*
 class Dropdown {
 public:
-    Dropdown(const sf::Vector2f& position)
+    Dropdown(const sf::Font& font, const sf::Vector2f& position)
         : isOpen(true), cursorPos(0) { //opened by default
         //inputbox always visible?
         inputBox.setSize(sf::Vector2f(200, 50));
-        inputBox.setFillColor(sf::Color::White);
+        inputBox.setFillColor(sf::Color::Cyan);
         inputBox.setOutlineThickness(2);
         inputBox.setOutlineColor(sf::Color::Magenta);
-        inputBox.setPosition(position.x, position.y /*+ 50*/);
+        inputBox.setPosition(position.x, position.y);
+
+        //font
+        inputText.setFont(font);
+        inputText.setCharacterSize(20);
+        inputText.setFillColor(sf::Color::Red);
+        inputText.setPosition(position.x + 10, position.y + 60);
+
         //initialize string
         inputString = "";
         std::string userInput;
@@ -40,12 +49,12 @@ public:
     }
 
     void handleEvents(const sf::Event& event, const sf::Vector2i& mousePos) {
-        //if (event.type == sf::Event::MouseButtonPressed) {
+        if (event.type == sf::Event::MouseButtonPressed) {
             //close dropdown when clicking outside
-            //if (isOpen && !inputBox.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
-                //isOpen = false;
-            //}
-        //}
+            if (isOpen && !inputBox.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+                isOpen = false;
+            }
+        }
 
         if (isOpen && event.type == sf::Event::TextEntered) {
             if (event.text.unicode == '\b') {
@@ -70,6 +79,7 @@ public:
                 cursorPos++;
             }
             //userInput = inputString;
+            inputText.setString(inputString);
         }
     }
 
@@ -78,22 +88,23 @@ public:
         if (isOpen) {
 
             window.draw(inputBox);
+            window.draw(inputText);
 
             //input text as rectangles (lines) or something
-            for (size_t i = 0; i < inputString.size(); ++i) {
-                sf::RectangleShape charRect(sf::Vector2f(10, 30));
-                charRect.setFillColor(sf::Color::Black);
-                charRect.setPosition(inputBox.getPosition().x + 10 + (i * 12), inputBox.getPosition().y + 10); //spacing in box
-                window.draw(charRect);
-            }
+            //for (size_t i = 0; i < inputString.size(); ++i) {
+                //sf::RectangleShape charRect(sf::Vector2f(10, 30));
+                //charRect.setFillColor(sf::Color::Black);
+                //charRect.setPosition(inputBox.getPosition().x + 10 + (i * 12), inputBox.getPosition().y + 10); //spacing in box
+                //window.draw(charRect);
+            //}
 
             //blinking line for cursor cause im so cool
-            //if (isOpen && cursorPos < inputString.size()) {
-                //sf::RectangleShape cursor(sf::Vector2f(2, 30)); //THE LINE
-                //cursor.setFillColor(sf::Color::Black);
-                //cursor.setPosition(inputBox.getPosition().x + 10 + (cursorPos * 12), inputBox.getPosition().y + 10);
-                //window.draw(cursor);
-            //}
+            if (isOpen && cursorPos < inputString.size()) {
+                sf::RectangleShape cursor(sf::Vector2f(2, 30)); //THE LINE
+                cursor.setFillColor(sf::Color::Black);
+                cursor.setPosition(inputBox.getPosition().x + 10 + (cursorPos * 12), inputBox.getPosition().y + 10);
+                window.draw(cursor);
+            }
         }
     }
 
@@ -104,7 +115,8 @@ public:
 // ====================================
 private:
     bool isOpen;
-
+    sf::Text inputText; //displayed text?
+    sf::Font font; //font
     sf::RectangleShape inputBox; //input box
     std::string inputString; //user's typing
     size_t cursorPos; //cursor pos
@@ -113,10 +125,16 @@ private:
 // save to file 
 // ====================================
 
+*/
+
 
 //open save's dropdown
 void createDropdown(sf::RenderWindow& window) {
-    Dropdown saveBox(sf::Vector2f(300, 100));
+    //sf::Font font;
+    //if (!font.loadFromFile("arial.tff")) {
+        //return; //error loading font (idk what that acutally does im just guessing)
+    //}
+    Dropdown saveBox(/*font,*/sf::Vector2f(300, 100)); //i removed font because it doesnt work rn
 
     while (window.isOpen()) {
         sf::Event event;
@@ -130,7 +148,7 @@ void createDropdown(sf::RenderWindow& window) {
         }
 
         // Clear the window
-        window.clear(sf::Color::White);
+        //window.clear(sf::Color::Red);
 
         // Draw the dropdown with input box
         saveBox.draw(window);
@@ -138,6 +156,7 @@ void createDropdown(sf::RenderWindow& window) {
         // Display the window
         window.display();
     }
+    return; //idk what this does
 }
 
 // TODO: make it so that the file saved changes depending on what the user inputs
@@ -147,7 +166,7 @@ void PaintApp::saveToFile(const std::string& filename) {
     //if inputbox isn't empty
 	texture.getTexture().copyToImage().saveToFile(filename);
     //make dropdown dissapear
-    std::cout << "Saved file!" << std::endl;
+    std::cout << /*inputGetter + */"Saved file!" << std::endl;
     //std::cout << userInput << std::endl;
 }
 

@@ -51,7 +51,7 @@ void PaintApp::handleLeftClick(sf::Event event) {
             redo();
         }
         else if (clickedTool == Tool::SaveFile) {
-            saveToFile("output.png");
+            saveToFile(/*userInput + */".png");
         }
         else if (clickedTool == Tool::Dropdown) { // TODO: this is really bad to have toolbar call paintapp then call toolbar
             toolbar.openDropdown();

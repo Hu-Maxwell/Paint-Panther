@@ -46,7 +46,7 @@ public:
     void initButtons(std::vector<Button>& buttonVector, float startingPosX, float startingPosY);
     Tool handleUIInput(sf::Event event);
     void openDropdown();
-    void saveToFile();
+    //void saveToFile();
     void highlightButton(Tool);
     void renderUI();
 
@@ -54,7 +54,7 @@ public:
     void openColorWheel(); 
     sf::Color getRgbOnClick(sf::Event event);
 
-    void openSaveFile();
+    //void openSaveFile();
 
 
     sf::RenderWindow& window;
