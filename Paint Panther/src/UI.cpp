@@ -4,21 +4,14 @@
 #define M_PI 3.14159265358979323846
 #endif
 
-sf::Font Toolbar::Button::font; 
 
 Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
-    // filepath very buggy atm, feel free to comment out this part 
-    if (!Button::font.loadFromFile("assets/arial.ttf")) {
-        std::cerr << "Error loading font 'arial.ttf'." << std::endl;
-        exit(EXIT_FAILURE);
-    }
-
     dropdownIsOpen = false;
 
     toolbarHeight = 40.0f;
     backgroundColor = sf::Color(200, 200, 200);
 
-    toolbarBackground.setSize(sf::Vector2f(window.getSize().x, toolbarHeight));
+    toolbarBackground.setSize(sf::Vector2f(window.getSize().x * 3, toolbarHeight));
     toolbarBackground.setPosition(0, 0);
     toolbarBackground.setFillColor(backgroundColor);
 
@@ -29,15 +22,15 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     sf::Vector2f buttonPos; 
     buttonGap = 5.0f;
 
-    // buttons.emplace_back("assets/pen.png", Tool::Undo); 
-    //buttons.emplace_back("assets/redo.png", Tool::Redo);
-    //buttons.emplace_back("assets/save.png", Tool::SaveFile); 
-    //buttons.emplace_back("assets/pen.png", Tool::Pen);
-    //buttons.emplace_back("assets/eraser.png", Tool::Eraser); 
-    //buttons.emplace_back("assets/fill.png", Tool::Fill); 
-    // buttons.emplace_back("assets/color.png", Tool::Color); 
+    buttons.emplace_back("assets/pen.png", Tool::Undo); 
+    buttons.emplace_back("assets/redo.png", Tool::Redo);
+    buttons.emplace_back("assets/save.png", Tool::SaveFile); 
+    buttons.emplace_back("assets/pen.png", Tool::Pen);
+    buttons.emplace_back("assets/eraser.png", Tool::Eraser); 
+    buttons.emplace_back("assets/fill.png", Tool::Fill); 
+    buttons.emplace_back("assets/color.png", Tool::Color); 
     buttons.emplace_back("assets/dropdown.png", Tool::Dropdown);
-    // buttons.emplace_back("AI", Tool::AI);
+    buttons.emplace_back("assets/ai.png", Tool::AI);
     initButtons(buttons, 0, 0);
 
 
@@ -52,10 +45,10 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     dropdownRect.setFillColor(backgroundColor);
     dropdownRect.setPosition(dropdownPosX, dropdownPosY);
 
-    //dropdownButtons.emplace_back("Rect", Tool::Rect);
-    //dropdownButtons.emplace_back("Circle", Tool::Circle);
-    //dropdownButtons.emplace_back("Tri", Tool::Triangle); 
-    //dropdownButtons.emplace_back("Po", Tool::Polygon); 
+    dropdownButtons.emplace_back("assets/rectangle.png", Tool::Rect);
+    dropdownButtons.emplace_back("assets/circle.png", Tool::Circle);
+    dropdownButtons.emplace_back("assets/triangle.png", Tool::Triangle); 
+    dropdownButtons.emplace_back("assets/polygon.png", Tool::Polygon); 
 
     initButtons(dropdownButtons, dropdownPosX, dropdownPosY);
 
@@ -69,13 +62,7 @@ void Toolbar::initButtons(std::vector<Button>& buttonVector, float startingPosX,
         sf::RectangleShape& buttonRect = button.rect; 
 
         buttonRect.setSize(sf::Vector2f(buttonSize.x, toolbarHeight)); 
-        buttonRect.setPosition(buttonPosX, buttonPosY); 
-
-        // center the button's text
-        sf::FloatRect textBounds = button.text.getLocalBounds();
-        button.text.setOrigin(textBounds.left + textBounds.width / 2.0f, textBounds.top + textBounds.height / 2.0f); 
-        button.text.setPosition(buttonRect.getPosition().x + buttonRect.getSize().x / 2, buttonRect.getPosition().y + buttonRect.getSize().y / 2);
-    
+        button.setPosition(buttonPosX, buttonPosY); 
         buttonPosX += buttonSize.x + buttonGap; 
     }
 }
@@ -118,21 +105,21 @@ void Toolbar::highlightButton(Tool currentButton) {
 
     // Undo Highlighting
     for (int i = 0; i < buttons.size(); i++) {
-        buttons[i].rect.setFillColor(sf::Color(100, 100, 250));
+        buttons[i].background.setFillColor(sf::Color(255, 174, 174));
     }
     for (int i = 0; i < dropdownButtons.size(); i++) {
-        dropdownButtons[i].rect.setFillColor(sf::Color(100, 100, 250));
+        dropdownButtons[i].background.setFillColor(sf::Color(255, 174, 174));
     }
 
     // Finds button by comparing against button[i].tool
     for (int i = 0; i < buttons.size(); i++) {
         if (buttons[i].tool == currentButton && currentButton !=  Tool::SaveFile && currentButton != Tool::Undo) {
-            buttons[i].rect.setFillColor(sf::Color(50, 50, 210));
+            buttons[i].background.setFillColor(sf::Color(255, 120, 120));
         }
     }
     for (int i = 0; i < dropdownButtons.size(); i++) {
         if (dropdownButtons[i].tool == currentButton) {
-            dropdownButtons[i].rect.setFillColor(sf::Color(80, 80, 230));
+            dropdownButtons[i].background.setFillColor(sf::Color(255, 120, 120));
         }
     }
 
@@ -262,15 +249,15 @@ void Toolbar::renderUI() {
     window.draw(toolbarBackground);
 
     for (const Button& btn : buttons) {
+        window.draw(btn.background);
         window.draw(btn.rect);
-        window.draw(btn.text);
     }
 
     if (dropdownIsOpen) {
         window.draw(dropdownRect);
         for (const Button& btn : dropdownButtons) {
+            window.draw(btn.background);
             window.draw(btn.rect);
-            window.draw(btn.text);
         }
     }
 

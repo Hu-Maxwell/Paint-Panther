@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\ai.png" />
     <Image Include="assets\circle.png" />
     <Image Include="assets\dropdown.png" />
     <Image Include="assets\eraser.png" />
     <Image Include="assets\fill.png" />
     <Image Include="assets\mr_handsome.jpg" />
-    <Image Include="assets\pen.png" />
     <Image Include="assets\polygon.png" />
     <Image Include="assets\rectangle.png" />
     <Image Include="assets\redo.png" />
