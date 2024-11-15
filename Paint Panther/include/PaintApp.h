@@ -8,6 +8,7 @@
 
 #include "UI.h"
 #include "apiHandler.h"
+#include "StartScreen.h"
 
 class PaintApp {
 public:
@@ -56,6 +57,8 @@ private:
 
     // ==== shapes =====
     sf::Vector2f shapeStartPos;
+
+    StartScreen startScreen;
 
     // rect
     bool isDrawingRect = false;

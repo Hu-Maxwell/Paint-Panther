@@ -31,13 +31,11 @@ void PaintApp::run() {
 // draws all elements to the window
 void PaintApp::render() {
     window.clear();
-    if (currentState == AppState::StartScreen) {
+     if (!startScreen.isStartClicked()) {
         // Render Start Screen
-        window.draw(titleText);
-        window.draw(startButton);
-        window.draw(startButtonText);
+        startScreen.draw();
     }
-    else if (currentState == AppState::MainApp) {
+    else {
         // Draw the main texture
         window.draw(sprite);
 
