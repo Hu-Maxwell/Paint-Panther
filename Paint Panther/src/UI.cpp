@@ -29,18 +29,19 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     sf::Vector2f buttonPos; 
     buttonGap = 5.0f;
 
-    buttons.emplace_back("Undo", Tool::Undo); 
-    buttons.emplace_back("Redo", Tool::Redo);
-    buttons.emplace_back("Save", Tool::SaveFile); 
-    buttons.emplace_back("Pen", Tool::Pen);
-    buttons.emplace_back("Ersr", Tool::Eraser); 
-    buttons.emplace_back("Fill", Tool::Fill); 
-    buttons.emplace_back("Color", Tool::Color); 
-    buttons.emplace_back("Drop", Tool::Dropdown);
-    buttons.emplace_back("AI", Tool::AI);
+    buttons.emplace_back("assets/pen.png", Tool::Undo); 
+    //buttons.emplace_back("Redo", Tool::Redo);
+    //buttons.emplace_back("Save", Tool::SaveFile); 
+    //buttons.emplace_back("Pen", Tool::Pen);
+    //buttons.emplace_back("Ersr", Tool::Eraser); 
+    //buttons.emplace_back("Fill", Tool::Fill); 
+    //buttons.emplace_back("Color", Tool::Color); 
+    //buttons.emplace_back("Drop", Tool::Dropdown);
+    //buttons.emplace_back("AI", Tool::AI);
     initButtons(buttons, 0, 0);
 
-    // dropdown
+
+    // dropdown ======================================================
     dropdownWidth = (4 * buttonSize.x) + (3 * buttonGap);
     dropdownHeight = buttonSize.x;
 
@@ -51,10 +52,10 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     dropdownRect.setFillColor(backgroundColor);
     dropdownRect.setPosition(dropdownPosX, dropdownPosY);
 
-    dropdownButtons.emplace_back("Rect", Tool::Rect);
-    dropdownButtons.emplace_back("Circle", Tool::Circle);
-    dropdownButtons.emplace_back("Tri", Tool::Triangle); 
-    dropdownButtons.emplace_back("Po", Tool::Polygon); // TODO: change the UI dropdown so it fits
+    //dropdownButtons.emplace_back("Rect", Tool::Rect);
+    //dropdownButtons.emplace_back("Circle", Tool::Circle);
+    //dropdownButtons.emplace_back("Tri", Tool::Triangle); 
+    //dropdownButtons.emplace_back("Po", Tool::Polygon); 
 
     initButtons(dropdownButtons, dropdownPosX, dropdownPosY);
 

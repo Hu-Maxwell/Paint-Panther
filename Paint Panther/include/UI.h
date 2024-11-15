@@ -26,20 +26,23 @@ public:
     struct Button {
         sf::RectangleShape rect;
         sf::Text text;
+        sf::Texture texture;
         Tool tool;
         static sf::Font font; 
         static sf::Color color; 
         
-        Button(const std::string& label, Tool _tool) {
-            text.setFont(font);
-            text.setString(label);
-            text.setCharacterSize(14);
-            text.setFillColor(sf::Color::White);
-
+        Button(const std::string filepath, Tool _tool) {
             tool = _tool;
 
-            rect.setSize(sf::Vector2f(40.0f, 40.0f)); // TODO: change this to buttonSize
-            rect.setFillColor(sf::Color(100, 100, 250)); // TODO: change this to buttonColor
+            rect.setSize(sf::Vector2f(40.0f, 40.0f)); 
+            rect.setFillColor(sf::Color(100, 100, 250)); 
+
+            if (!texture.loadFromFile(filepath)) {
+                std::cerr << "texture bad: " << filepath << std::endl;
+                exit(EXIT_FAILURE);
+            }
+
+            rect.setTexture(&texture);
         }
     };
 
