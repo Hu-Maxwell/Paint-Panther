@@ -122,12 +122,17 @@ class Dropdown {
 public:
     Dropdown(/*const sf::Font& font, */const sf::Vector2f& position) //ive removed the note for the font because it isn't working rn
         : isOpen(true), cursorPos(0) { //opened by default
+        //this is for the piece behind the input box
+        background.setSize(sf::Vector2f(420, 170)); // Slightly larger than the input box
+        background.setFillColor(sf::Color(200,200,200)); // backgroundColor
+        background.setPosition(position.x - 10, position.y + 10); // Offset to surround the input box
+
         //inputbox always visible?
-        inputBox.setSize(sf::Vector2f(200, 50));
-        inputBox.setFillColor(sf::Color::Cyan);
+        inputBox.setSize(sf::Vector2f(400, 50));
+        inputBox.setFillColor(sf::Color::White);
         inputBox.setOutlineThickness(2);
-        inputBox.setOutlineColor(sf::Color::Magenta);
-        inputBox.setPosition(position.x, position.y /*+ 50*/);
+        inputBox.setOutlineColor(sf::Color::Black);
+        inputBox.setPosition(position.x, position.y + 110);
 
         //font
         inputText.setFont(font);
@@ -144,7 +149,7 @@ public:
     void handleEvents(const sf::Event& event, const sf::Vector2i& mousePos) {
         if (event.type == sf::Event::MouseButtonPressed) {
             //close dropdown when clicking outside
-            if (isOpen && !inputBox.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+            if (isOpen && !background.getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
                 isOpen = false;
             }
         }
@@ -193,25 +198,28 @@ public:
     void draw(sf::RenderWindow& window) {
 
         if (isOpen) {
-
+            window.draw(background);
             window.draw(inputBox);
             window.draw(inputText);
 
             //input text as rectangles (lines) or something
-            //for (size_t i = 0; i < inputString.size(); ++i) {
-                //sf::RectangleShape charRect(sf::Vector2f(10, 30));
-                //charRect.setFillColor(sf::Color::Black);
-                //charRect.setPosition(inputBox.getPosition().x + 10 + (i * 12), inputBox.getPosition().y + 10); //spacing in box
-                //window.draw(charRect);
-            //}
+            for (size_t i = 0; i < inputString.size(); ++i) {
+                sf::RectangleShape charRect(sf::Vector2f(10, 30));
+                charRect.setFillColor(sf::Color::Black);
+                charRect.setPosition(inputBox.getPosition().x + 10 + (i * 12), inputBox.getPosition().y + 10); //spacing in box
+                window.draw(charRect);
+            }
 
-            //blinking line for cursor cause im so cool
+            //blinking line for cursor cause im so cool (idk why it doesnt appear)
             if (isOpen && cursorPos < inputString.size()) {
                 sf::RectangleShape cursor(sf::Vector2f(2, 30)); //THE LINE
                 cursor.setFillColor(sf::Color::Black);
                 cursor.setPosition(inputBox.getPosition().x + 10 + (cursorPos * 12), inputBox.getPosition().y + 10);
                 window.draw(cursor);
             }
+        }
+        else {
+            window.
         }
     }
 
@@ -222,10 +230,12 @@ public:
     // ====================================
 private:
     bool isOpen;
-    sf::Text inputText; //displayed text?
+
     sf::Font font; //font
+    sf::RectangleShape background; //back box
     sf::RectangleShape inputBox; //input box
     std::string inputString; //user's typing
+    sf::Text inputText; //displayed text?
     std::string inputGetter; //probably gonna work
     size_t cursorPos; //cursor pos
 };

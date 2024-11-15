@@ -134,7 +134,7 @@ void createDropdown(sf::RenderWindow& window) {
     //if (!font.loadFromFile("arial.tff")) {
         //return; //error loading font (idk what that acutally does im just guessing)
     //}
-    Dropdown saveBox(/*font,*/sf::Vector2f(300, 100)); //i removed font because it doesnt work rn
+    Dropdown saveBox(/*font,*/sf::Vector2f(70, 40)); //i removed font because it doesnt work rn
 
     while (window.isOpen()) {
         sf::Event event;
