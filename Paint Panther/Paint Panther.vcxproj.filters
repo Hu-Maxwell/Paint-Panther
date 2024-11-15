@@ -16,6 +16,9 @@
     <Filter Include="docs">
       <UniqueIdentifier>{4b71ea21-406b-4f73-8da5-6f504f34afee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="assets\icons">
+      <UniqueIdentifier>{1b71b399-adfe-4d64-a7f9-12f4457e5230}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\mr_handsome.jpg">
@@ -42,6 +45,9 @@
     <Image Include="..\..\..\..\..\Downloads\pen Icon tool.png">
       <Filter>assets</Filter>
     </Image>
+    <Image Include="..\..\..\..\..\Downloads\undo.png">
+      <Filter>assets\icons</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="docs\bugs_documentation.txt">
@@ -64,12 +70,27 @@
     <ClCompile Include="src\UI.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\api.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shapes.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tools.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\user.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\PaintApp.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\UI.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\apiHandler.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

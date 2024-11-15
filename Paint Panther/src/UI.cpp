@@ -28,7 +28,24 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     sf::Vector2f buttonPos; 
     buttonGap = 5.0f;
 
-    buttons.emplace_back("Undo", Tool::Undo); 
+   /* Button undoButton("Undo", Tool::Undo);*/
+  /*  undoButton.texture.loadFromFile("assets/icons/undo.png");
+    undoButton.rect.setTexture(&undoButton.texture);*/
+
+
+    sf::Texture undoTexture;
+    if (!undoTexture.loadFromFile("assets/icons/undo.png")) {
+        std::cerr << "Failed to load undo texture from 'assets/icons/undo.png'." << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    undoTexture.loadFromFile("assets/icons/undo.png");
+
+
+
+    //undoButton.textureImage.setTexture(undoButton.texture);
+
+    //buttons.emplace_back("Undo", Tool::Undo); 
+    buttons.emplace_back(undoTexture, Tool::Undo); 
     buttons.emplace_back("Redo", Tool::Redo);
     buttons.emplace_back("Save", Tool::SaveFile); 
     buttons.emplace_back("Pen", Tool::Pen);
@@ -37,6 +54,9 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     buttons.emplace_back("Color", Tool::Color); 
     buttons.emplace_back("Drop", Tool::Dropdown);
     buttons.emplace_back("AI", Tool::AI);
+
+ /*   buttons.push_back(std::move(undoButton));*/
+
     initButtons(buttons, 0, 0);
 
     // dropdown

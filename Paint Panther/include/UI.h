@@ -23,20 +23,41 @@ enum class Tool {
 
 class Toolbar {
 public:
+    //struct Button {
+    //    sf::RectangleShape rect;
+    //    sf::Text text;
+    //    Tool tool;
+    //    sf::Texture texture;
+    //    sf::Sprite textureImage;
+    //    static sf::Font font; 
+    //    static sf::Color color; 
+    //    
+    //    Button(const std::string& label, Tool _tool) {
+    //        text.setFont(font);
+    //        text.setString(label);
+    //        text.setCharacterSize(14);
+    //        text.setFillColor(sf::Color::White);
+
+    //        tool = _tool;
+
+    //        rect.setSize(sf::Vector2f(40.0f, 40.0f)); // TODO: change this to buttonSize
+    //        rect.setFillColor(sf::Color(100, 100, 250)); // TODO: change this to buttonColor
+    //    }
+    //};
+
     struct Button {
         sf::RectangleShape rect;
         sf::Text text;
         Tool tool;
-        static sf::Font font; 
-        static sf::Color color; 
-        
-        Button(const std::string& label, Tool _tool) {
-            text.setFont(font);
-            text.setString(label);
-            text.setCharacterSize(14);
-            text.setFillColor(sf::Color::White);
+        sf::Texture texture;
+        sf::Sprite textureImage;
+        static sf::Font font;
+        static sf::Color color;
 
+        Button(sf::Texture& texture, Tool _tool) {
             tool = _tool;
+
+            textureImage.setTexture(texture);
 
             rect.setSize(sf::Vector2f(40.0f, 40.0f)); // TODO: change this to buttonSize
             rect.setFillColor(sf::Color(100, 100, 250)); // TODO: change this to buttonColor
@@ -64,6 +85,9 @@ public:
     sf::Vector2f buttonSize; 
     float buttonGap; 
     sf::Color backgroundColor; 
+
+    //Buttons:
+  
 
     sf::RectangleShape dropdownRect; 
     std::vector<Button> dropdownButtons; 
