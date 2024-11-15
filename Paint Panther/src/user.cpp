@@ -45,6 +45,9 @@ void PaintApp::handleLeftClick(sf::Event event) {
         currentColor = tempColor;
     }
 
+    // checks if click is in dropdown
+    toolbar.checkIfDropdownClicked(event); 
+
     // manages UI
     if (toolbar.handleUIInput(event) != Tool::Nothing) {
         Tool clickedTool = toolbar.handleUIInput(event);

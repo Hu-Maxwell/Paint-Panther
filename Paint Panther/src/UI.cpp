@@ -98,9 +98,17 @@ Tool Toolbar::handleUIInput(sf::Event event) {
     return Tool::Nothing; 
 }
 
-void Toolbar::openDropdown() {
-    if (dropdownIsOpen) {dropdownIsOpen = false;}
+void Toolbar::openDropdown() { // referenced by user.cpp
     dropdownIsOpen = true;
+}
+
+void Toolbar::checkIfDropdownClicked(sf::Event event) {
+    sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+    if (dropdownIsOpen) {
+        if (!dropdownRect.getGlobalBounds().contains(mousePos)) {
+            dropdownIsOpen = false;
+        }
+    }
 }
 
 // hue shift down (darker) to mark selected buttons (excluding undo and save)
@@ -179,7 +187,7 @@ sf::Color Toolbar::HSVtoRGB(float h, float s, float v) {
 
 
 void Toolbar::openColorWheel() {
-    int colorWheelSize = 512;
+    int colorWheelSize = 216;
     cwImage.create(colorWheelSize, colorWheelSize, sf::Color::Black);
 
     int cx = colorWheelSize / 2; // x of circle
@@ -228,7 +236,6 @@ void Toolbar::openColorWheel() {
     colorWheelOpen = true;
 }
 
-// vomit code dont even try to understand cuz i dont 
 sf::Color Toolbar::getRgbOnClick(sf::Event event) {
     sf::Vector2i mousePos(event.mouseButton.x, event.mouseButton.y);
 
@@ -237,16 +244,16 @@ sf::Color Toolbar::getRgbOnClick(sf::Event event) {
     localPos.x -= cwSprite.getPosition().x;
     localPos.y -= cwSprite.getPosition().y;
 
-    // if not in circle, return debug color (here, it's black)
+    // if not in circle, return placeholder color (here, it's black)
     // TODO: change it from black to some random color the user will never select
     if (localPos.x < 0 || localPos.x >= cwImage.getSize().x ||
         localPos.y < 0 || localPos.y >= cwImage.getSize().y) {
-        return sf::Color::Black; 
+        colorWheelOpen = false;
+        return sf::Color::Black;
     }
-
-    sf::Color color = cwImage.getPixel(localPos.x, localPos.y);
-
-    return color; 
+    else {
+        return cwImage.getPixel(localPos.x, localPos.y);
+    }
 }
 
 void Toolbar::renderUI() {

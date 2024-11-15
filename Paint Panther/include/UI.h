@@ -47,6 +47,7 @@ public:
     void initButtons(std::vector<Button>& buttonVector, float startingPosX, float startingPosY);
     Tool handleUIInput(sf::Event event);
     void openDropdown();
+    void checkIfDropdownClicked(sf::Event event);
     void highlightButton(Tool);
     void renderUI();
 
