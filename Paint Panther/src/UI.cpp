@@ -29,15 +29,15 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     sf::Vector2f buttonPos; 
     buttonGap = 5.0f;
 
-    buttons.emplace_back("assets/pen.png", Tool::Undo); 
-    //buttons.emplace_back("Redo", Tool::Redo);
-    //buttons.emplace_back("Save", Tool::SaveFile); 
-    //buttons.emplace_back("Pen", Tool::Pen);
-    //buttons.emplace_back("Ersr", Tool::Eraser); 
-    //buttons.emplace_back("Fill", Tool::Fill); 
-    //buttons.emplace_back("Color", Tool::Color); 
-    //buttons.emplace_back("Drop", Tool::Dropdown);
-    //buttons.emplace_back("AI", Tool::AI);
+    // buttons.emplace_back("assets/pen.png", Tool::Undo); 
+    //buttons.emplace_back("assets/redo.png", Tool::Redo);
+    //buttons.emplace_back("assets/save.png", Tool::SaveFile); 
+    //buttons.emplace_back("assets/pen.png", Tool::Pen);
+    //buttons.emplace_back("assets/eraser.png", Tool::Eraser); 
+    //buttons.emplace_back("assets/fill.png", Tool::Fill); 
+    // buttons.emplace_back("assets/color.png", Tool::Color); 
+    buttons.emplace_back("assets/dropdown.png", Tool::Dropdown);
+    // buttons.emplace_back("AI", Tool::AI);
     initButtons(buttons, 0, 0);
 
 
