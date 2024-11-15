@@ -163,7 +163,6 @@ void PaintApp::fill() {
     tempTexture.loadFromImage(image);
     sf::Sprite tempSprite(tempTexture);
 
-    texture.clear(sf::Color::Transparent);
     texture.draw(tempSprite);
     texture.display();
 }

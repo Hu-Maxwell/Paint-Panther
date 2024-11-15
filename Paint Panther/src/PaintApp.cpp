@@ -8,7 +8,7 @@
 PaintApp::PaintApp()
     : window(sf::VideoMode(1600, 1000), "Paint2D App"), 
     toolbar(window), 
-    currentColor(sf::Color::Red) {
+    currentColor(sf::Color::Black) {
 
     window.setFramerateLimit(144); 
 
