@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <future>
 
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
@@ -50,10 +51,9 @@ std::string getResponse() {
     const std::string image_path = "C:/Users/deweb/source/repos/Paint Panther/Paint Panther/output.png"; // incorrect filepath for all 
 
     try {
-        // Read and encode the image to base64
         std::string base64_image = read_image_base64(image_path);
 
-        // Construct the JSON payload
+        // construct the JSON payload
         nlohmann::json payload = {
             {"model", "gpt-4o-mini"},
             {"messages", {
@@ -105,4 +105,8 @@ std::string getResponse() {
     catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
+}
+
+std::future<std::string> getResponseAsync() {
+    return std::async(std::launch::async, getResponse);
 }

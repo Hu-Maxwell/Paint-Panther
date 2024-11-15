@@ -45,6 +45,10 @@ private:
     // fill 
     
 
+    // ai 
+    std::future<std::string> aiResponseFuture;
+    bool aiResponsePending = false; 
+
     // ==== shapes =====
     sf::Vector2f shapeStartPos;
 

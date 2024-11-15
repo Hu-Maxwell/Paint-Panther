@@ -1,8 +1,8 @@
 #ifndef API_HANDLER_H
 #define API_HANDLER_H
 
-#include <string>
+#include <future>
 
-std::string getResponse();
+std::future<std::string> getResponseAsync();
 
 #endif 
