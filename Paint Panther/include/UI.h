@@ -47,7 +47,10 @@ public:
     void openDropdown();
     void highlightButton(Tool);
     void renderUI();
+
     void closeIcons(Tool, sf::Event event);
+    bool checkIfOpen();
+    bool inColorWheel(sf::Event);
 
     sf::Color HSVtoRGB(float h, float s, float v);
     void openColorWheel(); 
@@ -75,7 +78,7 @@ public:
     sf::Image cwImage;
     sf::Texture cwTexture;
 	sf::Sprite cwSprite;
-    bool colorWheelOpen; 
+    bool colorWheelOpen;
 };
 
 #endif 

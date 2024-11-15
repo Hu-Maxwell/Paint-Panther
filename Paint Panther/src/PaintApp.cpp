@@ -76,31 +76,35 @@ void PaintApp::handleEvents() {
                  
                 Tool currentClick = toolbar.handleUIInput(event); // Closes Dropdown and color wheel if user clicks anywhere on screen
                 toolbar.closeIcons(currentClick, event);
+                // if colorwheelisopen AND click is in the wheel
+                if ( !(toolbar.inColorWheel(event) && toolbar.checkIfOpen()) ) {
 
-                if (currentTool == Tool::Pen) {
-                    startDrawing();
-                }
-                if (currentTool == Tool::Eraser) {
-                    startErase(); 
-                }
-                if (currentTool == Tool::Fill) {
-                    fill();
-                }
-                else if (currentTool == Tool::Rect) {    
-                    startRect();
-                }
-                else if (currentTool == Tool::Circle) {
-                    startCircle();
-                }
-                else if (currentTool == Tool::Triangle) {
-                    startTriangle(); 
+
+                    if (currentTool == Tool::Pen) {
+                        startDrawing();
+                    }
+                    if (currentTool == Tool::Eraser) {
+                        startErase();
+                    }
+                    if (currentTool == Tool::Fill) {
+                        fill();
+                    }
+                    else if (currentTool == Tool::Rect) {
+                        startRect();
+                    }
+                    else if (currentTool == Tool::Circle) {
+                        startCircle();
+                    }
+                    else if (currentTool == Tool::Triangle) {
+                        startTriangle();
+                    }
                 }
             }
             
         }
 
         else if (event.type == sf::Event::MouseButtonReleased) {
-            if (event.mouseButton.button == sf::Mouse::Left) { // Add the unhighlight case Here - UI/UX
+            if (event.mouseButton.button == sf::Mouse::Left) { 
                 if (currentTool == Tool::Pen) {
                     stopDrawing();
                 }
