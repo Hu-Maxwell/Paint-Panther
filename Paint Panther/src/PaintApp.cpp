@@ -18,17 +18,28 @@ PaintApp::PaintApp()
     eraserOutline.setOutlineColor(sf::Color::Black);
     eraserOutline.setOutlineThickness(1.0f);
     
-    texture.create(1600, 1200); // TODO: change so it fits inside window
+    sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();
+    texture.create(desktopMode.width, desktopMode.height);
     texture.clear(sf::Color::White);
     texture.display();
     sprite.setTexture(texture.getTexture());
+    sprite.setPosition(0, 0);
 }
 
 // run - main loop of the application
 void PaintApp::run() {
+    int res = 0;  
     if (startingScreen) {
         StartingScreen screen(window);
-        screen.mainLoop(); 
+        res = screen.mainLoop(); 
+    }
+
+    if (res == -1) {
+        window.close(); 
+    }
+    if (res == 1) {
+        sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();
+        window.create(sf::VideoMode(desktopMode.width, desktopMode.height), "Paint2D App");
     }
 
     while (window.isOpen()) {
