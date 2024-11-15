@@ -22,7 +22,7 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     sf::Vector2f buttonPos; 
     buttonGap = 5.0f;
 
-    buttons.emplace_back("assets/pen.png", Tool::Undo); 
+    buttons.emplace_back("assets/undo.png", Tool::Undo); 
     buttons.emplace_back("assets/redo.png", Tool::Redo);
     buttons.emplace_back("assets/save.png", Tool::SaveFile); 
     buttons.emplace_back("assets/pen.png", Tool::Pen);

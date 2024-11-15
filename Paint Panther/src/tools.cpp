@@ -193,3 +193,9 @@ void PaintApp::floodFill(sf::Image& image, int x, int y, const sf::Color& target
     }
 }
 
+void PaintApp::displayAiResponse() {
+
+
+    // std font 
+    // contentAi
+}

@@ -30,6 +30,7 @@
     <Image Include="assets\redo.png" />
     <Image Include="assets\save.png" />
     <Image Include="assets\triangle.png" />
+    <Image Include="assets\undo.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="docs\bugs_documentation.txt" />

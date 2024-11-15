@@ -1,5 +1,8 @@
 #include "../include/PaintApp.h"
 #include <future>
+#include <nlohmann/json.hpp> 
+
+using json = nlohmann::json;
 
 void PaintApp::handleEvents() {
     sf::Event event;
@@ -11,8 +14,19 @@ void PaintApp::handleEvents() {
 
         if (aiResponsePending && aiResponseFuture.wait_for(std::chrono::seconds(0)) == std::future_status::ready) {
             std::string response = aiResponseFuture.get();
-            std::cout << response << std::endl;
+
+            try {
+                auto responseJson = json::parse(response);
+                contentAi = responseJson["choices"][0]["message"]["content"];
+                text.setString(contentAi);
+                std::cout << contentAi << std::endl;
+            }
+            catch (const std::exception& e) {
+                std::cerr << "Error parsing JSON response: " << e.what() << std::endl;
+            }
+
             aiResponsePending = false;
+
         }
 
         else if (event.type == sf::Event::MouseButtonPressed) {
@@ -67,9 +81,9 @@ void PaintApp::handleLeftClick(sf::Event event) {
             toolbar.openColorWheel();
         }
         else if (clickedTool == Tool::AI) {
-            std::cout << "Starting AI request..." << std::endl;
             aiResponseFuture = getResponseAsync();  
             aiResponsePending = true; 
+            isAiResponse = true;
         }
         else if (
             clickedTool == Tool::Pen || clickedTool == Tool::Eraser || clickedTool == Tool::Fill ||

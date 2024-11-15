@@ -12,6 +12,22 @@ PaintApp::PaintApp()
 
     window.setFramerateLimit(144); 
 
+    if (!font.loadFromFile("assets/Zain-Regular.ttf")) {
+        std::cerr << "Couldn't load 'arial.ttf'." << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    container.setPosition(window.getSize().x * .85, 100);
+    container.setSize(sf::Vector2f(600, 200));
+    container.setFillColor(sf::Color(150, 150, 150));
+
+    text.setFont(font);
+    text.setPosition(window.getSize().x * .85 + 10, 100);
+    text.setCharacterSize(50);
+    text.setFillColor(sf::Color::Black);
+    text.setString("Loading...");
+
+
     // eraser outline 
     eraserOutline.setRadius(eraserRadius);
     eraserOutline.setFillColor(sf::Color::White);
@@ -81,6 +97,11 @@ void PaintApp::render() {
     if (isDrawingTriangle) {
         window.draw(currentTriangle);
     }
+
+    if (isAiResponse) {
+        window.draw(container);
+        window.draw(text);
+    }//ai
 
     // render UI 
     toolbar.renderUI();

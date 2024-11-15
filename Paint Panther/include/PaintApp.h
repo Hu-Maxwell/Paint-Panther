@@ -52,6 +52,11 @@ private:
     // ai 
     std::future<std::string> aiResponseFuture;
     bool aiResponsePending = false; 
+    std::string contentAi;
+    sf::RectangleShape container; 
+    sf::Font font; 
+    sf::Text text;
+    bool isAiResponse = false;
 
     // ==== shapes =====
     sf::Vector2f shapeStartPos;
@@ -113,6 +118,8 @@ private:
     void undo();
     void redo();
     void saveState();
+
+    void displayAiResponse(); 
 
     void render();
 };
