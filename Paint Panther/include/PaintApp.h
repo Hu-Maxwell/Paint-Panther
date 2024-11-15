@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "UI.h"
+#include "startingScreen.h"
 #include "apiHandler.h"
 
 class PaintApp {

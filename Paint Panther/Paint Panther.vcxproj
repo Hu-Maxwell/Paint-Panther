@@ -40,10 +40,12 @@
   <ItemGroup>
     <ClInclude Include="include\apiHandler.h" />
     <ClInclude Include="include\PaintApp.h" />
+    <ClInclude Include="include\startingScreen.h" />
     <ClInclude Include="include\UI.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\arial.ttf" />
+    <Font Include="assets\Zain-Regular.ttf" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

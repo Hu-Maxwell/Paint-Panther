@@ -58,7 +58,7 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
 
     initButtons(dropdownButtons, dropdownPosX, dropdownPosY);
 
-}// End toolbar
+}
 
 void Toolbar::initButtons(std::vector<Button>& buttonVector, float startingPosX, float startingPosY) {
     float buttonPosX = startingPosX;
