@@ -25,9 +25,9 @@
     <Image Include="..\..\..\..\..\Downloads\Rectangle Icon Tool.png" />
     <Image Include="..\..\..\..\..\Downloads\Triangle Icon Tool.jpg" />
     <Image Include="..\..\..\..\..\Downloads\undo icon.jpg" />
-    <Image Include="..\..\..\..\..\Downloads\undo.png" />
     <Image Include="assets\mr_handsome.jpg" />
     <Image Include="assets\pen.png" />
+    <Image Include="assets\undo.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="docs\bugs_documentation.txt" />
