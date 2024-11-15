@@ -59,32 +59,39 @@ void PaintApp::startDrawing() {
     isDrawing = true;
 }
 
-// is glitchy here - skips a bit because of rectangle angle changing 
 void PaintApp::draw() {
     float lineThickness = 10.0f;
     sf::Vector2i curMousePos = sf::Mouse::getPosition(window);
 
-    if (lastMousePos != curMousePos && lastMousePos.x != -1) {
-        // Calculate line length and angle
+    if (lastMousePos.x != -1) {
         float dx = static_cast<float>(curMousePos.x - lastMousePos.x);
         float dy = static_cast<float>(curMousePos.y - lastMousePos.y);
-        float length = sqrt(dx * dx + dy * dy);
-        float angle = atan2(dy, dx) * 180.0f / 3.14159f;
+        float distance = std::sqrt(dx * dx + dy * dy);
 
-        // Create a rectangle shape
-        sf::RectangleShape rectangle(sf::Vector2f(length, lineThickness)); // 5.0f is the desired thickness
-        rectangle.setFillColor(currentColor);
+        // amount of circles drawn each frame depends on how far the last mouse pos is 
+        // (distance / radius) approximates the amount of circles that need to be drawn
+        // + 1 because, without it, if the distance is really small (1 pix), nothing will be drawn 
+        int amountOfCircles = static_cast<int>(distance / (lineThickness / 2)) + 1;
+        float stepsX = dx / amountOfCircles;
+        float stepsY = dy / amountOfCircles;
 
-        // Set position and rotation
-        rectangle.setPosition(sf::Vector2f(lastMousePos.x + dx / 2.0f, lastMousePos.y + dy / 2.0f));
-        rectangle.setRotation(angle);
+        for (int i = 0; i <= amountOfCircles; i++) {
+            // calculate pos of circles between
+            float x = lastMousePos.x + (stepsX * i);
+            float y = lastMousePos.y + (stepsY * i);
 
-        // Draw the rectangle
-        texture.draw(rectangle);
+            sf::CircleShape circle(lineThickness / 2.0f);
+            circle.setFillColor(currentColor);
+            circle.setOrigin(lineThickness / 2.0f, lineThickness / 2.0f);
+            circle.setPosition(x, y);
+
+            texture.draw(circle);
+        }
     }
-    lastMousePos = curMousePos;
 
+    lastMousePos = curMousePos;
     texture.display();
+
 }
 
 void PaintApp::stopDrawing() {
@@ -95,7 +102,7 @@ void PaintApp::stopDrawing() {
 // erase tool 
 // ====================================
 
-// TODO: add a circle around cursor that indicates erase radius
+// TODO: move curMousePos so it's global
 void PaintApp::startErase() {
     saveState();
     isErasing = true;
@@ -104,7 +111,7 @@ void PaintApp::startErase() {
 void PaintApp::erase() {
     sf::Vector2i curMousePos = sf::Mouse::getPosition(window);
 
-    float eraserRadius = 20.f;
+    // eraser
     sf::CircleShape eraser(eraserRadius);
     eraser.setFillColor(sf::Color::White);
     eraser.setPosition(static_cast<float>(curMousePos.x - eraserRadius),
@@ -112,6 +119,13 @@ void PaintApp::erase() {
 
     texture.draw(eraser);
     texture.display();
+}
+
+void PaintApp::updateEraserOutline() {
+    sf::Vector2i curMousePos = sf::Mouse::getPosition(window);
+    sf::Vector2f floatMousePos = sf::Vector2f(static_cast<float>(curMousePos.x - eraserRadius), static_cast<float>(curMousePos.y - eraserRadius));
+
+    eraserOutline.setPosition(floatMousePos);
 }
 
 void PaintApp::stopErase() {

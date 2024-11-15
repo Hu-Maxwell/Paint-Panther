@@ -9,6 +9,12 @@ PaintApp::PaintApp()
     : window(sf::VideoMode(1600, 1000), "Paint2D App"),
     toolbar(window), 
     currentColor(sf::Color::Red) {
+
+    // eraser outline 
+    eraserOutline.setRadius(eraserRadius);
+    eraserOutline.setFillColor(sf::Color::White);
+    eraserOutline.setOutlineColor(sf::Color::Black);
+    eraserOutline.setOutlineThickness(1.0f);
     
     texture.create(1600, 1200); // TODO: change so it fits inside window
     texture.clear(sf::Color::White);
@@ -32,6 +38,10 @@ void PaintApp::run() {
 void PaintApp::render() {
     window.clear();
     window.draw(sprite);
+
+    if (currentTool == Tool::Eraser) {
+        window.draw(eraserOutline);
+    }
 
     if (isDrawingRect) {
         window.draw(currentRectangle);

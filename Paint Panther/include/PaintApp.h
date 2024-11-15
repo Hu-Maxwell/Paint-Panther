@@ -38,7 +38,9 @@ private:
     bool isDrawing = false;
 
     // eraser
+    sf::CircleShape eraserOutline; 
     bool isErasing = false; 
+    float eraserRadius = 20.0f;
     
     // fill 
     
@@ -77,7 +79,8 @@ private:
 
     void startErase(); 
     void erase();
-    void stopErase(); 
+    void updateEraserOutline(); 
+    void stopErase();  
 
     void fill(); 
     void floodFill(sf::Image& image, int x, int y, const sf::Color& targetColor, const sf::Color& replacementColor);

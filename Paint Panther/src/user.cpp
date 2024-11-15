@@ -130,8 +130,11 @@ void PaintApp::handleMouseMove(sf::Event event) {
     if (currentTool == Tool::Pen && isDrawing) {
         draw();
     }
-    if (currentTool == Tool::Eraser && isErasing) {
-        erase();
+    if (currentTool == Tool::Eraser) {
+        if (isErasing) {
+            erase(); 
+        }
+        updateEraserOutline();
     }
     else if (currentTool == Tool::Rect && isDrawingRect) {
         updateRect();
