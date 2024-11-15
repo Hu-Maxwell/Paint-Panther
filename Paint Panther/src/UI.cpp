@@ -99,7 +99,21 @@ Tool Toolbar::handleUIInput(sf::Event event) {
 
 void Toolbar::openDropdown() {
     if (dropdownIsOpen) {dropdownIsOpen = false;}
-    dropdownIsOpen = true;
+    else { dropdownIsOpen = true; }
+}
+
+void Toolbar::closeIcons(Tool currentClick, sf::Event event) {
+    if (currentClick != Tool::Dropdown && dropdownIsOpen) {
+        dropdownIsOpen = false;
+    }
+    if (currentClick != Tool::Color && colorWheelOpen) {
+        sf::Vector2f localPos = getMouseCoords(event);
+
+        //  Checks if the click is within the color wheel
+        if (localPos.x < 0 || localPos.x >= cwImage.getSize().x ||  
+            localPos.y < 0 || localPos.y >= cwImage.getSize().y) {colorWheelOpen = false;}
+        
+    }
 }
 
 // hue shift down (darker) to mark selected buttons (excluding undo and save)
@@ -115,7 +129,7 @@ void Toolbar::highlightButton(Tool currentButton) {
 
     // Finds button by comparing against button[i].tool
     for (int i = 0; i < buttons.size(); i++) {
-        if (buttons[i].tool == currentButton && currentButton !=  Tool::SaveFile && currentButton != Tool::Undo) {
+        if (buttons[i].tool == currentButton && currentButton !=  Tool::SaveFile && currentButton != Tool::Undo && currentButton != Tool::Redo) {
             buttons[i].rect.setFillColor(sf::Color(50, 50, 210));
         }
     }
@@ -178,67 +192,78 @@ sf::Color Toolbar::HSVtoRGB(float h, float s, float v) {
 
 
 void Toolbar::openColorWheel() {
-    int colorWheelSize = 512;
-    cwImage.create(colorWheelSize, colorWheelSize, sf::Color::Black);
+    if (!colorWheelOpen){
+        int colorWheelSize = 512;
+        cwImage.create(colorWheelSize, colorWheelSize, sf::Color::Black);
 
-    int cx = colorWheelSize / 2; // x of circle
-    int cy = colorWheelSize / 2; // y of circle
-    int radius = colorWheelSize / 2; // radius of circle
+        int cx = colorWheelSize / 2; // x of circle
+        int cy = colorWheelSize / 2; // y of circle
+        int radius = colorWheelSize / 2; // radius of circle
 
-    // for each pixel
-    for (int y = 0; y < colorWheelSize; y++) {
-        for (int x = 0; x < colorWheelSize; x++) {
-            // dx and dy is the distance from the center of the circle
-            int dx = x - cx;
-            int dy = y - cy;
-            double distance = sqrt(dx * dx + dy * dy); // dist formula -> distance of pixel to center
+        // for each pixel
+        for (int y = 0; y < colorWheelSize; y++) {
+            for (int x = 0; x < colorWheelSize; x++) {
+                // dx and dy is the distance from the center of the circle
+                int dx = x - cx;
+                int dy = y - cy;
+                double distance = sqrt(dx * dx + dy * dy); // dist formula -> distance of pixel to center
 
-            // if the pixel is inside the circle
-            if (distance <= radius) {
-                double angle = atan2(dy, dx);
+                // if the pixel is inside the circle
+                if (distance <= radius) {
+                    double angle = atan2(dy, dx);
 
-                // ensure angle is always between [0, 2pi] 
-                if (angle < 0)
-                    angle += 2 * M_PI;
+                    // ensure angle is always between [0, 2pi] 
+                    if (angle < 0)
+                        angle += 2 * M_PI;
 
-                // each pixel of a color wheel is made of 3 aspects: hue, saturation and value
-                double hue = angle * 180 / M_PI;
-                double saturation = distance / radius;
-                double value = 1.0;
+                    // each pixel of a color wheel is made of 3 aspects: hue, saturation and value
+                    double hue = angle * 180 / M_PI;
+                    double saturation = distance / radius;
+                    double value = 1.0;
 
-                sf::Color color = HSVtoRGB(hue, saturation, value);
-                cwImage.setPixel(x, y, color);
+                    sf::Color color = HSVtoRGB(hue, saturation, value);
+                    cwImage.setPixel(x, y, color);
+                }
             }
         }
+
+        if (!cwTexture.loadFromImage(cwImage)) {
+            std::cerr << "Failed to load color wheel texture." << std::endl;
+            return;
+        }
+
+        cwSprite.setTexture(cwTexture);
+        sf::Vector2u windowSize = window.getSize();
+
+        float cwX = (6 * buttonSize.x) + (6 * buttonGap);
+        float cwY = toolbarHeight;
+        cwSprite.setPosition(cwX, cwY);
+
+        colorWheelOpen = true;
     }
-
-    if (!cwTexture.loadFromImage(cwImage)) {
-        std::cerr << "Failed to load color wheel texture." << std::endl;
-        return;
+    else {
+        colorWheelOpen = false;
     }
-
-    cwSprite.setTexture(cwTexture);
-    sf::Vector2u windowSize = window.getSize();
-
-    float cwX = (6 * buttonSize.x) + (6 * buttonGap);
-    float cwY = toolbarHeight;
-    cwSprite.setPosition(cwX, cwY);
-
-    colorWheelOpen = true;
 }
 
-// vomit code dont even try to understand cuz i dont 
-sf::Color Toolbar::getRgbOnClick(sf::Event event) {
-    sf::Vector2i mousePos(event.mouseButton.x, event.mouseButton.y);
-
-	// gets local pos of mouse click based off of the color wheel
-    sf::Vector2f localPos = window.mapPixelToCoords(mousePos);
+/* This function takes in a click event and checks where the click was located, returning the pixel coords in a Vector2f */
+sf::Vector2f Toolbar::getMouseCoords(sf::Event event) {// attention
+    sf::Vector2i mousePos(event.mouseButton.x, event.mouseButton.y);// pulls current mouse position
+   
+    // gets local pos of mouse click based off of the color wheel
+    sf::Vector2f localPos = window.mapPixelToCoords(mousePos); // local Pos is a vector with 2 floats (access them like structs (.x or .y)
     localPos.x -= cwSprite.getPosition().x;
     localPos.y -= cwSprite.getPosition().y;
+    return localPos;
+}
+
+/* This Function  Returns the RGB value on the color wheel relative to click position */
+sf::Color Toolbar::getRgbOnClick(sf::Event event) {
+    sf::Vector2f localPos = getMouseCoords(event); // Checks where the click is (pixle coords)
 
     // if not in circle, return 
     // PLACEHOLDER BLACK COLOR FOR NOW
-    if (localPos.x < 0 || localPos.x >= cwImage.getSize().x ||
+    if (localPos.x < 0 || localPos.x >= cwImage.getSize().x ||  //  Checks if the click is within the color wheel
         localPos.y < 0 || localPos.y >= cwImage.getSize().y) {
         std::cout << "returned out of bound"; 
         return sf::Color::Black; 
@@ -254,6 +279,37 @@ sf::Color Toolbar::getRgbOnClick(sf::Event event) {
 
     return color; 
 }
+
+
+//// vomit code dont even try to understand cuz i dont 
+//sf::Color Toolbar::getRgbOnClick(sf::Event event) {
+//    sf::Vector2i mousePos(event.mouseButton.x, event.mouseButton.y);// pulls current mouse position
+//
+//	// gets local pos of mouse click based off of the color wheel ->converts mouse pos to pixel coords
+//    sf::Vector2f localPos = window.mapPixelToCoords(mousePos); // local Pos is a vector with 2 floats (access them like structs (.x or .y)
+//    localPos.x -= cwSprite.getPosition().x;
+//    localPos.y -= cwSprite.getPosition().y;
+//
+//    // if not in circle, return 
+//    // PLACEHOLDER BLACK COLOR FOR NOW
+//    if (localPos.x < 0 || localPos.x >= cwImage.getSize().x ||  //  Checks if the click is within the color wheel
+//        localPos.y < 0 || localPos.y >= cwImage.getSize().y) {
+//        std::cout << "returned out of bound"; 
+//        return sf::Color::Black; 
+//    }
+//
+//    sf::Color color = cwImage.getPixel(localPos.x, localPos.y);
+//
+//    std::cout << "RGB: ("
+//        << static_cast<int>(color.r) << ", "
+//        << static_cast<int>(color.g) << ", "
+//        << static_cast<int>(color.b) << ")"
+//        << std::endl;
+//
+//    return color; 
+//}
+
+
 
 void Toolbar::renderUI() {
     window.draw(toolbarBackground);

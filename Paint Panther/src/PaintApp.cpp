@@ -48,8 +48,8 @@ void PaintApp::handleEvents() {
                 if (toolbar.handleUIInput(event) != Tool::Nothing) {
                     Tool clickedTool = toolbar.handleUIInput(event);
 
-                    toolbar.highlightButton(clickedTool); // Testing this (clicked tool returns the "tool" in the enumerated toolbar class - Use to find the button[i].tool
-                    
+                    toolbar.highlightButton(clickedTool);
+
                     if (clickedTool == Tool::Undo) {
                         undo();
                     }
@@ -59,20 +59,23 @@ void PaintApp::handleEvents() {
                     else if (clickedTool == Tool::SaveFile) {
                         saveToFile("output.png");
                     }
-                    else if (clickedTool == Tool::Dropdown) { // thi s is really bad to have toolbar call paintapp then call toolbar
+                    else if (clickedTool == Tool::Dropdown) { // this is really bad to have toolbar call paintapp then call toolbar
                         toolbar.openDropdown();
                     }
                     else if (clickedTool == Tool::Color) {
-                        toolbar.openColorWheel(); 
+                        toolbar.openColorWheel();
                     }
                     else if (
-                        clickedTool == Tool::Pen || clickedTool == Tool::Eraser || clickedTool == Tool::Fill 
+                        clickedTool == Tool::Pen || clickedTool == Tool::Eraser || clickedTool == Tool::Fill
                         || clickedTool == Tool::Rect || clickedTool == Tool::Circle || clickedTool == Tool::Triangle) {
                         currentTool = clickedTool;
                     }
                     exitLoop = true;
                     break;
                 }
+                 
+                Tool currentClick = toolbar.handleUIInput(event); // Closes Dropdown and color wheel if user clicks anywhere on screen
+                toolbar.closeIcons(currentClick, event);
 
                 if (currentTool == Tool::Pen) {
                     startDrawing();

@@ -47,10 +47,12 @@ public:
     void openDropdown();
     void highlightButton(Tool);
     void renderUI();
+    void closeIcons(Tool, sf::Event event);
 
     sf::Color HSVtoRGB(float h, float s, float v);
     void openColorWheel(); 
     sf::Color getRgbOnClick(sf::Event event);
+    sf::Vector2f getMouseCoords(sf::Event event); // returns a vector sf storing mouse coords.
 
     sf::RenderWindow& window;
     sf::Font font;
