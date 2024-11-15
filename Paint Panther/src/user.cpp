@@ -7,26 +7,60 @@ void PaintApp::handleEvents() {
         if (event.type == sf::Event::Closed) {
             window.close();
         }
+        else if (currentState == AppState::StartScreen){
+            // Handle events for Start Screen
 
-        else if (event.type == sf::Event::MouseButtonPressed) {
-            if (event.mouseButton.button == sf::Mouse::Left) {
-                handleLeftClick(event);
+            // Handle mouse movement for hover effect
+            if (event.type == sf::Event::MouseMoved) {
+                sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+
+                // Change button color on hover
+                if (startButton.getGlobalBounds().contains(mousePos)) {
+                    startButton.setFillColor(sf::Color(150, 150, 250)); // Lighter blue
+                }
+                else {
+                    startButton.setFillColor(sf::Color(100, 100, 250)); // Original color
+                }
+            }
+
+            // Handle mouse button press
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+
+                // Check if the mouse click is within the start button bounds
+                if (startButton.getGlobalBounds().contains(mousePos)) {
+                    currentState = AppState::MainApp; // Switch to MainApp state
+                }
+            }
+
+            // Handle key press (e.g., Enter key to start)
+            if (event.type == sf::Event::KeyPressed) {
+                if (event.key.code == sf::Keyboard::Enter) {
+                    currentState = AppState::MainApp;
+                }
             }
         }
-
-        // though it's repeat code, it's more organized this way
-        else if (event.type == sf::Event::MouseButtonPressed) {
-            if (event.mouseButton.button == sf::Mouse::Right) {
-                handleRightClick(event);
+        else if (currentState == AppState::MainApp){
+            if (event.type == sf::Event::MouseButtonPressed) {
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    handleLeftClick(event);
+                }
             }
-        }
 
-        else if (event.type == sf::Event::MouseButtonReleased) {
-            handleClickRelease(event);
-        }
+            // though it's repeat code, it's more organized this way
+            else if (event.type == sf::Event::MouseButtonPressed) {
+                if (event.mouseButton.button == sf::Mouse::Right) {
+                    handleRightClick(event);
+                }
+            }
 
-        else if (event.type == sf::Event::MouseMoved) {
-            handleMouseMove(event);
+            else if (event.type == sf::Event::MouseButtonReleased) {
+                handleClickRelease(event);
+            }
+
+            else if (event.type == sf::Event::MouseMoved) {
+                handleMouseMove(event);
+            }
         }
     }
 }

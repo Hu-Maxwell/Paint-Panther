@@ -31,30 +31,41 @@ void PaintApp::run() {
 // draws all elements to the window
 void PaintApp::render() {
     window.clear();
-    window.draw(sprite);
-
-    if (isDrawingRect) {
-        window.draw(currentRectangle);
+    if (currentState == AppState::StartScreen) {
+        // Render Start Screen
+        window.draw(titleText);
+        window.draw(startButton);
+        window.draw(startButtonText);
     }
+    else if (currentState == AppState::MainApp) {
+        // Draw the main texture
+        window.draw(sprite);
 
-    if (isDrawingCircle) {
-        window.draw(currentCircle);
-    }
-
-    if (isDrawingPolygon && polygonPoints.size() > 1) {
-        sf::VertexArray lines(sf::LinesStrip, polygonPoints.size());
-        for (size_t i = 0; i < polygonPoints.size(); ++i) {
-            lines[i].position = polygonPoints[i];
-            lines[i].color = currentColor;
+        // Draw ongoing shapes if any
+        if (isDrawingRect) {
+            window.draw(currentRectangle);
         }
-        window.draw(lines);
+
+        if (isDrawingCircle) {
+            window.draw(currentCircle);
+        }
+
+        if (isDrawingPolygon && polygonPoints.size() > 1) {
+            sf::VertexArray lines(sf::LinesStrip, polygonPoints.size());
+            for (size_t i = 0; i < polygonPoints.size(); ++i) {
+                lines[i].position = polygonPoints[i];
+                lines[i].color = currentColor;
+            }
+            window.draw(lines);
+        }
+
+        if (isDrawingTriangle) {
+            window.draw(currentTriangle);
+        }
+
+        // Render UI
+        toolbar.renderUI();
     }
 
-    if (isDrawingTriangle) {
-        window.draw(currentTriangle);
-    }
-
-    // render UI 
-    toolbar.renderUI();
     window.display();
 }

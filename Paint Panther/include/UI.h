@@ -43,6 +43,12 @@ public:
         }
     };
 
+    // ui for start screen
+    sf::Font font; // Ensure you have a font loaded
+    sf::Text titleText;
+    sf::RectangleShape startButton;
+    sf::Text startButtonText;
+
     Toolbar(sf::RenderWindow& _window);
     void initButtons(std::vector<Button>& buttonVector, float startingPosX, float startingPosY);
     Tool handleUIInput(sf::Event event);

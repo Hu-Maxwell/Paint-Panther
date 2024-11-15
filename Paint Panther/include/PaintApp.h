@@ -41,7 +41,18 @@ private:
     bool isErasing = false; 
     
     // fill 
-    
+
+    // application state for start screen and pain screen
+    enum class AppState {
+        StartScreen,
+        MainApp
+    };
+    AppState currentState;
+
+    sf::Font font; // Ensure you have a font loaded
+    sf::Text titleText;
+    sf::RectangleShape startButton;
+    sf::Text startButtonText;
 
     // ==== shapes =====
     sf::Vector2f shapeStartPos;
