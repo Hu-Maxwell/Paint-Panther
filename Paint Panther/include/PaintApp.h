@@ -2,6 +2,7 @@
 #define PAINTAPP_H
 
 #include <SFML/Graphics.hpp>
+#include <string>
 #include <stack>
 #include <vector>
 #include <iostream>
@@ -27,6 +28,7 @@ private:
 
     bool isDrawing = false;
     bool dropdownIsOpen = false;
+    bool dropdownSaveIsOpen = false;
 
     Tool currentTool = Tool::Pen;
 
@@ -66,7 +68,16 @@ private:
     void handleClickRelease(sf::Event event);
     void handleMouseMove(sf::Event event);
 
+    // save file and its dropdown
     void saveToFile(const std::string& filename);
+
+    sf::RectangleShape saveFileButton; //this is the button that opens the menu.  find a way to make this the save button
+    bool saveIsOpen;
+    sf::RectangleShape saveFileInputBox; //input box
+    std::string saveFileInputString; //user's typing
+    size_t saveFileCursorPos; //cursor pos
+    //end of save to file stuff
+    //this stuff isn't doing anything ^^^
 
     void startDrawing();
     void draw();

@@ -46,12 +46,16 @@ public:
     void initButtons(std::vector<Button>& buttonVector, float startingPosX, float startingPosY);
     Tool handleUIInput(sf::Event event);
     void openDropdown();
+    void saveToFile();
     void highlightButton(Tool);
     void renderUI();
 
     sf::Color HSVtoRGB(float h, float s, float v);
     void openColorWheel(); 
     sf::Color getRgbOnClick(sf::Event event);
+
+    void openSaveFile();
+
 
     sf::RenderWindow& window;
     sf::Font font;
@@ -69,6 +73,16 @@ public:
     float dropdownWidth;
     float dropdownHeight; // change to vector2 later
     bool dropdownIsOpen; 
+
+    bool dropdownIsOpenSave;
+    
+    //dropdown I am making for savefile button
+    sf::RectangleShape dropdownSaveRect;
+    std::vector<Button> dropdownSaveButtons;
+    float dropdownSaveWidth;
+    float dropdownSaveHeight; // change to vector2 later
+    bool dropdownSaveIsOpen;
+
 
 	// cwImage -> cwTexture -> cwSprite cuz sfml is weird
     sf::Image cwImage;

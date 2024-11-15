@@ -14,6 +14,7 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     }
 
     dropdownIsOpen = false;
+    dropdownSaveIsOpen = false;
 
     toolbarHeight = 40.0f;
     backgroundColor = sf::Color(200, 200, 200);
@@ -56,6 +57,24 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     dropdownButtons.emplace_back("Po", Tool::Polygon); // TODO: change the UI dropdown so it fits
 
     initButtons(dropdownButtons, dropdownPosX, dropdownPosY);
+
+    // savefile
+    dropdownSaveWidth = (3 * buttonSize.x) + (2 * buttonGap);
+    dropdownSaveHeight = buttonSize.x;
+
+    dropdownSaveRect.setSize(sf::Vector2f(dropdownWidth, dropdownHeight));
+    dropdownSaveRect.setFillColor(sf::Color::Red);
+    dropdownSaveRect.setPosition(3 * buttonSize.x + 3 * buttonGap, toolbarHeight);
+
+    float dropdownSavePosX = (3 * buttonSize.x) + (3 * buttonGap);
+    float dropdownSavePosY = toolbarHeight;
+
+    //dropdownButtons.emplace_back("Rect", Tool::Rect);
+    //dropdownButtons.emplace_back("Circle", Tool::Circle);
+    //dropdownButtons.emplace_back("Tri", Tool::Triangle);
+    //dropdownButtons.emplace_back("Po", Tool::Polygon); // TODO: change the UI dropdown so it fits
+
+    //initButtons(dropdownButtons, dropdownPosX, dropdownPosY);
 
 }// End toolbar
 
@@ -102,6 +121,8 @@ void Toolbar::openDropdown() {
     if (dropdownIsOpen) {dropdownIsOpen = false;}
     dropdownIsOpen = true;
 }
+
+//
 
 // hue shift down (darker) to mark selected buttons (excluding undo and save)
 void Toolbar::highlightButton(Tool currentButton) { 
@@ -259,6 +280,13 @@ void Toolbar::renderUI() {
 
     if (dropdownIsOpen) {
         window.draw(dropdownRect);
+        for (const Button& btn : dropdownButtons) {
+            window.draw(btn.rect);
+            window.draw(btn.text);
+        }
+    }
+    if (dropdownSaveIsOpen) {
+        window.draw(dropdownSaveRect);
         for (const Button& btn : dropdownButtons) {
             window.draw(btn.rect);
             window.draw(btn.text);
