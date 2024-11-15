@@ -40,15 +40,15 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     initButtons(buttons, 0, 0);
 
     // dropdown
-    dropdownWidth = (3 * buttonSize.x) + (2 * buttonGap);
+    dropdownWidth = (4 * buttonSize.x) + (3 * buttonGap);
     dropdownHeight = buttonSize.x;
+
+    float dropdownPosX = (7 * buttonSize.x) + (7 * buttonGap);
+    float dropdownPosY = toolbarHeight;
 
     dropdownRect.setSize(sf::Vector2f(dropdownWidth, dropdownHeight));
     dropdownRect.setFillColor(backgroundColor);
-    dropdownRect.setPosition(3 * buttonSize.x + 3 * buttonGap, toolbarHeight);
-
-    float dropdownPosX = (3 * buttonSize.x) + (3 * buttonGap);
-    float dropdownPosY = toolbarHeight;
+    dropdownRect.setPosition(dropdownPosX, dropdownPosY);
 
     dropdownButtons.emplace_back("Rect", Tool::Rect);
     dropdownButtons.emplace_back("Circle", Tool::Circle);

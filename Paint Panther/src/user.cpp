@@ -19,10 +19,7 @@ void PaintApp::handleEvents() {
             if (event.mouseButton.button == sf::Mouse::Left) {
                 handleLeftClick(event);
             }
-        }
 
-        // though it's repeat code, it's more organized this way
-        else if (event.type == sf::Event::MouseButtonPressed) {
             if (event.mouseButton.button == sf::Mouse::Right) {
                 handleRightClick(event);
             }
@@ -114,6 +111,7 @@ void PaintApp::handleLeftClick(sf::Event event) {
 
 void PaintApp::handleRightClick(sf::Event event) {
     if (currentTool == Tool::Polygon) {
+        std::cout << "stop poly";
         stopPolygon();
     }
 }
