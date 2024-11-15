@@ -61,29 +61,23 @@ void StartingScreen::pollForInput() {
 }
 
 void StartingScreen::moveRightAnimation() {
-	// Define the target x-position (middle of the screen)
 	float compoundX = 0;
 
 	float targetX = window.getSize().x / 2.0f;
 	float distance = targetX - updatedX;
 
-	// Set a lower initial speed
-	static float speed = 7.0f;  // Starting speed, adjust as needed
+	static float speed = 7.0f;  
 
-	// Apply a smaller deceleration factor
-	float decelerationFactor = 0.990f;  // Closer to 1.0 means slower deceleration
+	float decelerationFactor = 0.990f;  
 
-	// Update the position if it's not at the target position
 	if (updatedX < targetX) {
 		updatedX += speed;
 
-		// Gradually reduce the speed for a slow deceleration effect
 		speed *= decelerationFactor;
 
-		// Stop moving if position is close enough to target
-		if (updatedX >= targetX - 1) {  // Adding a tolerance to snap to the target
-			updatedX = targetX;  // Snap to the target position for precision
-			speed = 0.0f;        // Stop the movement
+		if (updatedX >= targetX - 1) {  
+			updatedX = targetX;  
+			speed = 0.0f;        
 		}
 	}
 
