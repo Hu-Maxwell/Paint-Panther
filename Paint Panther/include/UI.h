@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <cmath>
+
 
 enum class Tool {
     Undo,

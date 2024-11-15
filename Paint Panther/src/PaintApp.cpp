@@ -8,6 +8,7 @@
 PaintApp::PaintApp()
     : window(sf::VideoMode(1600, 1000), "Paint2D App"),
     toolbar(window), 
+    
     currentColor(sf::Color::Red) {
     
     texture.create(1600, 1200); // TODO: change so it fits inside window

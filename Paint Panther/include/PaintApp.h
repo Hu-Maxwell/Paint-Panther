@@ -5,6 +5,7 @@
 #include <stack>
 #include <vector>
 #include <iostream>
+#include <cmath>
 
 #include "../include/UI.h"
 

@@ -1,5 +1,6 @@
 #include "../include/UI.h"
 #include <iostream>
+#include <cmath>
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -8,10 +9,10 @@
 sf::Font Toolbar::Button::font; 
 Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     // filepath very buggy atm, feel free to comment out this part 
-    if (!Button::font.loadFromFile("assets/arial.ttf")) {
-        std::cerr << "Error loading font 'arial.ttf'." << std::endl;
-        exit(EXIT_FAILURE);
-    }
+    // if (!Button::font.loadFromFile("assets/arial.ttf")) {
+    //     std::cerr << "Error loading font 'arial.ttf'." << std::endl;
+    //     exit(EXIT_FAILURE);
+    // }
 
     dropdownIsOpen = false;
 
@@ -39,13 +40,13 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     buttons.emplace_back("Drop", Tool::Dropdown);
     initButtons(buttons, 0, 0);
 
-    // dropdown
-    dropdownWidth = (3 * buttonSize.x) + (2 * buttonGap);
+    // dropdown | Pedro: I changed the width and it fixed the background grey color
+    dropdownWidth = (4 * buttonSize.x) + (3 * buttonGap); 
     dropdownHeight = buttonSize.x;
 
     dropdownRect.setSize(sf::Vector2f(dropdownWidth, dropdownHeight));
     dropdownRect.setFillColor(backgroundColor);
-    dropdownRect.setPosition(3 * buttonSize.x + 3 * buttonGap, toolbarHeight);
+    dropdownRect.setPosition((3 * buttonSize.x + 3 * buttonGap) + 180, toolbarHeight);//Testing Pedro 
 
     float dropdownPosX = (3 * buttonSize.x) + (3 * buttonGap);
     float dropdownPosY = toolbarHeight;
@@ -55,7 +56,7 @@ Toolbar::Toolbar(sf::RenderWindow& _window) : window(_window) {
     dropdownButtons.emplace_back("Tri", Tool::Triangle); 
     dropdownButtons.emplace_back("Po", Tool::Polygon); // TODO: change the UI dropdown so it fits
 
-    initButtons(dropdownButtons, dropdownPosX, dropdownPosY);
+    initButtons(dropdownButtons, dropdownPosX + 180, dropdownPosY);//Testing Pedro 
 
 }// End toolbar
 
