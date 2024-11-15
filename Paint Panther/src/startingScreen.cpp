@@ -9,14 +9,18 @@ StartingScreen::StartingScreen(sf::RenderWindow& _window) : window(_window) {
 	text1.setFont(font);
 	text1.setString("Paint");
 	text1.setCharacterSize(200); 
+	text1.setFillColor(sf::Color::Black);
 
 	text2.setFont(font);
 	text2.setString("Panther");
 	text2.setCharacterSize(200);
+	text2.setFillColor(sf::Color::Black);
 
 	trail1.setPosition(0, 243);
+	trail1.setFillColor(sf::Color::Black);
 
 	trail2.setPosition(0, 443);
+	trail2.setFillColor(sf::Color::Black);
 
 	button.setSize(sf::Vector2f(500, 150));
 	buttonText.setFont(font); 
@@ -25,16 +29,18 @@ StartingScreen::StartingScreen(sf::RenderWindow& _window) : window(_window) {
 	buttonText.setFillColor(sf::Color::Black); 
 
 	button2.setSize(sf::Vector2f(1000, 200));
-	button2.setPosition(10000, 10000);
+	button2.setPosition(window.getSize().x * 2, window.getSize().y * 2);
+	button2.setFillColor(sf::Color::Black); 
+	buttonText2.setPosition(window.getSize().x * 2, window.getSize().y * 2);
 	buttonText2.setFont(font);
 	buttonText2.setString("Resize window?");
 	buttonText2.setCharacterSize(150);
-	buttonText2.setFillColor(sf::Color::Black);
+	buttonText2.setFillColor(sf::Color::White);
 }
 
 int StartingScreen::mainLoop() {
 	while (window.isOpen()) {
-		window.clear(); 
+		window.clear(sf::Color(255, 174, 174, 100)); // web theme sf::Color(255, 174, 174, 100)
 
 		int res = pollForInput();
 		if (res == -1) {
@@ -54,10 +60,6 @@ int StartingScreen::mainLoop() {
 		else {
 			moveRightAnimation();
 		}
-
-
-
-
 
 		window.draw(text1);
 		window.draw(text2);
@@ -212,7 +214,6 @@ void StartingScreen::moveRightAnimation() {
 	button.setPosition(window.getSize().x - updatedX, 700); 
 	buttonText.setPosition(button.getPosition().x + (button.getSize().x / 4), button.getPosition().y - (button.getSize().y / 4));
 }
-
 
 // function that paintapp calls to get the resolution 
 void StartingScreen::getResolution() {
